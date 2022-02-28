@@ -129,10 +129,10 @@ export function WalletProvider({ children }) {
 
         const balance = await contract.balanceOf(address);
 
-        for (let i = 0; i < balance; i++) {
-            const tokenId = await contract.tokenOfOwnerByIndex(address, i + 1);
-            console.log(tokenId);
-        }
+        // for (let i = 0; i < balance; i++) {
+        //     const tokenId = await contract.tokenOfOwnerByIndex(address, i + 1);
+        //     console.log(tokenId);
+        // }
     }
 
     return (

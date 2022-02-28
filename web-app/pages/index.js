@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import ConnectWallet from '../components/ConnectWallet';
+import SelectToken from '../components/SelectToken';
 import WalletInfo from '../components/WalletInfo';
 import styles from '../styles/Home.module.css';
 import data from './data.json';
@@ -22,6 +23,7 @@ export default function Home() {
             <main className={styles.main}>
                 <WalletInfo />
                 <ConnectWallet />
+                <SelectToken />
             </main>
         </div>
     );

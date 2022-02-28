@@ -13,7 +13,7 @@ export default function ConnectWallet(props) {
 
     return (
         <>
-            <Fade in={visible} timeout={1000}>
+            <Fade in={visible} timeout={1000} unmountOnExit>
                 <Card
                     sx={{
                         padding: 4,

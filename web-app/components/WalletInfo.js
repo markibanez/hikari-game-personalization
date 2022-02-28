@@ -30,7 +30,7 @@ export default function WalletInfo(props) {
 
     return (
         <>
-            <Fade in={visible}>
+            <Fade in={visible} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
                 <Card sx={{ padding: 1, position: 'absolute', top: 10, right: 10 }}>
                     <Stack direction="row" spacing={1} alignItems="center">
                         <Blockies seed={wallet.address} />

@@ -52,7 +52,7 @@ export function WalletProvider({ children }) {
             walletconnect: {
                 package: WalletConnectProvider,
                 options: {
-                    infuraId: '86d5aa67154b4d1283f804fe39fcb07c'
+                    infuraId: '9c36c1ad9b8b45459b40c15aeb2449a2'
                 }
             }
         };

@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import ConnectWallet from '../components/ConnectWallet';
+import WalletInfo from '../components/WalletInfo';
 import styles from '../styles/Home.module.css';
 import data from './data.json';
 
 export default function Home() {
-    console.log(data);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -19,6 +20,7 @@ export default function Home() {
             </Head>
 
             <main className={styles.main}>
+                <WalletInfo />
                 <ConnectWallet />
             </main>
         </div>

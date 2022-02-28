@@ -98,11 +98,11 @@ export function WalletProvider({ children }) {
                 userAddress = ethers.utils.getAddress(instance.accounts[0]); break;
         }
 
-        setAddress(userAddress);
         setNetwork(instance.networkVersion);
         setWalletType(walletType);
         setEthersProvider(provider);
         setEthersSigner(signer);
+        setAddress(userAddress);
 
         enqueueSnackbar('Wallet connected', { variant: 'success' });
     };
@@ -114,6 +114,26 @@ export function WalletProvider({ children }) {
         setNetwork(null);
         setEthersProvider(null);
     };
+
+    const getNFTs = async () => {
+        if (!address) throw 'not-connected';
+        if (!ethersProvider) throw 'no-provider';
+
+        const abi = [
+            "function balanceOf(address owner) view returns (uint balance)",
+            "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint tokenId)"
+        ]
+
+        const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
+        const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
+
+        const balance = await contract.balanceOf(address);
+
+        for (let i = 0; i < balance; i++) {
+            const tokenId = await contract.tokenOfOwnerByIndex(address, i + 1);
+            console.log(tokenId);
+        }
+    }
 
     return (
         <WalletContext.Provider
@@ -128,7 +148,8 @@ export function WalletProvider({ children }) {
                 tokens,
                 selectedToken,
                 connect,
-                disconnect
+                disconnect,
+                getNFTs
             }}
         >
             {children}

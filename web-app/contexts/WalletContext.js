@@ -85,18 +85,14 @@ export function WalletProvider({ children }) {
         const signer = provider.getSigner();
 
         let walletType = null;
-        // @ts-ignore
         if (instance.isMetaMask) walletType = 'metamask';
-        // @ts-ignore
         if (instance.isWalletConnect) walletType = 'walletconnect';
 
         let userAddress;
         switch (walletType) {
             case 'metamask':
-                // @ts-ignore
                 userAddress = ethers.utils.getAddress(instance.selectedAddress); break;
             case 'walletconnect':
-                // @ts-ignore
                 userAddress = ethers.utils.getAddress(instance.accounts[0]); break;
         }
 
@@ -107,22 +103,6 @@ export function WalletProvider({ children }) {
         setEthersSigner(signer);
 
         enqueueSnackbar('Wallet connected', { variant: 'success' });
-        const response = await fetch(`/api/has-account?address=${userAddress}`);
-        if (response.status === 200) {
-            const result = await response.json();
-            console.log(result);
-
-            if (result.hasAccount && router.pathname?.toLowerCase() === '/create-account') {
-                router.push(`/profile/${userAddress}`);
-            }
-
-            // if (!result.hasAccount) router.push('/create-account');
-        } else {
-            throw(`${response.status}: ${(await response).text()}`)
-        }
-
-        // if (router.pathname !== '/create-account')
-        //     router.push('/create-account');
     };
 
     const disconnect = async () => {

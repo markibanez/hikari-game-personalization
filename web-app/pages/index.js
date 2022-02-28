@@ -10,7 +10,7 @@ export default function Home() {
             <Head>
                 <title>Hikari</title>
                 <meta name="description" content="Hikari Game Personalization" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/images/logo.jpg" />
             </Head>
 
             <main className={styles.main}>

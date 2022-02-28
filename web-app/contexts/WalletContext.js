@@ -69,6 +69,8 @@ export function WalletProvider({ children }) {
     const [ethersProvider, setEthersProvider] = useState(null);
     const [ethersSigner, setEthersSigner] = useState(null);
     const [walletType, setWalletType] = useState(null);
+    const [tokens, setTokens] = useState([]);
+    const [selectedToken, setSelectedToken] = useState(null);
 
     const connect = async () => {
         const instance = await web3Modal.connect();
@@ -123,6 +125,8 @@ export function WalletProvider({ children }) {
                 ethersSigner,
                 networks,
                 walletTypes,
+                tokens,
+                selectedToken,
                 connect,
                 disconnect
             }}

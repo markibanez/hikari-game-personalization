@@ -31,7 +31,8 @@ export default function SelectToken(props) {
                     sx={{
                         padding: 2,
                         textAlign: 'center',
-                        width: { xs: '100vw', sm: '95vw', md: '70vw', lg: '60vw', xl: '50vw' },
+                        width: { xs: '80vw', md: '70vw', lg: '60vw', xl: '50vw' },
+                        marginTop: 10
                     }}
                 >
                     {wallet.gettingTokens && (
@@ -51,14 +52,14 @@ export default function SelectToken(props) {
                                     <Typography variant="h5" sx={{ marginBottom: 2 }}>
                                         Select your Hikari NFT
                                     </Typography>
-                                    <Grid container spacing={{ xs: 1, md: 2 }} justifyContent="center">
+                                    <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="center">
                                         {wallet.tokens.map((token, index) => {
                                             return (
                                                 <Grid item key={index} xs={12} sm={6} md={3} lg={4} xl={3}>
                                                     <Card variant="outlined">
                                                         <CardMedia
                                                             component="img"
-                                                            height={{ xs: '200px', md: '160px' }}
+                                                            height={{ xs: '160px', md: '140px' }}
                                                             image={token.image}
                                                             alt={token.name}
                                                         />

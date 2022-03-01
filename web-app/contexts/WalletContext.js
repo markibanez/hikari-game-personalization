@@ -71,16 +71,16 @@ export function WalletProvider({ children }) {
     const [walletType, setWalletType] = useState(null);
     const [tokens, setTokens] = useState([]);
     const [selectedToken, setSelectedToken] = useState(null);
+    const [gettingTokens, setGettingTokens] = useState(true);
 
     const connect = async () => {
         const instance = await web3Modal.connect();
         instance.on('accountsChanged', (accounts) => {
-            setAddress(ethers.utils.getAddress(accounts[0]));
+            router.reload(window.location.pathname);
         });
 
         instance.on('chainChanged', (chainId) => {
-            const networkId = parseInt(chainId, 16);
-            setNetwork(networkId);
+            router.reload(window.location.pathname);
         });
 
         const provider = new ethers.providers.Web3Provider(instance);
@@ -119,28 +119,37 @@ export function WalletProvider({ children }) {
         if (!address) throw 'not-connected';
         if (!ethersProvider) throw 'no-provider';
 
-        const abi = [
-            "function balanceOf(address owner) view returns (uint balance)",
-            "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint tokenId)",
-            "function tokenURI(uint tokenId) view returns (string tokenUri)",
-        ]
+        setGettingTokens(true);
 
-        const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
-        const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
+        try {
+            const abi = [
+                "function balanceOf(address owner) view returns (uint balance)",
+                "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint tokenId)",
+                "function tokenURI(uint tokenId) view returns (string tokenUri)",
+            ]
 
-        const balance = await contract.balanceOf(address);
+            const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
+            const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
 
-        const tokenMetadata = []
-        for (let i = 0; i < balance; i++) {
-            const tokenId = await contract.tokenOfOwnerByIndex(address, i);
-            const tokenURI = await contract.tokenURI(tokenId);
+            const balance = await contract.balanceOf(address);
 
-            const response = await fetch(tokenURI);
-            const metadata = await response.json();
-            tokenMetadata.push(metadata);
+            const tokenMetadata = []
+            for (let i = 0; i < balance; i++) {
+                const tokenId = await contract.tokenOfOwnerByIndex(address, i);
+                const tokenURI = await contract.tokenURI(tokenId);
+
+                const response = await fetch(tokenURI);
+                const metadata = await response.json();
+                metadata.tokenId = tokenId;
+                tokenMetadata.push(metadata);
+            }
+
+            setTokens(tokenMetadata);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setGettingTokens(false);
         }
-
-        setTokens(tokenMetadata);
     }
 
     return (
@@ -155,6 +164,7 @@ export function WalletProvider({ children }) {
                 walletTypes,
                 tokens,
                 selectedToken,
+                gettingTokens,
                 connect,
                 disconnect,
                 getNFTs

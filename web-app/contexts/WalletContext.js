@@ -121,7 +121,8 @@ export function WalletProvider({ children }) {
 
         const abi = [
             "function balanceOf(address owner) view returns (uint balance)",
-            "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint tokenId)"
+            "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint tokenId)",
+            "function tokenURI(uint tokenId) view returns (string tokenUri)",
         ]
 
         const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
@@ -129,10 +130,17 @@ export function WalletProvider({ children }) {
 
         const balance = await contract.balanceOf(address);
 
-        // for (let i = 0; i < balance; i++) {
-        //     const tokenId = await contract.tokenOfOwnerByIndex(address, i + 1);
-        //     console.log(tokenId);
-        // }
+        const tokenMetadata = []
+        for (let i = 0; i < balance; i++) {
+            const tokenId = await contract.tokenOfOwnerByIndex(address, i);
+            const tokenURI = await contract.tokenURI(tokenId);
+
+            const response = await fetch(tokenURI);
+            const metadata = await response.json();
+            tokenMetadata.push(metadata);
+        }
+
+        setTokens(tokenMetadata);
     }
 
     return (

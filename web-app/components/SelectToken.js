@@ -1,55 +1,97 @@
-import { Card, CircularProgress, Fade, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardMedia, CircularProgress, Fade, Grid, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '../contexts/WalletContext';
 
 export default function SelectToken(props) {
     const wallet = useContext(WalletContext);
     const { enqueueSnackbar } = useSnackbar();
-    const visible = !(Boolean(wallet.selectedToken)) && Boolean(wallet.address);
+    const visible = !Boolean(wallet.selectedToken) && Boolean(wallet.address);
     const [loading, setLoading] = useState(true);
+    const hasTokens = wallet.tokens?.length > 0;
 
     useEffect(() => {
         if (visible) {
-            setLoading(true);
-
-            wallet.getNFTs()
-                .then(() => {
-
-                })
-                .catch(err => {
+            wallet
+                .getNFTs()
+                .then(() => {})
+                .catch((err) => {
                     console.log(err);
                     enqueueSnackbar('Could not get your NFTs', { variant: 'error' });
-                })
-                .finally(() => {
-                    setLoading(false);
-                })
+                });
         }
-    }, [visible])
+    }, [visible]);
+
+    const personalizeClicked = (token) => {};
 
     return (
         <>
             <Fade in={visible} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
-                <Card sx={{ padding: 2 }}>
-                    {loading &&
-                    <>
-                        <Typography variant="h5">
-                            Getting your Hikari NFTs
-                        </Typography>
+                <Card
+                    sx={{
+                        padding: 2,
+                        textAlign: 'center',
+                        width: { xs: '100vw', sm: '95vw', md: '70vw', lg: '60vw', xl: '50vw' },
+                    }}
+                >
+                    {wallet.gettingTokens && (
+                        <>
+                            <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                                Getting your Hikari NFTs
+                            </Typography>
 
-                        <CircularProgress />
-                    </>
-                    }
+                            <CircularProgress />
+                        </>
+                    )}
 
-                    {!loading &&
-                    <>
-                        <Typography variant="h5">
-                            Select your Hikari NFT
-                        </Typography>
-                    </>
-                    }
+                    {!wallet.gettingTokens && (
+                        <>
+                            {hasTokens && (
+                                <>
+                                    <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                                        Select your Hikari NFT
+                                    </Typography>
+                                    <Grid container spacing={{ xs: 1, md: 2 }} justifyContent="center">
+                                        {wallet.tokens.map((token, index) => {
+                                            return (
+                                                <Grid item key={index} xs={12} sm={6} md={3} lg={4} xl={3}>
+                                                    <Card variant="outlined">
+                                                        <CardMedia
+                                                            component="img"
+                                                            height={{ xs: '200px', md: '160px' }}
+                                                            image={token.image}
+                                                            alt={token.name}
+                                                        />
+
+                                                        <Stack direction="column" sx={{ padding: 1 }}>
+                                                            <Typography variant="body1">{token.name}</Typography>
+                                                            <Button
+                                                                variant="outlined"
+                                                                color="primary"
+                                                                href={`/personalize/${wallet.address}/${token.tokenId}`}
+                                                                target="_blank"
+                                                                rel="noreferrer noopener"
+                                                            >
+                                                                Personalize
+                                                            </Button>
+                                                        </Stack>
+                                                    </Card>
+                                                </Grid>
+                                            );
+                                        })}
+                                    </Grid>
+                                </>
+                            )}
+
+                            {!hasTokens && (
+                                <Typography variant="h5">
+                                    You do not have Hikari NFTs. Please acquire at least one to proceed.
+                                </Typography>
+                            )}
+                        </>
+                    )}
                 </Card>
             </Fade>
         </>
-    )
+    );
 }

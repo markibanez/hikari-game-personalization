@@ -35,8 +35,8 @@ export default function WalletInfo(props) {
                     <Stack direction="row" spacing={1} alignItems="center">
                         <Blockies seed={wallet.address} />
                         <Typography variant="body1">{wallet.address?.substring(0, 12)}...</Typography>
-                        <IconButton>
-                            <MenuIcon onClick={menuClick} />
+                        <IconButton onClick={menuClick}>
+                            <MenuIcon />
                         </IconButton>
                     </Stack>
                     <Menu

@@ -58,10 +58,11 @@ export function WalletProvider({ children }) {
         };
 
         web3Modal = new Web3Modal({
-            // network: 'mainnet',
             cacheProvider: true,
             providerOptions
         });
+
+        if (localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")) connect();
     }, []);
 
     const [address, setAddress] = useState(null);
@@ -108,7 +109,7 @@ export function WalletProvider({ children }) {
     };
 
     const disconnect = async () => {
-        web3Modal.clearCachedProvider();
+        await web3Modal.clearCachedProvider();
 
         setAddress(null);
         setNetwork(null);

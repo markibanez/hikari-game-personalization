@@ -2,6 +2,7 @@ import { Avatar, Button, Card, CardMedia, CircularProgress, Fade, Grid, Stack, T
 import { useSnackbar } from 'notistack';
 import React, { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '../contexts/WalletContext';
+import Link from 'next/link'
 
 export default function SelectToken(props) {
     const wallet = useContext(WalletContext);
@@ -66,15 +67,14 @@ export default function SelectToken(props) {
 
                                                         <Stack direction="column" sx={{ padding: 1 }}>
                                                             <Typography variant="body1">{token.name}</Typography>
-                                                            <Button
-                                                                variant="outlined"
-                                                                color="primary"
-                                                                href={`/personalize/${wallet.address}/${token.tokenId}`}
-                                                                target="_blank"
-                                                                rel="noreferrer noopener"
-                                                            >
-                                                                Personalize
-                                                            </Button>
+                                                            <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
+                                                                <Button
+                                                                    variant="outlined"
+                                                                    color="primary"
+                                                                >
+                                                                    Personalize
+                                                                </Button>
+                                                            </Link>
                                                         </Stack>
                                                     </Card>
                                                 </Grid>

@@ -153,6 +153,32 @@ export function WalletProvider({ children }) {
         }
     }
 
+    const getNFT = async (tokenId) => {
+        if (!ethersProvider) throw 'no-provider';
+        const abi = ["function tokenURI(uint tokenId) view returns (string tokenUri)"]
+
+        const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
+        const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
+
+        const tokenURI = await contract.tokenURI(tokenId);
+
+        const response = await fetch(tokenURI);
+        const metadata = await response.json();
+        metadata.tokenId = tokenId;
+
+        return metadata;
+    }
+
+    const getNFTOwner = async (tokenId) => {
+        if (!ethersProvider) throw 'no-provider';
+        const abi = ["function ownerOf(uint tokenId) view returns (address owner)"]
+
+        const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
+        const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
+
+        return (await contract.ownerOf(tokenId));
+    }
+
     return (
         <WalletContext.Provider
             value={{
@@ -168,7 +194,9 @@ export function WalletProvider({ children }) {
                 gettingTokens,
                 connect,
                 disconnect,
-                getNFTs
+                getNFTs,
+                getNFT,
+                getNFTOwner
             }}
         >
             {children}

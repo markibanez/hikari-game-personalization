@@ -6,8 +6,8 @@ import { ethers } from 'ethers';
 import { useSnackbar } from 'notistack';
 import { useContext, useEffect, useState } from 'react';
 import { Backdrop, Box, Card, CardContent, CircularProgress, Fade } from '@mui/material';
-import Start from './start';
-import Decision from './decision';
+import Start from '../../../components/Start';
+import Decision from '../../../components/Decision';
 
 export default function Token() {
     const wallet = useContext(WalletContext);

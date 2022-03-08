@@ -1,15 +1,12 @@
 import { Box, Button, Card, CardContent, Fade, Stack, Typography } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useContext, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props;
-    const wallet = useContext(WalletContext);
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
-    const { enqueueSnackbar } = useSnackbar();
 
     const chooseOption = async (option) => {
         setProcessing(true);

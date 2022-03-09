@@ -11,24 +11,6 @@ const theme = createTheme({
         fontWeightRegular: 500,
         fontWeightMedium: 700,
     },
-    palette: {
-        // background: {
-        //     default: '#FFF',
-        //     paper: '#FFF',
-        // },
-        // text: {
-        //     primary: '#000'
-        // },
-        // primary: {
-        //     main: '#E6EEF7'
-        // },
-        // secondary: {
-        //     main: '#FFF'
-        // },
-        // action: {
-        //     active: '#FFF'
-        // },
-    },
 });
 
 function MyApp({ Component, pageProps }) {

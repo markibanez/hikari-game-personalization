@@ -13,6 +13,10 @@ export default function Decision(props) {
         setChosenOption(option);
     };
 
+    const choiceStyle = {
+        width: '100%',
+    };
+
     const exitedHandler = async () => {
         try {
             const response = await fetch(`/api/update-state?address=${address}&token=${token}&option=${chosenOption}`);
@@ -28,23 +32,32 @@ export default function Decision(props) {
         } finally {
             setProcessing(false);
         }
-    }
+    };
 
     return (
         <>
-            <Fade
-                in={!processing}
-                timeout={1000}
-                onExited={exitedHandler}
-            >
+            <Box
+                sx={{
+                    position: 'fixed',
+                    padding: 0,
+                    margin: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundColor: '#000',
+                    zIndex: 1
+                }}
+            ></Box>
+            <Fade in={!processing} timeout={1000} onExited={exitedHandler}>
                 <Box
                     sx={{
+                        position: 'fixed',
                         padding: 0,
                         margin: 0,
                         width: '100vw',
                         height: '100vh',
                         backgroundImage: `url('/art/${decision.art_file}')`,
                         backgroundSize: 'cover',
+                        zIndex: 200
                     }}
                 >
                     <Box
@@ -59,39 +72,53 @@ export default function Decision(props) {
                             backgroundRepeat: 'no-repeat',
                         }}
                     ></Box>
-                    <Box sx={{ position: 'fixed', top: 20, left: 20, maxWidth: '40vw' }}>
-                        <Typography variant="body1" color="#FFF" sx={{ marginBottom: 2 }}>
+                    <Box
+                        sx={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 20,
+                            maxWidth: '36vw',
+                            height: '30vh',
+                            alignItems: 'center',
+                        }}
+                        display="flex"
+                    >
+                        <Typography variant="h5" color="#FFF" sx={{ marginBottom: 2 }}>
                             {decision.dialogue}
                         </Typography>
+                    </Box>
 
-                        {decision.option1_id && (
-                            <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                <Typography variant="body2" color="#FFF">
-                                    {decision.option1_text || 'Continue...'}
-                                </Typography>
-                            </a>
-                        )}
-                        {decision.option2_id && (
-                            <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                <Typography variant="body2" color="#FFF">
-                                    {decision.option2_text || 'Continue...'}
-                                </Typography>
-                            </a>
-                        )}
-                        {decision.option3_id && (
-                            <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                <Typography variant="body2" color="#FFF">
-                                    {decision.option3_text || 'Continue...'}
-                                </Typography>
-                            </a>
-                        )}
-                        {decision.option4_id && (
-                            <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                <Typography variant="body2" color="#FFF">
-                                    {decision.option4_text || 'Continue...'}
-                                </Typography>
-                            </a>
-                        )}
+                    <Box sx={{ position: 'fixed', bottom: 50, width: '100%' }}>
+                        <Stack direction="row" justifyContent="center" spacing={5}>
+                            {decision.option1_id && (
+                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
+                                    <Typography variant="h5" color="#FFF">
+                                        {decision.option1_text || 'Continue...'}
+                                    </Typography>
+                                </a>
+                            )}
+                            {decision.option2_id && (
+                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
+                                    <Typography variant="h5" color="#FFF">
+                                        {decision.option2_text || 'Continue...'}
+                                    </Typography>
+                                </a>
+                            )}
+                            {decision.option3_id && (
+                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
+                                    <Typography variant="h5" color="#FFF">
+                                        {decision.option3_text || 'Continue...'}
+                                    </Typography>
+                                </a>
+                            )}
+                            {decision.option4_id && (
+                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
+                                    <Typography variant="h5" color="#FFF">
+                                        {decision.option4_text || 'Continue...'}
+                                    </Typography>
+                                </a>
+                            )}
+                        </Stack>
                     </Box>
                 </Box>
             </Fade>

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Bankai;
+    src: url("/bankai.otf") format("opentype");
+}
+
 body {
     background-image: url('/images/bg.jfif');
     background-repeat: no-repeat;
@@ -7,5 +12,5 @@ body {
 }
 
 * {
-    font-family: Roboto;
+    font-family: Bankai;
 }

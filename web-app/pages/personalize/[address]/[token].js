@@ -2,7 +2,7 @@ import { WalletContext } from '/contexts/WalletContext';
 import WalletInfo from '/components/WalletInfo';
 import styles from '/styles/Home.module.css';
 import { useRouter } from 'next/router';
-import { ethers } from 'ethers';
+import { constants, ethers } from 'ethers';
 import { useSnackbar } from 'notistack';
 import { useContext, useEffect, useState } from 'react';
 import { Backdrop, Box, Card, CardContent, CircularProgress, Fade } from '@mui/material';
@@ -30,7 +30,7 @@ export default function Token() {
 
             if (router.isReady && wallet.ethersProvider && address && !isNaN(tokenId)) {
                 try {
-                    const owner = await wallet.getNFTOwner(tokenId);
+                    const owner = await wallet.getNFTOwner(tokenId); console.log('owner', owner);
                     setOwnsToken(owner === wallet.address);
 
                     if (owner !== wallet.address) {

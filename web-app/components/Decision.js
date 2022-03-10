@@ -34,6 +34,20 @@ export default function Decision(props) {
         }
     };
 
+    const optBoxStyle = {
+        backgroundImage: `url('/choice-ink-stain.png')`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        width: '300px',
+        height: '150px',
+        zIndex: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+
+    const optionLinkStyle = { display: 'block', width: '200px'}
+
     return (
         <>
             <Box
@@ -44,7 +58,7 @@ export default function Decision(props) {
                     width: '100vw',
                     height: '100vh',
                     backgroundColor: '#000',
-                    zIndex: 1
+                    zIndex: 1,
                 }}
             ></Box>
             <Fade in={!processing} timeout={1000} onExited={exitedHandler}>
@@ -57,7 +71,7 @@ export default function Decision(props) {
                         height: '100vh',
                         backgroundImage: `url('/art/${decision.art_file}')`,
                         backgroundSize: 'cover',
-                        zIndex: 200
+                        zIndex: 5,
                     }}
                 >
                     <Box
@@ -65,8 +79,8 @@ export default function Decision(props) {
                             position: 'fixed',
                             top: -60,
                             left: 0,
-                            width: '60vw',
-                            height: '40vh',
+                            width: '70vw',
+                            height: '50vh',
                             backgroundImage: `url('/images/ink-stain.png')`,
                             backgroundSize: 'contain',
                             backgroundRepeat: 'no-repeat',
@@ -77,46 +91,67 @@ export default function Decision(props) {
                             position: 'fixed',
                             top: 0,
                             left: 20,
-                            maxWidth: '36vw',
-                            height: '30vh',
+                            maxWidth: '40vw',
+                            height: '40vh',
                             alignItems: 'center',
                         }}
                         display="flex"
                     >
-                        <Typography variant="h5" color="#FFF" sx={{ marginBottom: 2 }}>
+                        <Typography variant="h6" color="#FFF" sx={{ marginBottom: 2 }}>
                             {decision.dialogue}
                         </Typography>
                     </Box>
 
-                    <Box sx={{ position: 'fixed', bottom: 50, width: '100%' }}>
-                        <Stack direction="row" justifyContent="center" spacing={5}>
+                    <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
+                        <Stack direction="row" justifyContent="center" spacing={1}>
                             {decision.option1_id && (
-                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                    <Typography variant="h5" color="#FFF">
-                                        {decision.option1_text || 'Continue...'}
-                                    </Typography>
-                                </a>
+                                <Box
+                                    sx={optBoxStyle}
+                                    display="flex"
+                                >
+                                    <a href="javascript:void(0)" onClick={() => chooseOption(1)} style={optionLinkStyle}>
+                                        <Typography variant="h6" color="#FFF">
+                                            {decision.option1_text || 'Continue...'}
+                                        </Typography>
+                                    </a>
+                                </Box>
                             )}
                             {decision.option2_id && (
-                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                    <Typography variant="h5" color="#FFF">
+                            <Box
+                                sx={optBoxStyle}
+                                display="flex"
+                            >
+                                <a href="javascript:void(0)" onClick={() => chooseOption(2)} style={optionLinkStyle}>
+                                    <Typography variant="h6" color="#FFF">
                                         {decision.option2_text || 'Continue...'}
                                     </Typography>
                                 </a>
+                            </Box>
                             )}
+
                             {decision.option3_id && (
-                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                    <Typography variant="h5" color="#FFF">
-                                        {decision.option3_text || 'Continue...'}
-                                    </Typography>
-                                </a>
+                            <Box
+                                sx={optBoxStyle}
+                                display="flex"
+                            >
+                                    <a href="javascript:void(0)" onClick={() => chooseOption(3)} style={optionLinkStyle}>
+                                        <Typography variant="h6" color="#FFF">
+                                            {decision.option3_text || 'Continue...'}
+                                        </Typography>
+                                    </a>
+                            </Box>
                             )}
                             {decision.option4_id && (
-                                <a href="javascript:void(0)" onClick={() => chooseOption(1)}>
-                                    <Typography variant="h5" color="#FFF">
-                                        {decision.option4_text || 'Continue...'}
-                                    </Typography>
-                                </a>
+                                <Box
+                                    sx={optBoxStyle}
+                                    display="flex"
+                                >
+                                    <a href="javascript:void(0)" onClick={() => chooseOption(4)} style={optionLinkStyle}>
+                                        <Typography variant="h6" color="#FFF">
+                                            {decision.option4_text || 'Continue...'}
+                                        </Typography>
+                                    </a>
+                                </Box>
                             )}
                         </Stack>
                     </Box>

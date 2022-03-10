@@ -8,7 +8,7 @@ const handler = async (req, res) => {
 
     const db = await getDb();
     const players = await db.collection('players');
-    const player = await players.findOne({ address, tokenID }); console.log(player, 'player');
+    const player = await players.findOne({ address, tokenID });
 
     let state = {};
     if (player) {
@@ -39,6 +39,11 @@ const handler = async (req, res) => {
                 case 4:
                     nextDecisionId = currentDecision.option4_id;
                     break;
+            }
+
+            if (typeof nextDecisionId === 'string') {
+                const split = nextDecisionId.split();
+                console.log(split);
             }
 
             const nextDecision = decisions.find(d => d.id === nextDecisionId);

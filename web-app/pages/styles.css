@@ -1,6 +1,11 @@
-@font-face {
+/* @font-face {
     font-family: Bankai;
     src: url('/bankai.otf') format('opentype');
+} */
+
+@font-face {
+    font-family: HinaMincho;
+    src: url('/HinaMincho-Regular.ttf');
 }
 
 body {
@@ -9,10 +14,11 @@ body {
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
+    cursor: url(/pointer-walnut.cur), auto;
 }
 
 * {
-    font-family: Bankai;
+    font-family: HinaMincho;
 }
 
 a:link {

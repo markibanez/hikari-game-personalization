@@ -28,9 +28,9 @@ export default function Token() {
         const load = async () => {
             setLoading(true);
 
-            if (router.isReady && wallet.ethersProvider && address && !isNaN(tokenId)) {
+            if (router.isReady && wallet.address && wallet.ethersProvider && address && !isNaN(tokenId)) {
                 try {
-                    const owner = await wallet.getNFTOwner(tokenId); console.log('owner', owner);
+                    const owner = await wallet.getNFTOwner(tokenId);
                     setOwnsToken(owner === wallet.address);
 
                     if (owner !== wallet.address) {

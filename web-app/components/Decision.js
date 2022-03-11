@@ -44,9 +44,16 @@ export default function Decision(props) {
         zIndex: 20,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    };
 
-    const optionLinkStyle = { display: 'block', width: '200px'}
+    const optionLinkStyle = {
+        display: 'block',
+        width: '200px',
+        textAlign: 'center',
+        '&:hover': {
+            color: '#fcffa4'
+        },
+    };
 
     return (
         <>
@@ -105,52 +112,32 @@ export default function Decision(props) {
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
                         <Stack direction="row" justifyContent="center" spacing={1}>
                             {decision.option1_id && (
-                                <Box
-                                    sx={optBoxStyle}
-                                    display="flex"
-                                >
-                                    <a href="javascript:void(0)" onClick={() => chooseOption(1)} style={optionLinkStyle}>
-                                        <Typography variant="h6" color="#FFF">
-                                            {decision.option1_text || 'Continue...'}
-                                        </Typography>
-                                    </a>
+                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(1)}>
+                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                        {decision.option1_text || 'Continue...'}
+                                    </Typography>
                                 </Box>
                             )}
                             {decision.option2_id && (
-                            <Box
-                                sx={optBoxStyle}
-                                display="flex"
-                            >
-                                <a href="javascript:void(0)" onClick={() => chooseOption(2)} style={optionLinkStyle}>
-                                    <Typography variant="h6" color="#FFF">
+                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(2)}>
+                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option2_text || 'Continue...'}
                                     </Typography>
-                                </a>
-                            </Box>
+                                </Box>
                             )}
 
                             {decision.option3_id && (
-                            <Box
-                                sx={optBoxStyle}
-                                display="flex"
-                            >
-                                    <a href="javascript:void(0)" onClick={() => chooseOption(3)} style={optionLinkStyle}>
-                                        <Typography variant="h6" color="#FFF">
-                                            {decision.option3_text || 'Continue...'}
-                                        </Typography>
-                                    </a>
-                            </Box>
+                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(3)}>
+                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                        {decision.option3_text || 'Continue...'}
+                                    </Typography>
+                                </Box>
                             )}
                             {decision.option4_id && (
-                                <Box
-                                    sx={optBoxStyle}
-                                    display="flex"
-                                >
-                                    <a href="javascript:void(0)" onClick={() => chooseOption(4)} style={optionLinkStyle}>
-                                        <Typography variant="h6" color="#FFF">
-                                            {decision.option4_text || 'Continue...'}
-                                        </Typography>
-                                    </a>
+                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(4)}>
+                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                        {decision.option4_text || 'Continue...'}
+                                    </Typography>
                                 </Box>
                             )}
                         </Stack>

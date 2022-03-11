@@ -5,7 +5,7 @@ import './styles.css';
 
 const theme = createTheme({
     typography: {
-        fontFamily: `Bankai`,
+        fontFamily: `HinaMincho`,
         fontSize: 14,
         fontWeightLight: 400,
         fontWeightRegular: 500,

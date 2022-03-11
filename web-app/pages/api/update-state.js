@@ -121,7 +121,6 @@ const handler = async (req, res) => {
                 blue: 0,
                 green: 0,
                 currentDecision: 1,
-                decisionHistory: [],
             };
             await players.insertOne(state);
         } else {

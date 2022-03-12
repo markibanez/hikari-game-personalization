@@ -92,7 +92,7 @@ const handler = async (req, res) => {
                 const regex = new RegExp(/\b(?<property>red|blue|green|yellow|mana)\b(?<value>[+,-]\d{1,3})/gi);
 
                 const matches = rawEffects.matchAll(regex);
-                for (const m of matches) effects[`${m.groups.property}`] = Number(m.groups.value);
+                for (const m of matches) effects[`${m.groups.property?.toLowerCase()}`] = Number(m.groups.value);
             }
 
             logEntry.appliedEffects = effects;

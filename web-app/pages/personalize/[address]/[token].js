@@ -78,7 +78,7 @@ export default function Token() {
                 >
                     <CircularProgress color="inherit" />
                 </Backdrop>
-                <WalletInfo />
+                {/* <WalletInfo /> */}
 
                 <Fade in={!loading && address && !isNaN(tokenId) && !state?.signed} mountOnEnter timeout={1000} style={{ transitionDelay: `500ms` }}>
                     <Box>

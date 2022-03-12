@@ -22,6 +22,7 @@ export default function Decision(props) {
             const response = await fetch(`/api/update-state?address=${address}&token=${token}&option=${chosenOption}`);
             if (response.status === 200) {
                 const result = await response.json();
+                console.log(result);
                 setState(result.state);
                 setDecision(result.decision);
             } else {
@@ -46,9 +47,21 @@ export default function Decision(props) {
         justifyContent: 'center'
     };
 
+    const manaBoxStyle = {
+        backgroundImage: `url('/choice-ink-stain.png')`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        width: '200px',
+        height: '150px',
+        zIndex: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+
     const optionLinkStyle = {
         display: 'block',
-        width: '200px',
+        width: '250px',
         textAlign: 'center',
         '&:hover': {
             color: '#fcffa4'
@@ -141,6 +154,14 @@ export default function Decision(props) {
                                 </Box>
                             )}
                         </Stack>
+                    </Box>
+
+                    <Box sx={{ position: 'fixed', top: -30, right: 30 }}>
+                        <Box sx={manaBoxStyle} display="flex" onClick={() => chooseOption(4)}>
+                            <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                Mana: {state.mana}
+                            </Typography>
+                        </Box>
                     </Box>
                 </Box>
             </Fade>

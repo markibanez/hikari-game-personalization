@@ -94,7 +94,7 @@ export default function Decision(props) {
                         zIndex: 5,
                     }}
                 >
-                    <Box
+                    {/* <Box
                         sx={{
                             position: 'fixed',
                             top: -60,
@@ -120,7 +120,7 @@ export default function Decision(props) {
                         <Typography variant="h6" color="#FFF" sx={{ marginBottom: 2 }}>
                             {decision.dialogue}
                         </Typography>
-                    </Box>
+                    </Box> */}
 
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
                         <Stack direction="row" justifyContent="center" spacing={1}>

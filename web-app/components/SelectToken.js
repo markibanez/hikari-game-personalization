@@ -15,15 +15,38 @@ export default function SelectToken(props) {
             <Fade in={hasTokens} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
                 <Box
                     sx={{
-                        width: '1000px',
-                        height: '700px',
+                        width: '1500px',
+                        height: '900px',
                         textAlign: 'center',
-                        backgroundImage: `url("/images/branded-modal.png")`,
+                        backgroundImage: `url("/images/plain-modal.png")`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
-                        paddingTop: '140px'
+                        paddingY: '50px',
+                        marginTop: '150px'
                     }}
                 >
+                    {hasTokens && (
+                        <>
+                            <Typography variant="h2" sx={{ marginY: 5, fontFamily: 'DK-DDG', color: '#AEAD8F' }}>
+                                Select a soul to personalize
+                            </Typography>
+                            <Grid container spacing={{ xs: 1, md: 1 }} justifyContent="left" sx={{ paddingX: 10 }}>
+                                {wallet.tokens.map((token, index) => {
+                                    return (
+                                        <Grid item key={index} xs={12} sm={6} md={3}>
+                                            <Stack direction="column" sx={{ padding: 1 }}>
+                                                <video src="/art/soul.mp4" style={{ height: 150 }} autoPlay loop />
+                                                <Typography variant="h5" sx={{ fontFamily: 'DK-DDG', marginY: 1, color: '#302C21' }}>Soul No. {token.tokenId.toString()}</Typography>
+                                                <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
+                                                    <img src="/images/personalize-button.png" style={{ cursor: 'pointer' }} />
+                                                </Link>
+                                            </Stack>
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>
+                        </>
+                    )}
                 </Box>
 
                 {/* <Card

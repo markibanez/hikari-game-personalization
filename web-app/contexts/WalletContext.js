@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import Web3Modal from 'web3modal';
 import { useSnackbar } from 'notistack';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { interpolateAs } from 'next/dist/shared/lib/router/router';
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WalletContext = createContext({});
@@ -58,11 +59,11 @@ export function WalletProvider({ children }) {
         };
 
         web3Modal = new Web3Modal({
-            cacheProvider: true,
+            // cacheProvider: true,
             providerOptions
         });
 
-        if (localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")) connect();
+        // if (localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")) connect();
     }, []);
 
     const [address, setAddress] = useState(null);
@@ -76,6 +77,7 @@ export function WalletProvider({ children }) {
 
     const connect = async () => {
         const instance = await web3Modal.connect();
+        web3Modal.clearCachedProvider();
         instance.on('accountsChanged', (accounts) => {
             router.reload(window.location.pathname);
         });

@@ -1,7 +1,7 @@
-/* @font-face {
-    font-family: Bankai;
-    src: url('/bankai.otf') format('opentype');
-} */
+@font-face {
+    font-family: "DK-DDG";
+    src: url('/DK-Drop-Dead-Gorgeous.otf') format('opentype');
+}
 
 @font-face {
     font-family: HinaMincho;

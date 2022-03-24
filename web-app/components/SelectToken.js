@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardMedia, CircularProgress, Fade, Grid, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Button, Card, CardMedia, CircularProgress, Fade, Grid, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import React, { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '../contexts/WalletContext';
@@ -7,28 +7,26 @@ import Link from 'next/link'
 export default function SelectToken(props) {
     const wallet = useContext(WalletContext);
     const { enqueueSnackbar } = useSnackbar();
-    const visible = !Boolean(wallet.selectedToken) && Boolean(wallet.address);
-    const [loading, setLoading] = useState(true);
     const hasTokens = wallet.tokens?.length > 0;
-
-    useEffect(() => {
-        if (visible) {
-            wallet
-                .getNFTs()
-                .then(() => {})
-                .catch((err) => {
-                    console.log(err);
-                    enqueueSnackbar('Could not get your NFTs', { variant: 'error' });
-                });
-        }
-    }, [visible]);
-
-    const personalizeClicked = (token) => {};
+    console.log(wallet.tokens, 'wallet.tokens');
 
     return (
         <>
-            <Fade in={visible} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
-                <Card
+            <Fade in={hasTokens} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
+                <Box
+                    sx={{
+                        width: '1000px',
+                        height: '700px',
+                        textAlign: 'center',
+                        backgroundImage: `url("/images/branded-modal.png")`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        paddingTop: '140px'
+                    }}
+                >
+                </Box>
+
+                {/* <Card
                     sx={{
                         padding: 2,
                         textAlign: 'center',
@@ -91,7 +89,7 @@ export default function SelectToken(props) {
                             )}
                         </>
                     )}
-                </Card>
+                </Card> */}
             </Fade>
         </>
     );

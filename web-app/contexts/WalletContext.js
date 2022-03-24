@@ -73,7 +73,7 @@ export function WalletProvider({ children }) {
     const [walletType, setWalletType] = useState(null);
     const [tokens, setTokens] = useState([]);
     const [selectedToken, setSelectedToken] = useState(null);
-    const [gettingTokens, setGettingTokens] = useState(true);
+    const [gettingTokens, setGettingTokens] = useState(false);
 
     const connect = async () => {
         const instance = await web3Modal.connect();

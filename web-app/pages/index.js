@@ -8,11 +8,10 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <main className={styles.main}>
-                {/* <WalletInfo />
-                <ConnectWallet />
-                <SelectToken /> */}
 
                 <ConnectWallet />
+                <SelectToken />
+
             </main>
         </div>
     );

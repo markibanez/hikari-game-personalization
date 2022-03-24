@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Button, Card, Fade, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Fade, Stack, Typography, Backdrop, CircularProgress } from '@mui/material';
 import { ethers } from 'ethers';
 import { WalletContext } from '../contexts/WalletContext';
 import Link from 'next/link';
 
 export default function ConnectWallet(props) {
     const wallet = useContext(WalletContext);
+    const [showYourSouls, setShowYourSouls] = useState(false);
 
     return (
         <>
@@ -16,23 +17,47 @@ export default function ConnectWallet(props) {
                     <img
                         src="/images/begin-button.png"
                         style={{ width: 300, marginTop: 270, cursor: 'pointer' }}
-                        onClick={wallet.connect}
+                        onClick={async () => {
+                            await wallet.connect();
+                            setShowYourSouls(true);
+                        }}
                     />
                 </Box>
-
-                {/* <Card
+            </Fade>
+            <Fade in={showYourSouls} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
+                <Box
                     sx={{
-                        padding: 4,
+                        width: '800px',
+                        height: '600px',
+                        textAlign: 'center',
+                        backgroundImage: `url("/images/branded-modal.png")`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        paddingTop: '140px'
                     }}
                 >
-                    <Stack>
-                        <Typography variant="h4" sx={{ marginBottom: 3 }}>
-                            connect your web3 wallet
-                        </Typography>
-                        <Button variant="outlined" size="large" onClick={wallet.connect}>Connect</Button>
-                    </Stack>
-                </Card> */}
+                    <Typography variant="h3" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '30px' }}>
+                        Your Souls...
+                    </Typography>
+                    <br />
+                    <img
+                        src="/images/begin-button.png"
+                        style={{ width: 300, marginTop: 10, cursor: 'pointer' }}
+                        onClick={async () => {
+                            await wallet.getNFTs();
+                            setShowYourSouls(false);
+                        }}
+                    />
+                </Box>
             </Fade>
+
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={Boolean(wallet.address) && wallet.gettingTokens}
+                // onClick={handleClose}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </>
     );
 }

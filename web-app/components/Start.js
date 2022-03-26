@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Stack, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useContext, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
@@ -35,7 +35,29 @@ export default function Start(props) {
 
     return (
         <>
-            <Card>
+            <Box
+                    sx={{
+                        width: '800px',
+                        height: '600px',
+                        textAlign: 'center',
+                        backgroundImage: `url("/images/branded-modal.png")`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        paddingTop: '140px'
+                    }}
+                >
+
+                    <Typography variant="h4" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '30px' }}>
+                        We need to verify your wallet with your signature
+                    </Typography>
+                    <br/>
+                    <img
+                        src="/images/begin-button.png"
+                        style={{ width: 300, marginTop: 10, cursor: 'pointer' }}
+                        onClick={sign}
+                    />
+            </Box>
+            {/* <Card>
                 <CardContent>
                     <Stack direction="column">
                         <Typography variant="h5">Personalization Start</Typography>
@@ -46,7 +68,7 @@ export default function Start(props) {
                         </LoadingButton>
                     </Stack>
                 </CardContent>
-            </Card>
+            </Card> */}
         </>
     );
 }

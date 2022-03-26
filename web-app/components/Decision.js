@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, Fade, Stack, Typography } from '@mui/material';
+import { Backdrop, Box, Button, Card, CardContent, Fade, Stack, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
@@ -7,6 +7,7 @@ export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props;
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
+    const [randomDismissed, setRandomDismissed] = useState(false);
 
     const chooseOption = async (option) => {
         setProcessing(true);
@@ -25,6 +26,7 @@ export default function Decision(props) {
                 console.log(result);
                 setState(result.state);
                 setDecision(result.decision);
+                setRandomDismissed(false);
             } else {
                 console.log(response);
             }
@@ -90,8 +92,11 @@ export default function Decision(props) {
                         width: '100vw',
                         height: '100vh',
                         backgroundImage: `url('/art/${decision.art_file}')`,
-                        backgroundSize: 'cover',
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
                         zIndex: 5,
+                        filter: state?.isRandom && !randomDismissed ? `blur(8px)` : 'initial'
                     }}
                 >
                     {/* <Box
@@ -156,15 +161,41 @@ export default function Decision(props) {
                         </Stack>
                     </Box>
 
-                    <Box sx={{ position: 'fixed', top: -30, right: 30 }}>
+                    {/* <Box sx={{ position: 'fixed', top: -30, right: 30 }}>
                         <Box sx={manaBoxStyle} display="flex" onClick={() => chooseOption(4)}>
                             <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                 Mana: {state.mana}
                             </Typography>
                         </Box>
-                    </Box>
+                    </Box> */}
+
                 </Box>
+
             </Fade>
+
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={Boolean(state.isRandom && !randomDismissed)}
+                onClick={() => { setRandomDismissed(true) }}
+            >
+                <Stack direction="column" justifyContent="center" alignItems="center">
+                    {state.randomSuccess &&
+                    <img src="/images/random-success.png" />
+                    }
+
+                    {!state.randomSuccess &&
+                    <img src="/images/random-fail.png" />
+                    }
+
+                    <br /><br />
+
+                    <img src="/images/back-button.png" onClick={() => { setRandomDismissed(true) }} style={{ width: '200px', cursor: 'pointer' }} />
+
+                </Stack>
+
+                {/* <Typography variant="h1">{state.randomSuccess ? "SUCCESS" : "FAILED"}</Typography> */}
+
+            </Backdrop>
         </>
     );
 }

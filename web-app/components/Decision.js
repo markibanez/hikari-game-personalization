@@ -187,9 +187,15 @@ export default function Decision(props) {
                     <img src="/images/random-fail.png" />
                     }
 
+                    {state.randomEffects?.mana !== undefined &&
+                        <Box textAlign="center" sx={{ width: '300px', backgroundImage: `url('/images/mana-result.png')`, backgroundSize: 'contain' }}>
+                            <h1>{`${state.randomEffects.mana >= 0 ? '+' : ''}${state.randomEffects.mana} Mana`}</h1>
+                        </Box>
+                    }
+
                     <br /><br />
 
-                    <img src="/images/back-button.png" onClick={() => { setRandomDismissed(true) }} style={{ width: '200px', cursor: 'pointer' }} />
+                    <img src="/images/back-button.png" onClick={() => { setRandomDismissed(true) }} style={{ width: '200px' }} />
 
                 </Stack>
 

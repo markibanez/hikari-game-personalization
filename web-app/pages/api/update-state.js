@@ -111,6 +111,7 @@ const handler = async (req, res) => {
                 state.currentDecision = nextDecisionId;
                 state.isRandom = isRandom;
                 state.randomSuccess = randomSuccess;
+                state.randomEffects = effects;
             }
         }
     } else {

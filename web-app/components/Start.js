@@ -53,7 +53,7 @@ export default function Start(props) {
                     <br/>
                     <img
                         src="/images/begin-button.png"
-                        style={{ width: 300, marginTop: 10, cursor: 'pointer' }}
+                        style={{ width: 300, marginTop: 10 }}
                         onClick={sign}
                     />
             </Box>

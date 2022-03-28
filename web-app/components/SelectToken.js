@@ -52,7 +52,7 @@ export default function SelectToken(props) {
                                                 </Box>
                                                 <Typography variant="h5" sx={{ fontFamily: 'DK-DDG', marginY: 1, color: '#302C21' }}>Soul No. {token.tokenId.toString()}</Typography>
                                                 <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
-                                                    <img src="/images/personalize-button.png" style={{ cursor: 'pointer' }} />
+                                                    <img src="/images/personalize-button.png" />
                                                 </Link>
                                             </Stack>
                                         </Grid>

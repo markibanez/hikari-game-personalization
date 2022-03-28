@@ -16,7 +16,7 @@ export default function ConnectWallet(props) {
                     <br />
                     <img
                         src="/images/begin-button.png"
-                        style={{ width: 300, marginTop: 270, cursor: 'pointer' }}
+                        style={{ width: 300, marginTop: 270 }}
                         onClick={async () => {
                             await wallet.connect();
                             setShowYourSouls(true);
@@ -42,7 +42,7 @@ export default function ConnectWallet(props) {
                     <br />
                     <img
                         src="/images/begin-button.png"
-                        style={{ width: 300, marginTop: 10, cursor: 'pointer' }}
+                        style={{ width: 300, marginTop: 10 }}
                         onClick={async () => {
                             await wallet.getNFTs();
                             setShowYourSouls(false);

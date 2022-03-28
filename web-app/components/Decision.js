@@ -4,7 +4,7 @@ import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
 
 export default function Decision(props) {
-    const { state, decision, setState, setDecision, address, token } = props;
+    const { state, decision, setState, setDecision, address, token } = props; console.log(decision);
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
@@ -130,14 +130,14 @@ export default function Decision(props) {
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
                         <Stack direction="row" justifyContent="center" spacing={1}>
                             {decision.option1_id && (
-                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(1)}>
+                                <Box sx={{cursor: decision.option1_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(1)}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option1_text || 'Continue...'}
                                     </Typography>
                                 </Box>
                             )}
                             {decision.option2_id && (
-                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(2)}>
+                                <Box sx={{cursor: decision.option2_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(2)}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option2_text || 'Continue...'}
                                     </Typography>
@@ -145,14 +145,14 @@ export default function Decision(props) {
                             )}
 
                             {decision.option3_id && (
-                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(3)}>
+                                <Box sx={{cursor: decision.option3_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(3)}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option3_text || 'Continue...'}
                                     </Typography>
                                 </Box>
                             )}
                             {decision.option4_id && (
-                                <Box sx={optBoxStyle} display="flex" onClick={() => chooseOption(4)}>
+                                <Box sx={{cursor: decision.option4_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(4)}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option4_text || 'Continue...'}
                                     </Typography>

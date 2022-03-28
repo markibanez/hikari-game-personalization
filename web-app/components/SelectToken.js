@@ -34,8 +34,22 @@ export default function SelectToken(props) {
                                 {wallet.tokens.map((token, index) => {
                                     return (
                                         <Grid item key={index} xs={12} sm={6} md={3}>
-                                            <Stack direction="column" sx={{ padding: 1 }}>
-                                                <video src="/art/soul.mp4" style={{ height: 150 }} autoPlay loop />
+                                            <Stack direction="column" sx={{ padding: 1 }} alignItems="center">
+                                                <Box 
+                                                    sx={{ 
+                                                        backgroundImage: `url('/images/border-normal.png')`, 
+                                                        backgroundSize: 'contain', 
+                                                        backgroundRepeat: 'no-repeat',
+                                                        paddingTop: '7px', 
+                                                        height: '150px',
+                                                        width: '150px',
+                                                        '&:hover': {
+                                                            backgroundImage: `url('/images/border-hover.png')`
+                                                        }
+                                                    }}
+                                                >
+                                                    <video src="/art/soul.mp4" style={{ height: '92%' }} autoPlay loop />
+                                                </Box>
                                                 <Typography variant="h5" sx={{ fontFamily: 'DK-DDG', marginY: 1, color: '#302C21' }}>Soul No. {token.tokenId.toString()}</Typography>
                                                 <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
                                                     <img src="/images/personalize-button.png" style={{ cursor: 'pointer' }} />

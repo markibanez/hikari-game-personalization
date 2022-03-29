@@ -8,6 +8,12 @@ export default function ConnectWallet(props) {
     const wallet = useContext(WalletContext);
     const [showYourSouls, setShowYourSouls] = useState(false);
 
+    useEffect(() => {
+        if (wallet.address) {
+            wallet.getNFTs();
+        }
+    }, [wallet.address])
+
     return (
         <>
             <Fade in={!wallet.address} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
@@ -15,11 +21,10 @@ export default function ConnectWallet(props) {
                     <img src="/images/begin-label.png" style={{ width: 500, marginTop: 40 }} />
                     <br />
                     <img
-                        src="/images/begin-button.png"
+                        src="/images/connect-button.png"
                         style={{ width: 300, marginTop: 270 }}
                         onClick={async () => {
                             await wallet.connect();
-                            setShowYourSouls(true);
                         }}
                     />
                 </Box>

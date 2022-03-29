@@ -1,0 +1,28 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4582287, 2022-03-29T01:33:33-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: DropDeadGorgeous by Hanoded
+ * URL: https://www.myfonts.com/fonts/hanoded/drop-dead-gorgeous/regular/
+ * Copyright: Copyright (c) 2016 by David Kerkhoff. All rights reserved.
+ *
+ *
+ *
+ * © 2022 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/45eb8f");
+
+@font-face {
+  font-family: "DK-DDG";
+  src: url('/webFonts/DropDeadGorgeous/font.woff2') format('woff2'), url('/webFonts/DropDeadGorgeous/font.woff') format('woff');
+}
+

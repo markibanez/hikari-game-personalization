@@ -8,6 +8,7 @@ export default function Decision(props) {
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
+    const [manaDismissed, setManaDismissed] = useState(false);
 
     const chooseOption = async (option) => {
         setProcessing(true);
@@ -97,7 +98,7 @@ export default function Decision(props) {
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 5,
-                        filter: state?.isRandom && !randomDismissed ? `blur(8px)` : 'initial'
+                        filter: Boolean(state?.isRandom && !randomDismissed) || Boolean(!state.isRandom && state.randomEffects?.mana && !manaDismissed) ? `blur(8px)` : 'initial'
                     }}
                 >
                     {/* <Box
@@ -200,8 +201,33 @@ export default function Decision(props) {
 
                 </Stack>
 
-                {/* <Typography variant="h1">{state.randomSuccess ? "SUCCESS" : "FAILED"}</Typography> */}
+            </Backdrop>
 
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={Boolean(!state.isRandom && state.randomEffects?.mana && !manaDismissed)}
+                onClick={() => { setManaDismissed(true) }}
+            >
+                <Stack direction="column" justifyContent="center" alignItems="center">
+                    {state.randomEffects.mana >= 0 &&
+                    <img src="/images/mana-gained.png" />
+                    }
+
+                    {!state.randomEffects.mana < 0 &&
+                    <img src="/images/mana-lost.png" />
+                    }
+
+                    {state.randomEffects?.mana !== undefined &&
+                        <Box textAlign="center" sx={{ width: '300px', backgroundImage: `url('/images/mana-result.png')`, backgroundSize: 'contain' }}>
+                            <h1>{`${state.randomEffects.mana >= 0 ? '+' : ''}${state.randomEffects.mana} Mana`}</h1>
+                        </Box>
+                    }
+
+                    <br /><br />
+
+                    <img src="/images/back-button.png" onClick={() => { setManaDismissed(true) }} style={{ width: '200px' }} />
+
+                </Stack>
             </Backdrop>
         </>
     );

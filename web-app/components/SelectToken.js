@@ -87,7 +87,7 @@ export default function SelectToken(props) {
                                 <Grid item xs={10}>
                                     {grouped.map((tokens, gindex) => {
                                         return (
-                                            <Fade in={gindex === currentGroup} timeout={500} mountOnEnter unmountOnExit>
+                                            <Fade in={gindex === currentGroup} key={gindex} timeout={500} mountOnEnter unmountOnExit>
                                                 <Grid
                                                     container
                                                     spacing={{ xs: 6 }}

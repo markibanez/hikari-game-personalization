@@ -54,20 +54,20 @@ export default function Token() {
         }
 
         load();
-    }, [router, address, tokenId, wallet, enqueueSnackbar]);
+    }, [router, address, tokenId, wallet]);
 
     useEffect(() => {
         if (router.isReady) {
             if (!validAddress) enqueueSnackbar('Invalid address', { variant: 'error', persist: true });
             if (isNaN(tokenId)) enqueueSnackbar('Invalid token id', { variant: 'error', persist: true });
         }
-    }, [router, validAddress, tokenId, enqueueSnackbar]);
+    }, [router, validAddress, tokenId]);
 
     useEffect(() => {
         wallet.getNFT(tokenId).then((token) => {
             console.log(token);
         });
-    }, [wallet, tokenId]);
+    }, []);
 
     return (
         <div className={styles.container} style={{ overflow: 'hidden' }}>

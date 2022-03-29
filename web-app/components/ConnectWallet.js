@@ -12,7 +12,7 @@ export default function ConnectWallet(props) {
         if (wallet.address) {
             wallet.getNFTs();
         }
-    }, [wallet])
+    }, [wallet.address])
 
     return (
         <>

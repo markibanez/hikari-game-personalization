@@ -50,15 +50,16 @@ export default function Decision(props) {
     };
 
     const manaBoxStyle = {
-        backgroundImage: `url('/choice-ink-stain.png')`,
+        backgroundImage: `url('/images/mana-counter.png')`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
+        backgroundPosition: 'right top',
         width: '200px',
         height: '150px',
         zIndex: 20,
-        alignItems: 'center',
-        justifyContent: 'center'
+        textAlign: 'right',
+        paddingTop: '10px',
+        paddingRight: '30px'
     }
 
     const optionLinkStyle = {
@@ -161,13 +162,13 @@ export default function Decision(props) {
                         </Stack>
                     </Box>
 
-                    {/* <Box sx={{ position: 'fixed', top: -30, right: 30 }}>
-                        <Box sx={manaBoxStyle} display="flex" onClick={() => chooseOption(4)}>
-                            <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
-                                Mana: {state.mana}
+                    <Box sx={{ position: 'fixed', top: 0, right: 0 }}>
+                        <Box sx={manaBoxStyle}>
+                            <Typography variant="h3" sx={{ fontFamily: 'DK-DDG' }} color="#FFF">
+                                {state.mana}
                             </Typography>
                         </Box>
-                    </Box> */}
+                    </Box>
 
                 </Box>
 

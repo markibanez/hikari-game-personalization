@@ -123,7 +123,7 @@ const handler = async (req, res) => {
                 address,
                 tokenID,
                 signed: true,
-                mana: 0,
+                mana: 20,
                 red: 0,
                 yellow: 0,
                 blue: 0,

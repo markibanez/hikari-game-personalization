@@ -39,15 +39,26 @@ export default function Decision(props) {
     };
 
     const optBoxStyle = {
-        backgroundImage: `url('/images/option-bg2.png')`,
+        backgroundImage: `url('/images/option-bg4.png')`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         width: '300px',
-        height: '150px',
+        height: '120px',
         zIndex: 20,
         alignItems: 'center',
         justifyContent: 'left'
+    };
+
+    const optionLinkStyle = {
+        display: 'block',
+        width: '180px',
+        textAlign: 'left',
+        paddingLeft: 4,
+        fontSize: '12pt',
+        '&:hover': {
+            color: '#fcffa4'
+        },
     };
 
     const manaBoxStyle = {
@@ -55,22 +66,14 @@ export default function Decision(props) {
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'right top',
-        width: '200px',
-        height: '150px',
+        width: '190px',
+        height: '190px',
         zIndex: 20,
-        textAlign: 'right',
-        paddingTop: '10px',
-        paddingRight: '30px'
+        // textAlign: 'center',
+        // paddingTop: '10px',
+        // paddingRight: '30px'
     }
 
-    const optionLinkStyle = {
-        display: 'block',
-        width: '250px',
-        textAlign: 'center',
-        '&:hover': {
-            color: '#fcffa4'
-        },
-    };
 
     return (
         <>
@@ -130,7 +133,7 @@ export default function Decision(props) {
                     </Box> */}
 
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
-                        <Stack direction="row" justifyContent="center" spacing={1}>
+                        <Stack direction="row" justifyContent="center" spacing={15}>
                             {decision.option1_id && (
                                 <Box sx={{cursor: decision.option1_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(1)}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
@@ -163,9 +166,9 @@ export default function Decision(props) {
                         </Stack>
                     </Box>
 
-                    <Box sx={{ position: 'fixed', top: 0, right: 0 }}>
+                    <Box sx={{ position: 'fixed', top: -20, right: -20 }}>
                         <Box sx={manaBoxStyle}>
-                            <Typography variant="h3" sx={{ fontFamily: 'DK-DDG' }} color="#FFF">
+                            <Typography variant="h4" sx={{ fontFamily: 'DK-DDG', position: 'absolute', left: '120px', top: '36px' }} color="#AEAD8F">
                                 {state.mana}
                             </Typography>
                         </Box>

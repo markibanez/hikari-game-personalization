@@ -29,32 +29,6 @@ export default function ConnectWallet(props) {
                     />
                 </Box>
             </Fade>
-            <Fade in={showYourSouls} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
-                <Box
-                    sx={{
-                        width: '800px',
-                        height: '600px',
-                        textAlign: 'center',
-                        backgroundImage: `url("/images/branded-modal.png")`,
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
-                        paddingTop: '140px'
-                    }}
-                >
-                    <Typography variant="h3" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '30px' }}>
-                        Your Souls...
-                    </Typography>
-                    <br />
-                    <img
-                        src="/images/begin-button.png"
-                        style={{ width: 300, marginTop: 10 }}
-                        onClick={async () => {
-                            await wallet.getNFTs();
-                            setShowYourSouls(false);
-                        }}
-                    />
-                </Box>
-            </Fade>
 
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

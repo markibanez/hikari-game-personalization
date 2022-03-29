@@ -76,12 +76,12 @@ export default function SelectToken(props) {
                 >
                     {hasTokens && (
                         <>
-                            <Typography variant="h2" sx={{ marginTop: 20, fontFamily: 'DK-DDG', color: '#AEAD8F' }}>
+                            <Typography variant="h4" sx={{ marginTop: 20, marginBottom: 2, fontFamily: 'DK-DDG', color: '#AEAD8F' }}>
                                 Your souls
                             </Typography>
-                            <Grid container spacing={{ xs: 1, md: 1 }} justifyContent="center">
+                            <Grid container spacing={0} justifyContent="center">
                                 <Grid item xs={1} onClick={prevGroup}>
-                                    <img src="/images/prev.png" style={{ height: 115, marginTop: 70, zIndex: 100 }} />
+                                    <img src="/images/prev.png" style={{ height: 95, marginTop: 110, zIndex: 100 }} />
                                 </Grid>
 
                                 <Grid item xs={10}>
@@ -90,7 +90,7 @@ export default function SelectToken(props) {
                                             <Fade in={gindex === currentGroup} key={gindex} timeout={500} mountOnEnter unmountOnExit>
                                                 <Grid
                                                     container
-                                                    spacing={{ xs: 6 }}
+                                                    spacing={{ xs: 18 }}
                                                     justifyContent="left"
                                                     sx={{ paddingX: 10 }}
                                                 >
@@ -108,8 +108,8 @@ export default function SelectToken(props) {
                                                                             backgroundSize: 'contain',
                                                                             backgroundRepeat: 'no-repeat',
                                                                             paddingTop: '7px',
-                                                                            height: '200px',
-                                                                            width: '200px',
+                                                                            height: '280px',
+                                                                            width: '280px',
                                                                             '&:hover': {
                                                                                 backgroundImage: `url('/images/border-hover.png')`,
                                                                             },
@@ -117,7 +117,7 @@ export default function SelectToken(props) {
                                                                     >
                                                                         <video
                                                                             src="https://storage.googleapis.com/hikari-genu/soul.mp4"
-                                                                            style={{ height: '93%' }}
+                                                                            style={{ height: '95%' }}
                                                                             autoPlay
                                                                             loop
                                                                         />
@@ -148,7 +148,7 @@ export default function SelectToken(props) {
                                 </Grid>
 
                                 <Grid item xs={1} onClick={nextGroup}>
-                                    <img src="/images/next.png" style={{ height: 115, marginTop: 70, zIndex: 100 }} />
+                                    <img src="/images/next.png" style={{ height: 95, marginTop: 110, zIndex: 100 }} />
                                 </Grid>
                             </Grid>
                         </>

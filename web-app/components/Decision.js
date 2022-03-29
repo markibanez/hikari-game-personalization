@@ -39,7 +39,7 @@ export default function Decision(props) {
     };
 
     const optBoxStyle = {
-        backgroundImage: `url('/choice-ink-stain.png')`,
+        backgroundImage: `url('/images/option-bg2.png')`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -47,7 +47,7 @@ export default function Decision(props) {
         height: '150px',
         zIndex: 20,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'left'
     };
 
     const manaBoxStyle = {
@@ -209,11 +209,11 @@ export default function Decision(props) {
                 onClick={() => { setManaDismissed(true) }}
             >
                 <Stack direction="column" justifyContent="center" alignItems="center">
-                    {state.randomEffects.mana >= 0 &&
+                    {state.randomEffects?.mana >= 0 &&
                     <img src="/images/mana-gained.png" />
                     }
 
-                    {!state.randomEffects.mana < 0 &&
+                    {!state.randomEffects?.mana < 0 &&
                     <img src="/images/mana-lost.png" />
                     }
 

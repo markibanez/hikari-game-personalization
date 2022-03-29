@@ -116,7 +116,7 @@ export default function SelectToken(props) {
                                                                         }}
                                                                     >
                                                                         <video
-                                                                            src="https://storage.googleapis.com/hikari-genu/art/soul.mp4"
+                                                                            src="https://storage.googleapis.com/hikari-genu/soul.mp4"
                                                                             style={{ height: '93%' }}
                                                                             autoPlay
                                                                             loop

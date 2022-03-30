@@ -216,7 +216,7 @@ export default function Decision(props) {
                     <img src="/images/mana-gained.png" />
                     }
 
-                    {!state.randomEffects?.mana < 0 &&
+                    {state.randomEffects?.mana < 0 &&
                     <img src="/images/mana-lost.png" />
                     }
 

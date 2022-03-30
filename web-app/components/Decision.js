@@ -4,7 +4,7 @@ import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
 
 export default function Decision(props) {
-    const { state, decision, setState, setDecision, address, token } = props; console.log(decision);
+    const { state, decision, setState, setDecision, address, token } = props; console.log(state, decision);
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
@@ -96,7 +96,7 @@ export default function Decision(props) {
                         margin: 0,
                         width: '100vw',
                         height: '100vh',
-                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.art_file}')`,
+                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',

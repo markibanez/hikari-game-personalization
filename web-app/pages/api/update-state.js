@@ -39,23 +39,19 @@ const handler = async (req, res) => {
 
             switch (parseInt(option)) {
                 case 1:
-                    nextDecisionId = parseInt(currentDecision.option1_id);
-                    if (isNaN(nextDecisionId)) nextDecisionId = currentDecision.option1_id;
+                    nextDecisionId = currentDecision.option1_id;
                     rawEffects = currentDecision.option1_effect;
                     break;
                 case 2:
-                    nextDecisionId = parseInt(currentDecision.option2_id);
-                    if (isNaN(nextDecisionId)) nextDecisionId = currentDecision.option2_id;
+                    nextDecisionId = currentDecision.option2_id;
                     rawEffects = currentDecision.option2_effect;
                     break;
                 case 3:
-                    nextDecisionId = parseInt(currentDecision.option3_id);
-                    if (isNaN(nextDecisionId)) nextDecisionId = currentDecision.option3_id;
+                    nextDecisionId = currentDecision.option3_id;
                     rawEffects = currentDecision.option3_effect;
                     break;
                 case 4:
-                    nextDecisionId = parseInt(currentDecision.option4_id);
-                    if (isNaN(nextDecisionId)) nextDecisionId = currentDecision.option4_id;
+                    nextDecisionId = currentDecision.option4_id;
                     rawEffects = currentDecision.option4_effect;
                     break;
             }
@@ -91,6 +87,7 @@ const handler = async (req, res) => {
 
                     console.log('nextDecisionId', randomNumber, nextDecisionId);
                 } else {
+                    isRandom = false;
                     nextDecisionId = parseInt(nextDecisionId);
                 }
             }
@@ -113,11 +110,13 @@ const handler = async (req, res) => {
                     { $set: { currentDecision: nextDecisionId }, $inc: effects, $push: { logs: logEntry } }
                 );
 
-                state = await players.findOne({ address, tokenID });
-                // state.currentDecision = nextDecisionId;
+                if (effects?.mana !== undefined) state.mana += effects?.mana;
+
+                state.currentDecision = nextDecisionId;
                 state.isRandom = isRandom;
                 state.randomSuccess = randomSuccess;
                 state.randomEffects = effects;
+                console.log(state);
             }
         }
     } else {

@@ -66,21 +66,21 @@ const handler = async (req, res) => {
                     const odds2 = split[1].split('-').map((i) => parseInt(i));
 
                     const branch1Min = 1;
-                    const branch1Max = odds1[1];
+                    const branch1Max = odds1[2];
                     const branch2Min = branch1Max + 1;
-                    const branch2Max = branch1Max + odds2[1];
+                    const branch2Max = branch1Max + odds2[2];
 
                     const randomNumber = Math.floor(Math.random() * 100) + 1;
 
                     const effectSplit = rawEffects.split(',').map((i) => i.trim());
                     if (branch1Max >= randomNumber && branch1Min <= randomNumber) {
-                        randomSuccess = true;
-                        nextDecisionId = odds1[0];
+                        randomSuccess = odds1[0] === 1;
+                        nextDecisionId = odds1[1];
                         logEntry.randomized = { index: 0, odds: odds1[0], number: randomNumber };
                         rawEffects = effectSplit[0];
                     } else {
-                        randomSuccess = false;
-                        nextDecisionId = odds2[0];
+                        randomSuccess = odds2[0] === 1;
+                        nextDecisionId = odds2[1];
                         logEntry.randomized = { index: 1, odds: odds2[0], number: randomNumber };
                         rawEffects = effectSplit[1];
                     }

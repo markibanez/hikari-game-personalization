@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 import Web3Modal from 'web3modal';
 import { useSnackbar } from 'notistack';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { interpolateAs } from 'next/dist/shared/lib/router/router';
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WalletContext = createContext({});
@@ -74,6 +73,7 @@ export function WalletProvider({ children }) {
     const [tokens, setTokens] = useState([]);
     const [selectedToken, setSelectedToken] = useState(null);
     const [gettingTokens, setGettingTokens] = useState(false);
+    const [groupedTokens, setGroupedTokens] = useState([]);
 
     const connect = async () => {
         const instance = await web3Modal.connect();
@@ -106,8 +106,6 @@ export function WalletProvider({ children }) {
         setEthersProvider(provider);
         setEthersSigner(signer);
         setAddress(userAddress);
-
-        enqueueSnackbar('Wallet connected', { variant: 'success' });
     };
 
     const disconnect = async () => {

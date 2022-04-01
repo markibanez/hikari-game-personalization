@@ -1,7 +1,9 @@
 import { SnackbarProvider } from 'notistack';
 import { WalletProvider } from '../contexts/WalletContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Head from 'next/head'
 import './styles.css';
+import './../public/MyFontsWebfontsKit.css'
 
 const theme = createTheme({
     typography: {
@@ -15,19 +17,24 @@ const theme = createTheme({
 
 function MyApp({ Component, pageProps }) {
     return (
-        <ThemeProvider theme={theme}>
-            <SnackbarProvider
-                maxSnack={6}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right'
-                }}
-            >
-                <WalletProvider>
-                    <Component {...pageProps} />
-                </WalletProvider>
-            </SnackbarProvider>
-        </ThemeProvider>
+        <>
+            <Head>
+                <title>Hikari</title>
+            </Head>
+            <ThemeProvider theme={theme}>
+                <SnackbarProvider
+                    maxSnack={6}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right'
+                    }}
+                >
+                    <WalletProvider>
+                        <Component {...pageProps} />
+                    </WalletProvider>
+                </SnackbarProvider>
+            </ThemeProvider>
+        </>
     );
 }
 

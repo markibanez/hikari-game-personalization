@@ -56,32 +56,38 @@ const handler = async (req, res) => {
                     break;
             }
 
+            let isRandom = false;
+            let randomSuccess = null;
             if (typeof nextDecisionId === 'string') {
                 const split = nextDecisionId.split(',').map((i) => i.trim());
                 if (split.length === 2) {
+                    isRandom = true;
                     const odds1 = split[0].split('-').map((i) => parseInt(i));
                     const odds2 = split[1].split('-').map((i) => parseInt(i));
 
                     const branch1Min = 1;
-                    const branch1Max = odds1[1];
+                    const branch1Max = odds1[2];
                     const branch2Min = branch1Max + 1;
-                    const branch2Max = branch1Max + odds2[1];
+                    const branch2Max = branch1Max + odds2[2];
 
                     const randomNumber = Math.floor(Math.random() * 100) + 1;
 
                     const effectSplit = rawEffects.split(',').map((i) => i.trim());
                     if (branch1Max >= randomNumber && branch1Min <= randomNumber) {
-                        nextDecisionId = odds1[0];
+                        randomSuccess = odds1[0] === 1;
+                        nextDecisionId = odds1[1];
                         logEntry.randomized = { index: 0, odds: odds1[0], number: randomNumber };
                         rawEffects = effectSplit[0];
                     } else {
-                        nextDecisionId = odds2[0];
+                        randomSuccess = odds2[0] === 1;
+                        nextDecisionId = odds2[1];
                         logEntry.randomized = { index: 1, odds: odds2[0], number: randomNumber };
                         rawEffects = effectSplit[1];
                     }
 
                     console.log('nextDecisionId', randomNumber, nextDecisionId);
                 } else {
+                    isRandom = false;
                     nextDecisionId = parseInt(nextDecisionId);
                 }
             }
@@ -103,7 +109,14 @@ const handler = async (req, res) => {
                     { address, tokenID },
                     { $set: { currentDecision: nextDecisionId }, $inc: effects, $push: { logs: logEntry } }
                 );
+
+                if (effects?.mana !== undefined) state.mana += effects?.mana;
+
                 state.currentDecision = nextDecisionId;
+                state.isRandom = isRandom;
+                state.randomSuccess = randomSuccess;
+                state.randomEffects = effects;
+                console.log(state);
             }
         }
     } else {
@@ -115,7 +128,7 @@ const handler = async (req, res) => {
                 address,
                 tokenID,
                 signed: true,
-                mana: 0,
+                mana: 20,
                 red: 0,
                 yellow: 0,
                 blue: 0,

@@ -28,14 +28,16 @@ export default function Decision(props) {
                 setState(result.state);
                 setDecision(result.decision);
                 setRandomDismissed(false);
+                onImageLoaded(`https://storage.googleapis.com/hikari-genu/art/${result.decision.id}.png`);
             } else {
                 console.log(response);
             }
         } catch (err) {
             console.log(err);
-        } finally {
-            setProcessing(false);
         }
+        // finally {
+        //     setProcessing(false);
+        // }
     };
 
     const optBoxStyle = {
@@ -72,6 +74,12 @@ export default function Decision(props) {
         // textAlign: 'center',
         // paddingTop: '10px',
         // paddingRight: '30px'
+    }
+
+    const onImageLoaded = (url) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => { setProcessing(false); console.log(`${url} loaded`) };
     }
 
 

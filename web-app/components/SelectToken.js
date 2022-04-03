@@ -36,10 +36,11 @@ export default function SelectToken(props) {
     }
 
     const nextGroup = () => {
+        console.log(currentGroup);
         if (currentGroup < grouped.length - 1) {
             const targetGroup = currentGroup + 1;
             setCurrentGroup(-1);
-
+            console.log(targetGroup);
             setTimeout(() => {
                 setCurrentGroup(targetGroup);
             }, 500)
@@ -47,7 +48,7 @@ export default function SelectToken(props) {
     }
 
     const prevGroup = () => {
-        console.log('prev')
+        console.log(currentGroup)
         if (currentGroup >= 1) {
             const targetGroup = currentGroup - 1;
             setCurrentGroup(-1);
@@ -81,13 +82,13 @@ export default function SelectToken(props) {
                             </Typography>
                             <Grid container spacing={0} justifyContent="center">
                                 <Grid item xs={1} onClick={prevGroup}>
-                                    <img src="/images/prev.png" style={{ height: 95, marginTop: 110, zIndex: 100 }} />
+                                    <img src="/images/prev.png" style={{ height: 95, marginTop: 110, zIndex: 1000 }} />
                                 </Grid>
 
                                 <Grid item xs={10}>
                                     {grouped.map((tokens, gindex) => {
                                         return (
-                                            <Fade in={gindex === currentGroup} key={gindex} timeout={500} mountOnEnter unmountOnExit>
+                                            <Fade in={gindex === currentGroup} key={gindex} timeout={500} unmountOnExit >
                                                 <Grid
                                                     container
                                                     spacing={{ xs: 18 }}

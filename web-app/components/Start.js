@@ -37,22 +37,26 @@ export default function Start(props) {
         <>
             <Box
                     sx={{
-                        width: '800px',
-                        height: '600px',
+                        width: '1000px',
+                        height: '800px',
                         textAlign: 'center',
-                        backgroundImage: `url("/images/branded-modal.png")`,
+                        backgroundImage: `url("/images/branded-modal-2.png")`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
-                        paddingTop: '140px'
+                        paddingTop: '220px',
+                        marginTop: '140px'
                     }}
                 >
 
-                    <Typography variant="h4" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '30px' }}>
-                        We need to verify your wallet with your signature
+                    <Typography variant="h2" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '80px' }}>
+                        SIGN TRANSACTION
+                    </Typography>
+                    <Typography variant="h4" sx={{ paddingX: 10, fontSize: '27pt', color: '#302C21', marginTop: 2 }}>
+                        You must approve a state change in your wallet to begin the Gen-U experience with this soul.
                     </Typography>
                     <br/>
                     <img
-                        src="/images/begin-button.png"
+                        src="/images/sign-button.png"
                         style={{ width: 300, marginTop: 10 }}
                         onClick={sign}
                     />

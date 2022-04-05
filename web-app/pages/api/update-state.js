@@ -133,7 +133,7 @@ const handler = async (req, res) => {
                 yellow: 0,
                 blue: 0,
                 green: 0,
-                currentDecision: 1,
+                currentDecision: 1500,
             };
             await players.insertOne(state);
         } else {

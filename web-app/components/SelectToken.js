@@ -57,13 +57,13 @@ export default function SelectToken(props) {
                             <Stack
                                 className="masked-overflow"
                                 direction="row"
-                                spacing={2}
+                                spacing={3}
                                 sx={{
                                     width: '75%',
                                     height: '115%',
                                     // border: '1px solid black',
                                     marginX: 'auto',
-                                    padding: '5px 5px',
+                                    // padding: '5px 5px',
                                     overflowX: 'auto',
                                     overflowY: 'hidden'
                                 }}

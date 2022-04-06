@@ -47,7 +47,7 @@ a:active {
 
 .masked-overflow {
     --scrollbar-height: 8px;
-    --mask-width: 32px;
+    --mask-width: 48px;
     overflow-x: auto;
     overflow-y: hidden;
 
@@ -59,7 +59,14 @@ a:active {
         transparent
     );
 
+    --mask-size-content: 100% 100%;
+    --mask-image-scrollbar: linear-gradient(black, black);
+    --mask-size-scrollbar: 0 100%;
 
+    mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+    mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+    mask-position: 0 0, 100% 0;
+    mask-repeat: no-repeat, no-repeat;
 }
 
 /* Firefox */

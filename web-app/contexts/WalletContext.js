@@ -139,8 +139,9 @@ export function WalletProvider({ children }) {
                 const tokenId = await contract.tokenOfOwnerByIndex(address, i);
                 const tokenURI = await contract.tokenURI(tokenId);
 
-                const response = await fetch(tokenURI);
-                const metadata = await response.json();
+                // const response = await fetch(tokenURI);
+                // const metadata = await response.json(); console.log(metadata);
+                const metadata = {};
                 metadata.tokenId = tokenId;
                 tokenMetadata.push(metadata);
             }

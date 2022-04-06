@@ -29,6 +29,7 @@ export default function Decision(props) {
                 setState(result.state);
                 setDecision(result.decision);
                 setRandomDismissed(false);
+                setManaDismissed(false);
                 onImageLoaded(`https://storage.googleapis.com/hikari-genu/art/${result.decision.id}.png`);
             } else {
                 console.log(response);
@@ -91,8 +92,8 @@ export default function Decision(props) {
                     position: 'fixed',
                     padding: 0,
                     margin: 0,
-                    width: '100vw',
-                    height: '100vh',
+                    width: '100%',
+                    height: '100%',
                     backgroundColor: '#000',
                     zIndex: 1,
                 }}
@@ -103,8 +104,8 @@ export default function Decision(props) {
                         position: 'fixed',
                         padding: 0,
                         margin: 0,
-                        width: '100vw',
-                        height: '100vh',
+                        width: '100%',
+                        height: '100%',
                         backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',

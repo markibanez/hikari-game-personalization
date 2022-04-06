@@ -105,7 +105,7 @@ export default function Decision(props) {
                         margin: 0,
                         width: '100vw',
                         height: '100vh',
-                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png?uuid=${uuid()}')`,
+                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',

@@ -42,3 +42,42 @@ a:hover {
 a:active {
     text-decoration: none;
 }
+
+
+
+.masked-overflow {
+    --scrollbar-height: 8px;
+    --mask-width: 32px;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    --mask-image-content: linear-gradient(
+        to right,
+        transparent,
+        black var(--mask-width),
+        black calc(100% - var(--mask-width)),
+        transparent
+    );
+
+
+}
+
+/* Firefox */
+.masked-overflow {
+    scrollbar-width: thin; /* can also be normal, or none, to not render scrollbar */
+    scrollbar-color: #AEAD8F transparent; /* foreground background */
+}
+
+/* Webkit / Blink */
+.masked-overflow::-webkit-scrollbar {
+    height: 8px;
+}
+
+.masked-overflow::-webkit-scrollbar-thumb {
+    background-color: #AEAD8F;
+    border-radius: 9999px; /* always round */
+}
+
+.masked-overflow::-webkit-scrollbar-track {
+    background-color: transparent;
+}

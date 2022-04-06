@@ -20,138 +20,96 @@ export default function SelectToken(props) {
     const wallet = useContext(WalletContext);
     const { enqueueSnackbar } = useSnackbar();
     const hasTokens = wallet.tokens?.length > 0;
-    const [currentGroup, setCurrentGroup] = useState(0);
-
-    let grouping = [];
-    const grouped = [];
-    for (let i = 0; i < wallet.tokens.length; i++) {
-        if (grouping.length < 3) {
-            grouping.push(wallet.tokens[i]);
-
-            if (i === wallet.tokens.length - 1) grouped.push(grouping);
-        } else {
-            grouped.push(grouping);
-            grouping = [wallet.tokens[i]];
-        }
-    }
-
-    const nextGroup = () => {
-        console.log(currentGroup);
-        if (currentGroup < grouped.length - 1) {
-            const targetGroup = currentGroup + 1;
-            setCurrentGroup(-1);
-            console.log(targetGroup);
-            setTimeout(() => {
-                setCurrentGroup(targetGroup);
-            }, 500)
-        }
-    }
-
-    const prevGroup = () => {
-        console.log(currentGroup)
-        if (currentGroup >= 1) {
-            const targetGroup = currentGroup - 1;
-            setCurrentGroup(-1);
-
-            setTimeout(() => {
-                setCurrentGroup(targetGroup);
-            }, 500)
-        }
-
-    }
 
     return (
         <>
             <Fade in={hasTokens} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
                 <Box
                     sx={{
-                        width: '1200px',
-                        height: '800px',
+                        width: '60%',
+                        height: '30%',
                         textAlign: 'center',
                         backgroundImage: `url("/images/branded-modal.png")`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
-                        padding: '60px',
+                        backgroundPosition: 'center',
+                        padding: '8%',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: `translate(-50%, -50%)`,
                         // marginTop: '200px',
                     }}
                 >
                     {hasTokens && (
                         <>
-                            <Typography variant="h4" sx={{ marginTop: 20, marginBottom: 2, fontFamily: 'DK-DDG', color: '#AEAD8F' }}>
+                            <Typography
+                                variant="h4"
+                                sx={{
+                                    marginBottom: 2,
+                                    fontFamily: 'DK-DDG',
+                                    color: '#AEAD8F',
+                                    textShadow: '2px 2px #413D31',
+                                }}
+                            >
                                 Your souls
                             </Typography>
-                            <Grid container spacing={0} justifyContent="center">
-                                <Grid item xs={1} onClick={prevGroup}>
-                                    <img src="/images/prev.png" style={{ height: 95, marginTop: 110, zIndex: 1000 }} />
-                                </Grid>
-
-                                <Grid item xs={10}>
-                                    {grouped.map((tokens, gindex) => {
-                                        return (
-                                            <Fade in={gindex === currentGroup} key={gindex} timeout={500} unmountOnExit >
-                                                <Grid
-                                                    container
-                                                    spacing={{ xs: 18 }}
-                                                    justifyContent="left"
-                                                    sx={{ paddingX: 10 }}
+                            <Stack
+                                className="masked-overflow"
+                                direction="row"
+                                spacing={2}
+                                sx={{
+                                    width: '75%',
+                                    height: '115%',
+                                    // border: '1px solid black',
+                                    marginX: 'auto',
+                                    padding: '5px 5px',
+                                    overflowX: 'auto',
+                                    overflowY: 'hidden'
+                                }}
+                            >
+                                {wallet.tokens.map((token, index) => {
+                                    return (
+                                        <Grid item key={index} xs={12} md={4}>
+                                            <Stack direction="column" sx={{ padding: 1 }} alignItems="center">
+                                                <Box
+                                                    sx={{
+                                                        backgroundImage: `url('/images/border-normal.png')`,
+                                                        backgroundSize: 'contain',
+                                                        backgroundRepeat: 'no-repeat',
+                                                        paddingTop: '7px',
+                                                        height: '150px',
+                                                        width: '150px',
+                                                        '&:hover': {
+                                                            backgroundImage: `url('/images/border-hover.png')`,
+                                                        },
+                                                    }}
                                                 >
-                                                    {tokens.map((token, index) => {
-                                                        return (
-                                                            <Grid item key={index} xs={12} md={4}>
-                                                                <Stack
-                                                                    direction="column"
-                                                                    sx={{ padding: 1 }}
-                                                                    alignItems="center"
-                                                                >
-                                                                    <Box
-                                                                        sx={{
-                                                                            backgroundImage: `url('/images/border-normal.png')`,
-                                                                            backgroundSize: 'contain',
-                                                                            backgroundRepeat: 'no-repeat',
-                                                                            paddingTop: '7px',
-                                                                            height: '280px',
-                                                                            width: '280px',
-                                                                            '&:hover': {
-                                                                                backgroundImage: `url('/images/border-hover.png')`,
-                                                                            },
-                                                                        }}
-                                                                    >
-                                                                        <video
-                                                                            src="https://storage.googleapis.com/hikari-genu/soul.mp4"
-                                                                            style={{ height: '95%' }}
-                                                                            autoPlay
-                                                                            loop
-                                                                        />
-                                                                    </Box>
-                                                                    <Typography
-                                                                        variant="h4"
-                                                                        sx={{
-                                                                            fontFamily: 'DK-DDG',
-                                                                            marginY: 1,
-                                                                            color: '#302C21',
-                                                                        }}
-                                                                    >
-                                                                        Soul #{token.tokenId.toString()}
-                                                                    </Typography>
-                                                                    <Link
-                                                                        href={`/personalize/${wallet.address}/${token.tokenId}`}
-                                                                    >
-                                                                        <img src="/images/enter-genu-button.png" />
-                                                                    </Link>
-                                                                </Stack>
-                                                            </Grid>
-                                                        );
-                                                    })}
-                                                </Grid>
-                                            </Fade>
-                                        );
-                                    })}
-                                </Grid>
-
-                                <Grid item xs={1} onClick={nextGroup}>
-                                    <img src="/images/next.png" style={{ height: 95, marginTop: 110, zIndex: 100 }} />
-                                </Grid>
-                            </Grid>
+                                                    <video
+                                                        src="https://storage.googleapis.com/hikari-genu/soul.mp4"
+                                                        style={{ height: '95%' }}
+                                                        autoPlay
+                                                        loop
+                                                    />
+                                                </Box>
+                                                <Typography
+                                                    variant="h5"
+                                                    sx={{
+                                                        fontFamily: 'DK-DDG',
+                                                        marginY: 0,
+                                                        color: '#302C21',
+                                                    }}
+                                                >
+                                                    Soul #{token.tokenId.toString()}
+                                                </Typography>
+                                                <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
+                                                    <img src="/images/enter-genu-button.png" style={{ width: '200px' }} />
+                                                </Link>
+                                            </Stack>
+                                        </Grid>
+                                    );
+                                })}
+                            </Stack>
                         </>
                     )}
                 </Box>

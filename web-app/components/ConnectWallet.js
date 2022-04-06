@@ -12,17 +12,31 @@ export default function ConnectWallet(props) {
         if (wallet.address) {
             wallet.getNFTs();
         }
-    }, [wallet.address])
+    }, [wallet.address]);
 
     return (
         <>
             <Fade in={!wallet.address} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
                 <Box sx={{ width: '100vw', height: '100vh', textAlign: 'center' }}>
-                    <img src="/images/begin-label.png" style={{ width: 500, marginTop: 40 }} />
-                    <br />
+                    <img
+                        src="/images/begin-label.png"
+                        style={{
+                            width: '35%',
+                            height: '17.5%',
+                            objectFit: 'contain',
+                            marginTop: '2%',
+                            position: 'absolute',
+                            top: 0,
+                            left: '50%',
+                            transform: `translate(-50%, 0)`,
+                        }}
+                    />
                     <img
                         src="/images/connect-button.png"
-                        style={{ width: 300, marginTop: 270 }}
+                        style={{ width: '30%', height: '15%', objectFit: 'contain',position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: `translate(-50%, -50%)` }}
                         onClick={async () => {
                             await wallet.connect();
                         }}

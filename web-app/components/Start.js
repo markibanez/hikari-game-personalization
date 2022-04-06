@@ -37,8 +37,8 @@ export default function Start(props) {
         <>
             <Box
                     sx={{
-                        width: '1000px',
-                        height: '800px',
+                        width: '800px',
+                        height: '600px',
                         textAlign: 'center',
                         backgroundImage: `url("/images/branded-modal-2.png")`,
                         backgroundSize: 'contain',
@@ -48,10 +48,10 @@ export default function Start(props) {
                     }}
                 >
 
-                    <Typography variant="h2" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '80px' }}>
+                    <Typography variant="h3" sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '10px' }}>
                         SIGN TRANSACTION
                     </Typography>
-                    <Typography variant="h4" sx={{ paddingX: 10, fontSize: '27pt', color: '#302C21', marginTop: 2 }}>
+                    <Typography variant="h4" sx={{ paddingX: 10, fontSize: '20pt', color: '#302C21', marginTop: 2 }}>
                         You must approve a state change in your wallet to begin the Gen-U experience with this soul.
                     </Typography>
                     <br/>

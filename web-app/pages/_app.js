@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Head from 'next/head'
 import './styles.css';
 import './../public/MyFontsWebfontsKit.css'
+import { useEffect } from 'react';
 
 const theme = createTheme({
     typography: {
@@ -16,6 +17,11 @@ const theme = createTheme({
 });
 
 function MyApp({ Component, pageProps }) {
+    useEffect(() => {
+        window.onresize = () => {
+            document.body.style.zoom = (window.innerWidth / window.outerWidth);
+        }
+    }, [])
     return (
         <>
             <Head>

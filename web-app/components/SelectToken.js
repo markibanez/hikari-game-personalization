@@ -50,6 +50,7 @@ export default function SelectToken(props) {
                                     fontFamily: 'DK-DDG',
                                     color: '#AEAD8F',
                                     textShadow: '2px 2px #413D31',
+                                    fontSize: '4vmin'
                                 }}
                             >
                                 Your souls
@@ -57,53 +58,41 @@ export default function SelectToken(props) {
                             <Stack
                                 className="masked-overflow"
                                 direction="row"
-                                spacing={3}
+                                spacing={8}
                                 sx={{
-                                    width: '75%',
+                                    width: '65%',
                                     height: '115%',
                                     // border: '1px solid black',
                                     marginX: 'auto',
-                                    // padding: '5px 5px',
                                     overflowX: 'auto',
-                                    overflowY: 'hidden'
+                                    overflowY: 'hidden',
+                                    paddingX: 5
                                 }}
                             >
                                 {wallet.tokens.map((token, index) => {
                                     return (
                                         <Grid item key={index} xs={12} md={4}>
-                                            <Stack direction="column" sx={{ padding: 1 }} alignItems="center">
-                                                <Box
-                                                    sx={{
-                                                        backgroundImage: `url('/images/border-normal.png')`,
-                                                        backgroundSize: 'contain',
-                                                        backgroundRepeat: 'no-repeat',
-                                                        paddingTop: '7px',
-                                                        height: '150px',
-                                                        width: '150px',
-                                                        '&:hover': {
-                                                            backgroundImage: `url('/images/border-hover.png')`,
-                                                        },
-                                                    }}
-                                                >
-                                                    <video
-                                                        src="https://storage.googleapis.com/hikari-genu/soul.mp4"
-                                                        style={{ height: '95%' }}
-                                                        autoPlay
-                                                        loop
-                                                    />
-                                                </Box>
+                                            <Stack direction="column" sx={{ padding: 0, height: '100%' }} alignItems="center">
+                                                <video
+                                                    className="soul-video"
+                                                    src="https://storage.googleapis.com/hikari-genu/soul.mp4"
+                                                    autoPlay
+                                                    loop
+                                                />
                                                 <Typography
                                                     variant="h5"
                                                     sx={{
                                                         fontFamily: 'DK-DDG',
-                                                        marginY: 0,
+                                                        marginTop: 2,
                                                         color: '#302C21',
+                                                        alignSelf: 'center',
+                                                        fontSize: '2.5vmin'
                                                     }}
                                                 >
                                                     Soul #{token.tokenId.toString()}
                                                 </Typography>
                                                 <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
-                                                    <img src="/images/enter-genu-button.png" style={{ width: '200px' }} />
+                                                    <img src="/images/enter-genu-button.png" style={{ width: '120%', alignSelf: 'center' }} />
                                                 </Link>
                                             </Stack>
                                         </Grid>

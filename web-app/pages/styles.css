@@ -88,3 +88,12 @@ a:active {
 .masked-overflow::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
+.soul-video {
+    height: 45%;
+    border: 10px solid #544736;
+}
+
+.soul-video:hover {
+    border: 10px solid #8b542b;
+}

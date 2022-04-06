@@ -2,6 +2,7 @@ import { Backdrop, Box, Button, Card, CardContent, Fade, Stack, Typography } fro
 import { useContext, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
+import uuid from 'react-uuid';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props; console.log(state, decision);
@@ -104,7 +105,7 @@ export default function Decision(props) {
                         margin: 0,
                         width: '100vw',
                         height: '100vh',
-                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
+                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png?uuid=${uuid()}')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
@@ -217,7 +218,7 @@ export default function Decision(props) {
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={Boolean(!state.isRandom && state.randomEffects?.mana && !manaDismissed)}
-                onClick={() => { setManaDismissed(true) }}
+                // onClick={() => { setManaDismissed(true) }}
             >
                 <Stack direction="column" justifyContent="center" alignItems="center">
                     {state.randomEffects?.mana >= 0 &&

@@ -3525,7 +3525,7 @@
    "text_file": "177.txt",
    "dialogue": "Kibu asks to join you.",
    "id": 177,
-   "option1_id": "`179",
+   "option1_id": "179",
    "option1_text": "A) No",
    "option1_effect": "Blue+7",
    "option2_id": "180",

@@ -109,6 +109,7 @@ const handler = async (req, res) => {
                     $set: { currentDecision: nextDecisionId },
                     $inc: effects,
                     $push: { logs: logEntry },
+                    $addToSet: {}
                 };
 
                 // random luck calculation variables
@@ -125,6 +126,17 @@ const handler = async (req, res) => {
                     else if (storyEffects === 'female') updatePayload.$set.gender = 'female';
                     else {
                         // achievements
+                        const achievements = storyEffects.split(',').map(a => a?.trim());
+                        if (achievements.length === 1) {
+                            updatePayload.$addToSet.achievements = storyEffects;
+                        } else if (achievements.length === 4) {
+                            const achievement = achievements[option - 1];
+                            if (achievement)
+                                if (achievement !== 'x')
+                                    updatePayload.$addToSet.achievements = achievement;
+                        } else {
+                            console.log(`unknown achievement format ${storyEffects}`);
+                        }
                     }
                 }
 

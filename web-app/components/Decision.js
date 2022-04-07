@@ -77,7 +77,7 @@ export default function Decision(props) {
         alignItems: 'center',
         justifyContent: 'left',
         '&:hover': {
-            color: '#fcffa4'
+            color: '#fcffa4',
         },
     };
 
@@ -88,7 +88,7 @@ export default function Decision(props) {
         paddingLeft: 4,
         fontSize: '12pt',
         '&:hover': {
-            color: '#fcffa4'
+            color: '#fcffa4',
         },
     };
 
@@ -103,14 +103,16 @@ export default function Decision(props) {
         // textAlign: 'center',
         // paddingTop: '10px',
         // paddingRight: '30px'
-    }
+    };
 
     const onImageLoaded = (url) => {
         const img = new Image();
         img.src = url;
-        img.onload = () => { setProcessing(false); console.log(`${url} loaded`) };
-    }
-
+        img.onload = () => {
+            setProcessing(false);
+            console.log(`${url} loaded`);
+        };
+    };
 
     return (
         <>
@@ -138,7 +140,11 @@ export default function Decision(props) {
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 5,
-                        filter: Boolean(state?.isRandom && !randomDismissed) || Boolean(!state.isRandom && state.randomEffects?.mana && !manaDismissed) ? `blur(8px)` : 'initial'
+                        filter:
+                            Boolean(state?.isRandom && !randomDismissed) ||
+                            Boolean(!state.isRandom && state.randomEffects?.mana && !manaDismissed)
+                                ? `blur(8px)`
+                                : 'initial',
                     }}
                 >
                     {/* <Box
@@ -172,14 +178,36 @@ export default function Decision(props) {
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
                         <Stack direction="row" justifyContent="center" spacing={15}>
                             {decision.option1_id && (
-                                <Box sx={{cursor: decision.option1_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(1)} onMouseEnter={() => hoverAudio.play()}>
+                                <Box
+                                    sx={{
+                                        cursor:
+                                            decision.option1_id?.indexOf(',') > -1
+                                                ? `url('/dice.cur'), auto`
+                                                : 'inherit',
+                                        ...optBoxStyle,
+                                    }}
+                                    display="flex"
+                                    onClick={() => chooseOption(1)}
+                                    onMouseEnter={() => hoverAudio.play()}
+                                >
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option1_text || 'Continue...'}
                                     </Typography>
                                 </Box>
                             )}
                             {decision.option2_id && (
-                                <Box sx={{cursor: decision.option2_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(2)} onMouseEnter={() => hoverAudio.play()}>
+                                <Box
+                                    sx={{
+                                        cursor:
+                                            decision.option2_id?.indexOf(',') > -1
+                                                ? `url('/dice.cur'), auto`
+                                                : 'inherit',
+                                        ...optBoxStyle,
+                                    }}
+                                    display="flex"
+                                    onClick={() => chooseOption(2)}
+                                    onMouseEnter={() => hoverAudio.play()}
+                                >
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option2_text || 'Continue...'}
                                     </Typography>
@@ -187,14 +215,36 @@ export default function Decision(props) {
                             )}
 
                             {decision.option3_id && (
-                                <Box sx={{cursor: decision.option3_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(3)} onMouseEnter={() => hoverAudio.play()}>
+                                <Box
+                                    sx={{
+                                        cursor:
+                                            decision.option3_id?.indexOf(',') > -1
+                                                ? `url('/dice.cur'), auto`
+                                                : 'inherit',
+                                        ...optBoxStyle,
+                                    }}
+                                    display="flex"
+                                    onClick={() => chooseOption(3)}
+                                    onMouseEnter={() => hoverAudio.play()}
+                                >
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option3_text || 'Continue...'}
                                     </Typography>
                                 </Box>
                             )}
                             {decision.option4_id && (
-                                <Box sx={{cursor: decision.option4_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(4)} onMouseEnter={() => hoverAudio.play()}>
+                                <Box
+                                    sx={{
+                                        cursor:
+                                            decision.option4_id?.indexOf(',') > -1
+                                                ? `url('/dice.cur'), auto`
+                                                : 'inherit',
+                                        ...optBoxStyle,
+                                    }}
+                                    display="flex"
+                                    onClick={() => chooseOption(4)}
+                                    onMouseEnter={() => hoverAudio.play()}
+                                >
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option4_text || 'Continue...'}
                                     </Typography>
@@ -205,14 +255,16 @@ export default function Decision(props) {
 
                     <Box sx={{ position: 'fixed', top: -20, right: -20 }}>
                         <Box sx={manaBoxStyle}>
-                            <Typography variant="h4" sx={{ fontFamily: 'DK-DDG', position: 'absolute', left: '120px', top: '36px' }} color="#AEAD8F">
+                            <Typography
+                                variant="h4"
+                                sx={{ fontFamily: 'DK-DDG', position: 'absolute', left: '120px', top: '36px' }}
+                                color="#AEAD8F"
+                            >
                                 {state.mana}
                             </Typography>
                         </Box>
                     </Box>
-
                 </Box>
-
             </Fade>
 
             <Backdrop
@@ -221,26 +273,38 @@ export default function Decision(props) {
                 // onClick={() => { setRandomDismissed(true) }}
             >
                 <Stack direction="column" justifyContent="center" alignItems="center">
-                    {state.randomSuccess &&
-                    <img src="/images/random-success.png" />
-                    }
+                    {state.randomSuccess && <img src="/images/random-success.png" />}
 
-                    {!state.randomSuccess &&
-                    <img src="/images/random-fail.png" />
-                    }
+                    {!state.randomSuccess && <img src="/images/random-fail.png" />}
 
-                    {state.randomEffects?.mana !== undefined &&
-                        <Box textAlign="center" sx={{ width: '300px', backgroundImage: `url('/images/mana-result.png')`, backgroundSize: 'contain' }}>
+                    {state.randomEffects?.mana !== undefined && (
+                        <Box
+                            textAlign="center"
+                            sx={{
+                                width: '300px',
+                                backgroundImage: `url('/images/mana-result.png')`,
+                                backgroundSize: 'contain',
+                            }}
+                        >
                             <h1>{`${state.randomEffects.mana >= 0 ? '+' : ''}${state.randomEffects.mana} Mana`}</h1>
                         </Box>
-                    }
+                    )}
 
-                    <br /><br />
+                    <br />
+                    <br />
 
-                    <img src="/images/back-button.png" onClick={() => { setRandomDismissed(true) }} style={{ width: '200px' }} />
-
+                    <img
+                        src="/images/back-button.png"
+                        onClick={() => {
+                            setRandomDismissed(true);
+                            clickAudio.play();
+                        }}
+                        onMouseEnter={() => {
+                            hoverAudio.play();
+                        }}
+                        style={{ width: '200px' }}
+                    />
                 </Stack>
-
             </Backdrop>
 
             <Backdrop
@@ -249,24 +313,37 @@ export default function Decision(props) {
                 // onClick={() => { setManaDismissed(true) }}
             >
                 <Stack direction="column" justifyContent="center" alignItems="center">
-                    {state.randomEffects?.mana >= 0 &&
-                    <img src="/images/mana-gained.png" />
-                    }
+                    {state.randomEffects?.mana >= 0 && <img src="/images/mana-gained.png" />}
 
-                    {state.randomEffects?.mana < 0 &&
-                    <img src="/images/mana-lost.png" />
-                    }
+                    {state.randomEffects?.mana < 0 && <img src="/images/mana-lost.png" />}
 
-                    {state.randomEffects?.mana !== undefined &&
-                        <Box textAlign="center" sx={{ width: '300px', backgroundImage: `url('/images/mana-result.png')`, backgroundSize: 'contain' }}>
+                    {state.randomEffects?.mana !== undefined && (
+                        <Box
+                            textAlign="center"
+                            sx={{
+                                width: '300px',
+                                backgroundImage: `url('/images/mana-result.png')`,
+                                backgroundSize: 'contain',
+                            }}
+                        >
                             <h1>{`${state.randomEffects.mana >= 0 ? '+' : ''}${state.randomEffects.mana} Mana`}</h1>
                         </Box>
-                    }
+                    )}
 
-                    <br /><br />
+                    <br />
+                    <br />
 
-                    <img src="/images/back-button.png" onClick={() => { setManaDismissed(true) }} style={{ width: '200px' }} />
-
+                    <img
+                        src="/images/back-button.png"
+                        onClick={() => {
+                            setManaDismissed(true);
+                            clickAudio.play();
+                        }}
+                        onMouseEnter={() => {
+                            hoverAudio.play();
+                        }}
+                        style={{ width: '200px' }}
+                    />
                 </Stack>
             </Backdrop>
         </>

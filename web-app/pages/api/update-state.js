@@ -168,7 +168,7 @@ const handler = async (req, res) => {
                 randomChoice: 0,
                 randomSuccess: 0,
                 randomFail: 0,
-                currentDecision: 1500,
+                currentDecision: 1,
             };
             await players.insertOne(state);
         } else {

@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Backdrop, Box, Card, CardContent, CircularProgress, Fade } from '@mui/material';
 import Start from '../../../components/Start';
 import Decision from '../../../components/Decision';
+import Intro from '../../../components/Intro';
 
 export default function Token() {
     const wallet = useContext(WalletContext);
@@ -18,6 +19,7 @@ export default function Token() {
     const [ownsToken, setOwnsToken] = useState(false);
     const [state, setState] = useState({});
     const [decision, setDecision] = useState({});
+    const [introDone, setIntroDone] = useState(false);
 
     const validAddress = ethers.utils.isAddress(address);
     const csAddress = validAddress ? ethers.utils.getAddress(address) : null;
@@ -51,7 +53,11 @@ export default function Token() {
                     setLoading(false);
                 }
             }
-        }
+
+            // cache first intro image
+            const img = new Image();
+            img.src = 'https://storage.googleapis.com/hikari-genu/intro/1.png';
+        };
 
         load();
     }, [router, address, tokenId, wallet]);
@@ -72,23 +78,55 @@ export default function Token() {
     return (
         <div className={styles.container} style={{ overflow: 'hidden' }}>
             <main className={styles.main}>
-                <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                    open={loading}
-                >
+                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
                     <CircularProgress color="inherit" />
                 </Backdrop>
                 {/* <WalletInfo /> */}
 
-                <Fade in={!loading && address && !isNaN(tokenId) && !state?.signed} mountOnEnter timeout={1000} style={{ transitionDelay: `500ms` }}>
+                <Fade
+                    in={!loading && address && !isNaN(tokenId) && !state?.signed}
+                    mountOnEnter
+                    timeout={1000}
+                    style={{ transitionDelay: `500ms` }}
+                >
                     <Box>
                         <Start setState={setState} setDecision={setDecision} address={address} token={token} />
                     </Box>
                 </Fade>
 
-                <Fade in={!loading && state.signed && decision} mountOnEnter timeout={1000} style={{ transitionDelay: `500ms` }}>
+                {!loading && state.signed && decision?.id === 1 && !introDone && (
+                    <Box
+                        sx={{
+                            padding: 0,
+                            margin: 0,
+                            position: 'fixed',
+                            left: 0,
+                            top: 0,
+                            zIndex: 0,
+                            backgroundColor: '#24231d',
+                            width: '100%',
+                            height: '100%'
+                        }}
+                    >
+                        <Intro setIntroDone={setIntroDone} />
+                    </Box>
+                )}
+
+                <Fade
+                    in={!loading && state.signed && decision && introDone}
+                    mountOnEnter
+                    timeout={1000}
+                    style={{ transitionDelay: `500ms` }}
+                >
                     <Box sx={{ padding: 0, margin: 0, position: 'fixed', left: 0, top: 0, zIndex: 0 }}>
-                        <Decision state={state} decision={decision} setState={setState} setDecision={setDecision} address={address} token={token} />
+                        <Decision
+                            state={state}
+                            decision={decision}
+                            setState={setState}
+                            setDecision={setDecision}
+                            address={address}
+                            token={token}
+                        />
                     </Box>
                 </Fade>
 

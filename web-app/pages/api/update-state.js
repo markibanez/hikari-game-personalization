@@ -102,13 +102,33 @@ const handler = async (req, res) => {
             }
 
             logEntry.appliedEffects = effects;
-            logEntry.afterId = nextDecision.id
+            logEntry.afterId = nextDecision.id;
 
             if (nextDecision) {
-                await players.updateOne(
-                    { address, tokenID },
-                    { $set: { currentDecision: nextDecisionId }, $inc: effects, $push: { logs: logEntry } }
-                );
+                const updatePayload = {
+                    $set: { currentDecision: nextDecisionId },
+                    $inc: effects,
+                    $push: { logs: logEntry },
+                };
+
+                // random luck calculation variables
+                if (isRandom) {
+                    updatePayload.$inc.randomChoice = 1;
+                    if (randomSuccess) updatePayload.$inc.randomSuccess = 1;
+                    else updatePayload.$inc.randomFail = 1;
+                }
+
+                // story effects
+                const storyEffects = currentDecision.story_effects;
+                if (storyEffects) {
+                    if (storyEffects === 'male') updatePayload.$set.gender = 'male';
+                    else if (storyEffects === 'female') updatePayload.$set.gender = 'female';
+                    else {
+                        // achievements
+                    }
+                }
+
+                await players.updateOne({ address, tokenID }, updatePayload);
 
                 if (effects?.mana !== undefined) state.mana += effects?.mana;
 
@@ -133,6 +153,9 @@ const handler = async (req, res) => {
                 yellow: 0,
                 blue: 0,
                 green: 0,
+                randomChoice: 0,
+                randomSuccess: 0,
+                randomFail: 0,
                 currentDecision: 1500,
             };
             await players.insertOne(state);

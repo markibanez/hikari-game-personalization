@@ -191,7 +191,7 @@ export default function Decision(props) {
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={Boolean(state.isRandom && !randomDismissed)}
-                onClick={() => { setRandomDismissed(true) }}
+                // onClick={() => { setRandomDismissed(true) }}
             >
                 <Stack direction="column" justifyContent="center" alignItems="center">
                     {state.randomSuccess &&

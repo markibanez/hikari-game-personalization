@@ -13,6 +13,7 @@ export default function Decision(props) {
 
     const clickAudio = new Audio('/audio/click.wav');
     const hoverAudio = new Audio('/audio/hover.wav');
+    hoverAudio.volume = 0.1;
     const randomSuccessAudio = new Audio('/audio/random-success.wav');
     const randomFailAudio = new Audio('/audio/random-fail.wav');
 
@@ -42,9 +43,9 @@ export default function Decision(props) {
                         randomFailAudio.play();
                     }
                 } else {
-                    if (result.state.effects?.mana > 0) {
+                    if (result.state.randomEffects?.mana > 0) {
                         randomSuccessAudio.play();
-                    } else if (result.state.effects?.mana <= 0) {
+                    } else if (result.state.randomEffects?.mana <= 0) {
                         randomFailAudio.play();
                     }
                 }

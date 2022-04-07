@@ -1,5 +1,5 @@
 import { Backdrop, Box, Button, Card, CardContent, Fade, Stack, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
 import uuid from 'react-uuid';
@@ -11,7 +11,11 @@ export default function Decision(props) {
     const [randomDismissed, setRandomDismissed] = useState(false);
     const [manaDismissed, setManaDismissed] = useState(false);
 
+    const clickAudio = new Audio('/audio/click.wav');
+    const hoverAudio = new Audio('/audio/hover.wav');
+
     const chooseOption = async (option) => {
+        clickAudio.play();
         setProcessing(true);
         setChosenOption(option);
     };
@@ -51,7 +55,10 @@ export default function Decision(props) {
         height: '120px',
         zIndex: 20,
         alignItems: 'center',
-        justifyContent: 'left'
+        justifyContent: 'left',
+        '&:hover': {
+            color: '#fcffa4'
+        },
     };
 
     const optionLinkStyle = {
@@ -145,14 +152,14 @@ export default function Decision(props) {
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
                         <Stack direction="row" justifyContent="center" spacing={15}>
                             {decision.option1_id && (
-                                <Box sx={{cursor: decision.option1_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(1)}>
+                                <Box sx={{cursor: decision.option1_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(1)} onMouseEnter={() => hoverAudio.play()}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option1_text || 'Continue...'}
                                     </Typography>
                                 </Box>
                             )}
                             {decision.option2_id && (
-                                <Box sx={{cursor: decision.option2_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(2)}>
+                                <Box sx={{cursor: decision.option2_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(2)} onMouseEnter={() => hoverAudio.play()}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option2_text || 'Continue...'}
                                     </Typography>
@@ -160,14 +167,14 @@ export default function Decision(props) {
                             )}
 
                             {decision.option3_id && (
-                                <Box sx={{cursor: decision.option3_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(3)}>
+                                <Box sx={{cursor: decision.option3_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(3)} onMouseEnter={() => hoverAudio.play()}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option3_text || 'Continue...'}
                                     </Typography>
                                 </Box>
                             )}
                             {decision.option4_id && (
-                                <Box sx={{cursor: decision.option4_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(4)}>
+                                <Box sx={{cursor: decision.option4_id?.indexOf(',') > -1 ? `url('/dice.cur'), auto` : 'inherit', ...optBoxStyle}} display="flex" onClick={() => chooseOption(4)} onMouseEnter={() => hoverAudio.play()}>
                                     <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
                                         {decision.option4_text || 'Continue...'}
                                     </Typography>

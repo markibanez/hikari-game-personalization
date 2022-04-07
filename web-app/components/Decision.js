@@ -12,6 +12,7 @@ export default function Decision(props) {
     const [manaDismissed, setManaDismissed] = useState(false);
 
     const clickAudio = new Audio('/audio/click.wav');
+    clickAudio.volume = 0.75;
     const hoverAudio = new Audio('/audio/hover.wav');
     hoverAudio.volume = 0.1;
     const randomSuccessAudio = new Audio('/audio/random-success.wav');

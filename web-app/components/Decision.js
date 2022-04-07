@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import uuid from 'react-uuid';
 
 export default function Decision(props) {
-    const { state, decision, setState, setDecision, address, token } = props; console.log(state, decision);
+    const { state, decision, setState, setDecision, address, token } = props;
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
@@ -13,6 +13,8 @@ export default function Decision(props) {
 
     const clickAudio = new Audio('/audio/click.wav');
     const hoverAudio = new Audio('/audio/hover.wav');
+    const randomSuccessAudio = new Audio('/audio/random-success.wav');
+    const randomFailAudio = new Audio('/audio/random-fail.wav');
 
     const chooseOption = async (option) => {
         clickAudio.play();
@@ -30,6 +32,23 @@ export default function Decision(props) {
             if (response.status === 200) {
                 const result = await response.json();
                 console.log(result);
+
+                if (result.state.isRandom) {
+                    if (result.state.randomSuccess) {
+                        console.log('play random success');
+                        randomSuccessAudio.play();
+                    } else {
+                        console.log('play random success');
+                        randomFailAudio.play();
+                    }
+                } else {
+                    if (result.state.effects?.mana > 0) {
+                        randomSuccessAudio.play();
+                    } else if (result.state.effects?.mana <= 0) {
+                        randomFailAudio.play();
+                    }
+                }
+
                 setState(result.state);
                 setDecision(result.decision);
                 setRandomDismissed(false);

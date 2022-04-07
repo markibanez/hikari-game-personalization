@@ -93,7 +93,7 @@ export default function Decision(props) {
     };
 
     const manaBoxStyle = {
-        backgroundImage: `url('/images/mana-counter.png')`,
+        backgroundImage: `url('/images/mana-bg.png')`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'right top',
@@ -135,6 +135,7 @@ export default function Decision(props) {
                         margin: 0,
                         width: '100%',
                         height: '100%',
+                        aspectRatio: '16 / 9',
                         backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
@@ -147,34 +148,6 @@ export default function Decision(props) {
                                 : 'initial',
                     }}
                 >
-                    {/* <Box
-                        sx={{
-                            position: 'fixed',
-                            top: -60,
-                            left: 0,
-                            width: '70vw',
-                            height: '50vh',
-                            backgroundImage: `url('/images/ink-stain.png')`,
-                            backgroundSize: 'contain',
-                            backgroundRepeat: 'no-repeat',
-                        }}
-                    ></Box>
-                    <Box
-                        sx={{
-                            position: 'fixed',
-                            top: 0,
-                            left: 20,
-                            maxWidth: '40vw',
-                            height: '40vh',
-                            alignItems: 'center',
-                        }}
-                        display="flex"
-                    >
-                        <Typography variant="h6" color="#FFF" sx={{ marginBottom: 2 }}>
-                            {decision.dialogue}
-                        </Typography>
-                    </Box> */}
-
                     <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
                         <Stack direction="row" justifyContent="center" spacing={15}>
                             {decision.option1_id && (
@@ -255,9 +228,10 @@ export default function Decision(props) {
 
                     <Box sx={{ position: 'fixed', top: -20, right: -20 }}>
                         <Box sx={manaBoxStyle}>
+                            <img src="/images/mana-bottle.png" style={{ height: '30%', position:'absolute', top: '30px', left: '70px' }} />
                             <Typography
                                 variant="h4"
-                                sx={{ fontFamily: 'DK-DDG', position: 'absolute', left: '120px', top: '36px' }}
+                                sx={{ fontFamily: 'DK-DDG', position: 'absolute', left: '120px', top: '36px', textShadow: '2px 2px #413D31' }}
                                 color="#AEAD8F"
                             >
                                 {state.mana}

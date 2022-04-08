@@ -58,6 +58,7 @@ const handler = async (req, res) => {
 
             let isRandom = false;
             let randomSuccess = null;
+            let newAchievement = null;
             if (typeof nextDecisionId === 'string') {
                 const split = nextDecisionId.split(',').map((i) => i.trim());
                 if (split.length === 2) {
@@ -71,6 +72,7 @@ const handler = async (req, res) => {
                     const branch2Max = branch1Max + odds2[2];
 
                     const randomNumber = Math.floor(Math.random() * 100) + 1;
+                    console.log(branch1Min, branch1Max, branch2Min, branch2Max, randomNumber);
 
                     const effectSplit = rawEffects.split(',').map((i) => i.trim());
                     if (branch1Max >= randomNumber && branch1Min <= randomNumber) {
@@ -129,11 +131,16 @@ const handler = async (req, res) => {
                         const achievements = storyEffects.split(',').map(a => a?.trim());
                         if (achievements.length === 1) {
                             updatePayload.$addToSet.achievements = storyEffects;
+                            newAchievement = storyEffects;
                         } else if (achievements.length === 4) {
                             const achievement = achievements[option - 1];
                             if (achievement)
-                                if (achievement !== 'x')
+                            {
+                                if (achievement !== 'x') {
                                     updatePayload.$addToSet.achievements = achievement;
+                                    newAchievement = achievement;
+                                }
+                            }
                         } else {
                             console.log(`unknown achievement format ${storyEffects}`);
                         }
@@ -148,7 +155,9 @@ const handler = async (req, res) => {
                 state.isRandom = isRandom;
                 state.randomSuccess = randomSuccess;
                 state.randomEffects = effects;
-                console.log(state);
+                // state.newAchievement = 'senseis_tanto';
+                state.newAchievement = newAchievement;
+                // console.log(state);
             }
         }
     } else {

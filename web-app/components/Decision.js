@@ -1,8 +1,9 @@
-import { Backdrop, Box, Button, Card, CardContent, Fade, Stack, Typography } from '@mui/material';
+import { Backdrop, Box, Button, Card, CardContent, Fade, Slide, Stack, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
 import uuid from 'react-uuid';
+import achievements from './../data/achievements.json';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props;
@@ -10,6 +11,8 @@ export default function Decision(props) {
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
     const [manaDismissed, setManaDismissed] = useState(false);
+    const [showNewAch, setShowNewAch] = useState(false);
+    const [achievement, setAchievement] = useState({})
 
     const clickAudio = new Audio('/audio/click.wav');
     clickAudio.volume = 0.75;
@@ -48,6 +51,21 @@ export default function Decision(props) {
                         randomSuccessAudio.play();
                     } else if (result.state.randomEffects?.mana <= 0) {
                         randomFailAudio.play();
+                    }
+                }
+
+                if (result.state.newAchievement) {
+                    console.log(achievements);
+                    const found = achievements.find(a => a.Code === result.state.newAchievement);
+                    console.log(found);
+                    if (found) {
+                        setAchievement(found);
+                        setTimeout(() => {
+                            setShowNewAch(true);
+                            setTimeout(() => {
+                                setShowNewAch(false);
+                            }, 7000)
+                        }, 2000)
                     }
                 }
 
@@ -229,16 +247,66 @@ export default function Decision(props) {
 
                     <Box sx={{ position: 'fixed', top: -20, right: -20 }}>
                         <Box sx={manaBoxStyle}>
-                            <img src="/images/mana-bottle.png" style={{ height: '30%', position:'absolute', top: '30px', left: '70px' }} />
+                            <img
+                                src="/images/mana-bottle.png"
+                                style={{ height: '30%', position: 'absolute', top: '30px', left: '70px' }}
+                            />
                             <Typography
                                 variant="h4"
-                                sx={{ fontFamily: 'DK-DDG', position: 'absolute', left: '120px', top: '36px', textShadow: '2px 2px #413D31' }}
+                                sx={{
+                                    fontFamily: 'DK-DDG',
+                                    position: 'absolute',
+                                    left: '120px',
+                                    top: '36px',
+                                    textShadow: '2px 2px #413D31',
+                                }}
                                 color="#AEAD8F"
                             >
                                 {state.mana}
                             </Typography>
                         </Box>
                     </Box>
+
+                    <Slide in={showNewAch} direction="left">
+                        <Box
+                            sx={{
+                                width: '20%',
+                                height: '20%',
+                                position: 'absolute',
+                                right: 0,
+                                top: '22%',
+                                backgroundImage: `url('/images/achievement-bg.png')`,
+                                backgroundPosition: 'right',
+                                backgroundSize: 'contain',
+                                backgroundRepeat: 'no-repeat',
+                                zIndex: (theme) => theme.zIndex.drawer + 1,
+                                display: 'flex',
+                                justifyContent: 'left',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <img
+                                src="/images/sewer-rat.png"
+                                style={{ width: '25%', paddingLeft: '15%', paddingBottom: '5%' }}
+                            />
+                            <Typography
+                                variant="h3"
+                                sx={{
+                                    paddingLeft: '3%',
+                                    paddingBottom: '7%',
+                                    color: '#A49A81',
+                                    maxWidth: '40%',
+                                    textAlign: 'center',
+                                    fontSize: '3.6vmin',
+                                    fontFamily: 'DK-DDG',
+                                    textShadow: '4px 4px rgba(0, 0, 0, 0.25)'
+                                }}
+                            >
+                                {achievement.Name}
+                            </Typography>
+                        </Box>
+                    </Slide>
+
                 </Box>
             </Fade>
 

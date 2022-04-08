@@ -1,0 +1,92 @@
+[
+    {
+        "Name": "Lover’s Bane",
+        "Code": "lovers_bane",
+        "Event": "Killed Hitoshi",
+        "Icon": "Heart stabbed"
+    },
+    {
+        "Name": "99 Problems",
+        "Code": "99_problems",
+        "Event": "Killed Kira",
+        "Icon": "Heart stabbed"
+    },
+    {
+        "Name": "Sensei’s Tanto",
+        "Code": "senseis_tanto",
+        "Event": "Won sensei’s sword",
+        "Icon": "Tanto with sheath"
+    },
+    {
+        "Name": "Scroll of Wind",
+        "Code": "scroll_of_wind",
+        "Event": "Found the scroll",
+        "Icon": "Scroll"
+    },
+    {
+        "Name": "TMNT",
+        "Code": "tmnt",
+        "Event": "Climbed through sewer outlet",
+        "Icon": "Rat"
+    },
+    {
+        "Name": "Still I Rise",
+        "Code": "still_i_rise",
+        "Event": "Main character gets killed",
+        "Icon": "Angel"
+    },
+    {
+        "Name": "Feline Finder",
+        "Code": "feline_finder",
+        "Event": "Found Kitten",
+        "Icon": "Kitten"
+    },
+    {
+        "Name": "Beast Elemental",
+        "Code": "beast_elemental",
+        "Event": "Chose Beast Elemental",
+        "Icon": "Claw slash"
+    },
+    {
+        "Name": "Mist Elemental",
+        "Code": "mis_elemental",
+        "Event": "Chose Mist Elemental",
+        "Icon": "eyes sticking out through fog"
+    },
+    {
+        "Name": "Star Elemental",
+        "Code": "star_elemental",
+        "Event": "Chose Star Elemental",
+        "Icon": "exploding star"
+    },
+    {
+        "Name": "Flame Elemental",
+        "Code": "flame_elemental",
+        "Event": "Chose Flame Elemental",
+        "Icon": "Fireball"
+    },
+    {
+        "Name": "Oliver Twist",
+        "Code": "oliver_twist",
+        "Event": "Stole food successfully",
+        "Icon": "Steaming pot"
+    },
+    {
+        "Name": "Simp",
+        "Code": "simp",
+        "Event": "Chose ‘be with her’ ",
+        "Icon": ""
+    },
+    {
+        "Name": "XO Tour Llif3",
+        "Code": "xo_tour_llif3",
+        "Event": "All friends are dead",
+        "Icon": "Gravestone"
+    },
+    {
+        "Name": "Antisocial",
+        "Code": "antisocial",
+        "Event": "Chose not to go to the bonfire",
+        "Icon": ""
+    }
+]

@@ -113,7 +113,7 @@ export default function Token() {
                 )}
 
                 <Fade
-                    in={!loading && state.signed && decision && introDone}
+                    in={!loading && state.signed && decision && (introDone || state.currentDecision > 1)}
                     mountOnEnter
                     timeout={1000}
                     style={{ transitionDelay: `500ms` }}

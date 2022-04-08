@@ -269,7 +269,7 @@ export default function Decision(props) {
                     <br />
 
                     <img
-                        src="/images/back-button.png"
+                        src="/images/close-button.png"
                         onClick={() => {
                             setRandomDismissed(true);
                             clickAudio.play();
@@ -309,7 +309,7 @@ export default function Decision(props) {
                     <br />
 
                     <img
-                        src="/images/back-button.png"
+                        src="/images/close-button.png"
                         onClick={() => {
                             setManaDismissed(true);
                             clickAudio.play();

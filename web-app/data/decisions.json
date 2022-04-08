@@ -4788,7 +4788,7 @@
    "option1_id": "1-241-50, 0-242-50",
    "option1_text": "A) Try to convince her that Ichiro tricked her",
    "option1_effect": "Green+2 Yellow+5 Mana+3, Green+2 Yellow+5 Mana-5",
-   "option2_id": "0-243-65, 1-244-35",
+   "option2_id": "1-243-65, 0-244-35",
    "option2_text": "B) Use your elemental power to free Kibu ",
    "option2_effect": "Red+4 Blue+2 Mana+3, Red+4 Blue+2 Mana-5",
    "option3_id": "",

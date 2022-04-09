@@ -105,10 +105,12 @@ export default function Decision(props) {
 
     const playSlideAudio = () => {
         const data = slideAudioData.find(d => d.id === state.currentDecision);
-        const audioFile = data.audio_file;
-        const audio = new Audio(`/audio/bg/${audioFile}`);
-        audio.play();
-        setCurrentAudio(audio);
+        if (data) {
+            const audioFile = data.audio_file;
+            const audio = new Audio(`/audio/bg/${audioFile}`);
+            audio.play();
+            setCurrentAudio(audio);
+        }
     }
 
     const optBoxStyle = {

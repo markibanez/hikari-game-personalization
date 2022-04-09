@@ -68,7 +68,7 @@ export default function SelectToken(props) {
                                     overflowY: 'hidden',
                                     paddingX: 5
                                 }}
-                                justifyContent="center"
+                                justifyContent={wallet.tokens.length > 3 ? 'initial' : 'center'}
                             >
                                 {wallet.tokens.map((token, index) => {
                                     return (
@@ -93,7 +93,7 @@ export default function SelectToken(props) {
                                                     Soul #{token.tokenId.toString()}
                                                 </Typography>
                                                 <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
-                                                    <img src="/images/enter-genu-button.png" style={{ width: '170px', alignSelf: 'center' }} />
+                                                    <img src="/images/enter-genu-button.png" style={{ width: '120px', alignSelf: 'center' }} />
                                                 </Link>
                                             </Stack>
                                         </Grid>

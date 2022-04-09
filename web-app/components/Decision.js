@@ -4,6 +4,7 @@ import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
 import uuid from 'react-uuid';
 import achievements from './../data/achievements.json';
+import slideAudioData from './../data/audio.json';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props;
@@ -12,7 +13,8 @@ export default function Decision(props) {
     const [randomDismissed, setRandomDismissed] = useState(false);
     const [manaDismissed, setManaDismissed] = useState(false);
     const [showNewAch, setShowNewAch] = useState(false);
-    const [achievement, setAchievement] = useState({})
+    const [achievement, setAchievement] = useState({});
+    const [currentAudio, setCurrentAudio] = useState(null);
 
     const clickAudio = new Audio('/audio/click.wav');
     clickAudio.volume = 0.75;
@@ -35,6 +37,7 @@ export default function Decision(props) {
         try {
             const response = await fetch(`/api/update-state?address=${address}&token=${token}&option=${chosenOption}`);
             if (response.status === 200) {
+                fadeCurrentAudio();
                 const result = await response.json();
                 console.log(result);
 
@@ -84,6 +87,29 @@ export default function Decision(props) {
         //     setProcessing(false);
         // }
     };
+
+    function fadeCurrentAudio() {
+        if (!currentAudio) return;
+
+        if(currentAudio.volume - 0.3 > 0){
+            currentAudio.volume -= 0.3;
+            setTimeout(fadeCurrentAudio, 2);
+        } else {
+            currentAudio.pause();
+        }
+    }
+
+    const enterHandler = () => {
+        playSlideAudio();
+    }
+
+    const playSlideAudio = () => {
+        const data = slideAudioData.find(d => d.id === state.currentDecision);
+        const audioFile = data.audio_file;
+        const audio = new Audio(`/audio/bg/${audioFile}`);
+        audio.play();
+        setCurrentAudio(audio);
+    }
 
     const optBoxStyle = {
         backgroundImage: `url('/images/option-bg4.png')`,
@@ -146,7 +172,7 @@ export default function Decision(props) {
                     zIndex: 1,
                 }}
             ></Box>
-            <Fade in={!processing} timeout={1000} onExited={exitedHandler}>
+            <Fade in={!processing} timeout={1000} onEnter={enterHandler} onExited={exitedHandler}>
                 <Box
                     sx={{
                         position: 'fixed',

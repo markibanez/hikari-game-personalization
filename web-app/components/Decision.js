@@ -8,6 +8,7 @@ import slideAudioData from './../data/audio.json';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props;
+    console.log(state, decision);
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
@@ -33,11 +34,27 @@ export default function Decision(props) {
         width: '100%',
     };
 
+    const { story_effects } = decision;
+    // achievement
+    useEffect(() => {
+        if (story_effects) {
+            const found = achievements.find((a) => a.Code === story_effects);
+            if (found) {
+                setAchievement(found);
+                setTimeout(() => {
+                    setShowNewAch(true);
+                }, 1000);
+            }
+        }
+    }, [story_effects]);
+
     const exitedHandler = async () => {
         try {
             const response = await fetch(`/api/update-state?address=${address}&token=${token}&option=${chosenOption}`);
             if (response.status === 200) {
                 fadeCurrentAudio();
+                setShowNewAch(false);
+
                 const result = await response.json();
                 console.log(result);
 
@@ -58,17 +75,12 @@ export default function Decision(props) {
                 }
 
                 if (result.state.newAchievement) {
-                    console.log(achievements);
                     const found = achievements.find(a => a.Code === result.state.newAchievement);
-                    console.log(found);
                     if (found) {
                         setAchievement(found);
                         setTimeout(() => {
                             setShowNewAch(true);
-                            setTimeout(() => {
-                                setShowNewAch(false);
-                            }, 7000)
-                        }, 2000)
+                        }, 1000)
                     }
                 }
 
@@ -91,8 +103,8 @@ export default function Decision(props) {
     function fadeCurrentAudio() {
         if (!currentAudio) return;
 
-        if(currentAudio.volume - 0.3 > 0){
-            currentAudio.volume -= 0.3;
+        if (currentAudio.volume - 0.2 > 0) {
+            currentAudio.volume -= 0.2;
             setTimeout(fadeCurrentAudio, 2);
         } else {
             currentAudio.pause();
@@ -101,17 +113,17 @@ export default function Decision(props) {
 
     const enterHandler = () => {
         playSlideAudio();
-    }
+    };
 
     const playSlideAudio = () => {
-        const data = slideAudioData.find(d => d.id === state.currentDecision);
+        const data = slideAudioData.find((d) => d.id === state.currentDecision);
         if (data) {
             const audioFile = data.audio_file;
             const audio = new Audio(`/audio/bg/${audioFile}`);
             audio.play();
             setCurrentAudio(audio);
         }
-    }
+    };
 
     const optBoxStyle = {
         backgroundImage: `url('/images/option-bg4.png')`,
@@ -295,7 +307,15 @@ export default function Decision(props) {
                         </Box>
                     </Box>
 
-                    <Slide in={showNewAch} direction="left">
+                    <Slide
+                        in={showNewAch}
+                        direction="left"
+                        onEnter={() => {
+                            setTimeout(() => {
+                                setShowNewAch(false);
+                            }, 15000);
+                        }}
+                    >
                         <Box
                             sx={{
                                 width: '20%',
@@ -327,14 +347,13 @@ export default function Decision(props) {
                                     textAlign: 'center',
                                     fontSize: '3.6vmin',
                                     fontFamily: 'DK-DDG',
-                                    textShadow: '4px 4px rgba(0, 0, 0, 0.25)'
+                                    textShadow: '4px 4px rgba(0, 0, 0, 0.25)',
                                 }}
                             >
                                 {achievement.Name}
                             </Typography>
                         </Box>
                     </Slide>
-
                 </Box>
             </Fade>
 

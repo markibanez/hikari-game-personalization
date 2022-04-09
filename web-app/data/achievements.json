@@ -49,7 +49,7 @@
     },
     {
         "Name": "Mist Elemental",
-        "Code": "mis_elemental",
+        "Code": "mist_elemental",
         "Event": "Chose Mist Elemental",
         "Icon": "eyes sticking out through fog"
     },

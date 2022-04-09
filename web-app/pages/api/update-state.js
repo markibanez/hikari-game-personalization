@@ -131,7 +131,7 @@ const handler = async (req, res) => {
                         const achievements = storyEffects.split(',').map(a => a?.trim());
                         if (achievements.length === 1) {
                             updatePayload.$addToSet.achievements = storyEffects;
-                            newAchievement = storyEffects;
+                            // newAchievement = storyEffects;
                         } else if (achievements.length === 4) {
                             const achievement = achievements[option - 1];
                             if (achievement)

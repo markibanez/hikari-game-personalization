@@ -46,11 +46,11 @@ export default function SelectToken(props) {
                             <Typography
                                 variant="h4"
                                 sx={{
-                                    marginBottom: 2,
+                                    marginBottom: '2%',
                                     fontFamily: 'DK-DDG',
                                     color: '#AEAD8F',
                                     textShadow: '2px 2px #413D31',
-                                    fontSize: '4vmin'
+                                    fontSize: '3.5vmin'
                                 }}
                             >
                                 Your souls
@@ -68,6 +68,7 @@ export default function SelectToken(props) {
                                     overflowY: 'hidden',
                                     paddingX: 5
                                 }}
+                                justifyContent="center"
                             >
                                 {wallet.tokens.map((token, index) => {
                                     return (
@@ -92,7 +93,7 @@ export default function SelectToken(props) {
                                                     Soul #{token.tokenId.toString()}
                                                 </Typography>
                                                 <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
-                                                    <img src="/images/enter-genu-button.png" style={{ width: '120%', alignSelf: 'center' }} />
+                                                    <img src="/images/enter-genu-button.png" style={{ width: '170px', alignSelf: 'center' }} />
                                                 </Link>
                                             </Stack>
                                         </Grid>

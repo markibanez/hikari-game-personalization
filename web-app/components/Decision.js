@@ -48,6 +48,15 @@ export default function Decision(props) {
         }
     }, [story_effects]);
 
+    const isFinalSlide = decision?.id === 700;
+    let art;
+    if (isFinalSlide) {
+        if (state.gender === 'male') art = `https://storage.googleapis.com/hikari-genu/final/final-slide-male.png`;
+        else if (state.gender === 'female') art = `https://storage.googleapis.com/hikari-genu/final/final-slide-female.png`;
+    } else {
+        art = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`
+    }
+
     const exitedHandler = async () => {
         try {
             const response = await fetch(`/api/update-state?address=${address}&token=${token}&option=${chosenOption}`);
@@ -88,7 +97,7 @@ export default function Decision(props) {
                 setDecision(result.decision);
                 setRandomDismissed(false);
                 setManaDismissed(false);
-                onImageLoaded(`https://storage.googleapis.com/hikari-genu/art/${result.decision.id}.png`);
+                onImageLoaded(art);
             } else {
                 console.log(response);
             }
@@ -195,7 +204,7 @@ export default function Decision(props) {
                         width: '100%',
                         height: '100%',
                         aspectRatio: '16 / 9',
-                        backgroundImage: `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
+                        backgroundImage: `url('${art}')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',

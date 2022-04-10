@@ -75,8 +75,29 @@ export function WalletProvider({ children }) {
     const [gettingTokens, setGettingTokens] = useState(false);
     const [groupedTokens, setGroupedTokens] = useState([]);
 
+    const requiredNetwork = 4;
     const connect = async () => {
+        const providerOptions = {
+            walletconnect: {
+                package: WalletConnectProvider,
+                options: {
+                    infuraId: '9c36c1ad9b8b45459b40c15aeb2449a2'
+                }
+            }
+        };
+
+        web3Modal = new Web3Modal({
+            // cacheProvider: true,
+            providerOptions
+        });
+
         const instance = await web3Modal.connect();
+
+        if (instance.networkVersion != requiredNetwork) {
+            enqueueSnackbar((<h1>{`You are not in the correct network. Please switch your wallet to ${networks[requiredNetwork]?.name}`}</h1>), { variant: 'error' });
+            return;
+        }
+
         web3Modal.clearCachedProvider();
         instance.on('accountsChanged', (accounts) => {
             router.reload(window.location.pathname);
@@ -139,9 +160,9 @@ export function WalletProvider({ children }) {
                 const tokenId = await contract.tokenOfOwnerByIndex(address, i);
                 const tokenURI = await contract.tokenURI(tokenId);
 
-                // const response = await fetch(tokenURI);
-                // const metadata = await response.json(); console.log(metadata);
-                const metadata = {};
+                const response = await fetch(tokenURI);
+                const metadata = await response.json();
+                // const metadata = {};
                 metadata.tokenId = tokenId;
                 tokenMetadata.push(metadata);
             }

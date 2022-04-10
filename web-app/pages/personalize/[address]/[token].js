@@ -42,7 +42,7 @@ export default function Token() {
 
                     const response = await fetch(`/api/get-state?address=${address}&token=${tokenId}`);
                     if (response.status === 200) {
-                        const result = await response.json();
+                        const result = await response.json(); console.log(result);
                         setState(result.state);
                         setDecision(result.decision);
                     }
@@ -70,9 +70,9 @@ export default function Token() {
     }, [router, validAddress, tokenId]);
 
     useEffect(() => {
-        wallet.getNFT(tokenId).then((token) => {
-            console.log(token);
-        });
+        // wallet.getNFT(tokenId).then((token) => {
+        //     console.log(token);
+        // });
     }, []);
 
     return (

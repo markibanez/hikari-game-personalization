@@ -111,7 +111,7 @@ const handler = async (req, res) => {
                     $set: { currentDecision: nextDecisionId },
                     $inc: effects,
                     $push: { logs: logEntry },
-                    $addToSet: {}
+                    $addToSet: {},
                 };
 
                 // random luck calculation variables
@@ -128,14 +128,13 @@ const handler = async (req, res) => {
                     else if (storyEffects === 'female') updatePayload.$set.gender = 'female';
                     else {
                         // achievements
-                        const achievements = storyEffects.split(',').map(a => a?.trim());
+                        const achievements = storyEffects.split(',').map((a) => a?.trim());
                         if (achievements.length === 1) {
                             updatePayload.$addToSet.achievements = storyEffects;
                             // newAchievement = storyEffects;
                         } else if (achievements.length === 4) {
                             const achievement = achievements[option - 1];
-                            if (achievement)
-                            {
+                            if (achievement) {
                                 if (achievement !== 'x') {
                                     updatePayload.$addToSet.achievements = achievement;
                                     newAchievement = achievement;
@@ -188,7 +187,27 @@ const handler = async (req, res) => {
 
     const decision = decisions.find((d) => d.id === state.currentDecision);
 
-    res.status(200).json({ state, decision });
+    let manaRanking = null;
+    if (decision.id === 700) {
+        manaRanking = await players.aggregate([
+            {
+                $setWindowFields: {
+                    sortBy: { mana: -1 },
+                    output: {
+                        manaRank: { $rank: {} },
+                    },
+                },
+            },
+            {
+                $match: { tokenID: 2 },
+            },
+            {
+                $project: { tokenID: 1, mana: 1, manaRank: 1 },
+            },
+        ]).toArray();
+    }
+
+    res.status(200).json({ state, decision, manaRanking });
 };
 
 export default handler;

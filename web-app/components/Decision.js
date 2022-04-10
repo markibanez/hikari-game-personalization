@@ -8,7 +8,6 @@ import slideAudioData from './../data/audio.json';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, address, token } = props;
-    console.log(state, decision);
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);

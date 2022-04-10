@@ -1,4 +1,4 @@
-import { Backdrop, Box, Button, Card, CardContent, Fade, Slide, Stack, Typography } from '@mui/material';
+import { Backdrop, Box, Button, Card, CardContent, Fade, Grid, Slide, Stack, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { WalletContext } from '/contexts/WalletContext';
 import { useSnackbar } from 'notistack';
@@ -7,7 +7,7 @@ import achievements from './../data/achievements.json';
 import slideAudioData from './../data/audio.json';
 
 export default function Decision(props) {
-    const { state, decision, setState, setDecision, address, token } = props;
+    const { state, decision, setState, setDecision, manaRanking, setManaRanking, address, token } = props;
     const [processing, setProcessing] = useState(false);
     const [chosenOption, setChosenOption] = useState(1);
     const [randomDismissed, setRandomDismissed] = useState(false);
@@ -15,6 +15,9 @@ export default function Decision(props) {
     const [showNewAch, setShowNewAch] = useState(false);
     const [achievement, setAchievement] = useState({});
     const [currentAudio, setCurrentAudio] = useState(null);
+
+    const wallet = useContext(WalletContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const clickAudio = new Audio('/audio/click.wav');
     clickAudio.volume = 0.75;
@@ -51,9 +54,10 @@ export default function Decision(props) {
     let art;
     if (isFinalSlide) {
         if (state.gender === 'male') art = `https://storage.googleapis.com/hikari-genu/final/final-slide-male.png`;
-        else if (state.gender === 'female') art = `https://storage.googleapis.com/hikari-genu/final/final-slide-female.png`;
+        else if (state.gender === 'female')
+            art = `https://storage.googleapis.com/hikari-genu/final/final-slide-female.png`;
     } else {
-        art = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`
+        art = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`;
     }
 
     const exitedHandler = async () => {
@@ -83,13 +87,17 @@ export default function Decision(props) {
                 }
 
                 if (result.state.newAchievement) {
-                    const found = achievements.find(a => a.Code === result.state.newAchievement);
+                    const found = achievements.find((a) => a.Code === result.state.newAchievement);
                     if (found) {
                         setAchievement(found);
                         setTimeout(() => {
                             setShowNewAch(true);
-                        }, 1000)
+                        }, 1000);
                     }
+                }
+
+                if (result.manaRanking?.length > 0) {
+                    setManaRanking(result.manaRanking[0]);
                 }
 
                 setState(result.state);
@@ -185,6 +193,23 @@ export default function Decision(props) {
         };
     };
 
+    const finalOverviewSx = {
+        fontSize: '2.5vmin',
+    };
+
+    const finalize = async () => {
+        const { ethersSigner } = wallet;
+        const signature = await ethersSigner.signMessage('finalize-state');
+
+        const response = await fetch(`/api/finalize-state?address=${address}&token=${token}&signature=${signature}`);
+        if (response.status === 200) {
+            const result = await response.json();
+            enqueueSnackbar((<h2 sx={{ margin: 0, padding: 0 }}>Your Gen-U state has been finalized</h2>), { variant: 'success' });
+        } else {
+            enqueueSnackbar((<h2 sx={{ margin: 0, padding: 0 }}>Could not finalize your Gen-U state</h2>), { variant: 'error' });
+        }
+    }
+
     return (
         <>
             <Box
@@ -219,153 +244,309 @@ export default function Decision(props) {
                                 : 'initial',
                     }}
                 >
-                    <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
-                        <Stack direction="row" justifyContent="center" spacing={15}>
-                            {decision.option1_id && (
-                                <Box
-                                    sx={{
-                                        cursor:
-                                            decision.option1_id?.indexOf(',') > -1
-                                                ? `url('/dice.cur'), auto`
-                                                : 'inherit',
-                                        ...optBoxStyle,
-                                    }}
-                                    display="flex"
-                                    onClick={() => chooseOption(1)}
-                                    onMouseEnter={() => hoverAudio.play()}
-                                >
-                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
-                                        {decision.option1_text || 'Continue...'}
-                                    </Typography>
-                                </Box>
-                            )}
-                            {decision.option2_id && (
-                                <Box
-                                    sx={{
-                                        cursor:
-                                            decision.option2_id?.indexOf(',') > -1
-                                                ? `url('/dice.cur'), auto`
-                                                : 'inherit',
-                                        ...optBoxStyle,
-                                    }}
-                                    display="flex"
-                                    onClick={() => chooseOption(2)}
-                                    onMouseEnter={() => hoverAudio.play()}
-                                >
-                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
-                                        {decision.option2_text || 'Continue...'}
-                                    </Typography>
-                                </Box>
-                            )}
+                    {decision.id !== 700 && (
+                        <>
+                            <Box sx={{ position: 'fixed', bottom: 0, width: '100%' }}>
+                                <Stack direction="row" justifyContent="center" spacing={15}>
+                                    {decision.option1_id && (
+                                        <Box
+                                            sx={{
+                                                cursor:
+                                                    decision.option1_id?.indexOf(',') > -1
+                                                        ? `url('/dice.cur'), auto`
+                                                        : 'inherit',
+                                                ...optBoxStyle,
+                                            }}
+                                            display="flex"
+                                            onClick={() => chooseOption(1)}
+                                            onMouseEnter={() => hoverAudio.play()}
+                                        >
+                                            <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                                {decision.option1_text || 'Continue...'}
+                                            </Typography>
+                                        </Box>
+                                    )}
+                                    {decision.option2_id && (
+                                        <Box
+                                            sx={{
+                                                cursor:
+                                                    decision.option2_id?.indexOf(',') > -1
+                                                        ? `url('/dice.cur'), auto`
+                                                        : 'inherit',
+                                                ...optBoxStyle,
+                                            }}
+                                            display="flex"
+                                            onClick={() => chooseOption(2)}
+                                            onMouseEnter={() => hoverAudio.play()}
+                                        >
+                                            <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                                {decision.option2_text || 'Continue...'}
+                                            </Typography>
+                                        </Box>
+                                    )}
 
-                            {decision.option3_id && (
-                                <Box
-                                    sx={{
-                                        cursor:
-                                            decision.option3_id?.indexOf(',') > -1
-                                                ? `url('/dice.cur'), auto`
-                                                : 'inherit',
-                                        ...optBoxStyle,
-                                    }}
-                                    display="flex"
-                                    onClick={() => chooseOption(3)}
-                                    onMouseEnter={() => hoverAudio.play()}
-                                >
-                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
-                                        {decision.option3_text || 'Continue...'}
-                                    </Typography>
-                                </Box>
-                            )}
-                            {decision.option4_id && (
-                                <Box
-                                    sx={{
-                                        cursor:
-                                            decision.option4_id?.indexOf(',') > -1
-                                                ? `url('/dice.cur'), auto`
-                                                : 'inherit',
-                                        ...optBoxStyle,
-                                    }}
-                                    display="flex"
-                                    onClick={() => chooseOption(4)}
-                                    onMouseEnter={() => hoverAudio.play()}
-                                >
-                                    <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
-                                        {decision.option4_text || 'Continue...'}
-                                    </Typography>
-                                </Box>
-                            )}
-                        </Stack>
-                    </Box>
+                                    {decision.option3_id && (
+                                        <Box
+                                            sx={{
+                                                cursor:
+                                                    decision.option3_id?.indexOf(',') > -1
+                                                        ? `url('/dice.cur'), auto`
+                                                        : 'inherit',
+                                                ...optBoxStyle,
+                                            }}
+                                            display="flex"
+                                            onClick={() => chooseOption(3)}
+                                            onMouseEnter={() => hoverAudio.play()}
+                                        >
+                                            <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                                {decision.option3_text || 'Continue...'}
+                                            </Typography>
+                                        </Box>
+                                    )}
+                                    {decision.option4_id && (
+                                        <Box
+                                            sx={{
+                                                cursor:
+                                                    decision.option4_id?.indexOf(',') > -1
+                                                        ? `url('/dice.cur'), auto`
+                                                        : 'inherit',
+                                                ...optBoxStyle,
+                                            }}
+                                            display="flex"
+                                            onClick={() => chooseOption(4)}
+                                            onMouseEnter={() => hoverAudio.play()}
+                                        >
+                                            <Typography variant="h6" sx={optionLinkStyle} color="#FFF">
+                                                {decision.option4_text || 'Continue...'}
+                                            </Typography>
+                                        </Box>
+                                    )}
+                                </Stack>
+                            </Box>
 
-                    <Box sx={{ position: 'fixed', top: -20, right: -20 }}>
-                        <Box sx={manaBoxStyle}>
-                            <img
-                                src="/images/mana-bottle.png"
-                                style={{ height: '30%', position: 'absolute', top: '30px', left: '70px' }}
-                            />
-                            <Typography
-                                variant="h4"
+                            <Box sx={{ position: 'fixed', top: -20, right: -20 }}>
+                                <Box sx={manaBoxStyle}>
+                                    <img
+                                        src="/images/mana-bottle.png"
+                                        style={{ height: '30%', position: 'absolute', top: '30px', left: '70px' }}
+                                    />
+                                    <Typography
+                                        variant="h4"
+                                        sx={{
+                                            fontFamily: 'DK-DDG',
+                                            position: 'absolute',
+                                            left: '120px',
+                                            top: '36px',
+                                            textShadow: '2px 2px #413D31',
+                                        }}
+                                        color="#AEAD8F"
+                                    >
+                                        {state.mana}
+                                    </Typography>
+                                </Box>
+                            </Box>
+
+                            <Slide
+                                in={showNewAch}
+                                direction="left"
+                                onEnter={() => {
+                                    setTimeout(() => {
+                                        setShowNewAch(false);
+                                    }, 15000);
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        width: '20%',
+                                        height: '20%',
+                                        position: 'absolute',
+                                        right: 0,
+                                        top: '22%',
+                                        backgroundImage: `url('/images/achievement-bg.png')`,
+                                        backgroundPosition: 'right',
+                                        backgroundSize: 'contain',
+                                        backgroundRepeat: 'no-repeat',
+                                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                                        display: 'flex',
+                                        justifyContent: 'left',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <img
+                                        src={`/images/icons/${achievement.File}`}
+                                        style={{ width: '25%', paddingLeft: '15%', paddingBottom: '5%' }}
+                                    />
+                                    <Typography
+                                        variant="h3"
+                                        sx={{
+                                            paddingLeft: '3%',
+                                            paddingBottom: '7%',
+                                            color: '#A49A81',
+                                            maxWidth: '40%',
+                                            textAlign: 'center',
+                                            fontSize: '3.6vmin',
+                                            fontFamily: 'DK-DDG',
+                                            textShadow: '4px 4px rgba(0, 0, 0, 0.25)',
+                                        }}
+                                    >
+                                        {achievement.Name}
+                                    </Typography>
+                                </Box>
+                            </Slide>
+                        </>
+                    )}
+
+                    {decision.id === 700 && (
+                        <>
+                            <Box
                                 sx={{
-                                    fontFamily: 'DK-DDG',
+                                    width: '40%',
+                                    height: '50%',
+                                    backgroundImage: `url('/images/congrats-bg.png')`,
+                                    backgroundSize: 'contain',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
                                     position: 'absolute',
-                                    left: '120px',
-                                    top: '36px',
-                                    textShadow: '2px 2px #413D31',
+                                    top: '0%',
+                                    right: '5%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'end',
                                 }}
-                                color="#AEAD8F"
                             >
-                                {state.mana}
-                            </Typography>
-                        </Box>
-                    </Box>
+                                <Box
+                                    sx={{
+                                        width: '90%',
+                                        height: '60%',
+                                        marginBottom: '10%',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
+                                        You've successfully completed the Gen-U storyline.
+                                    </Typography>
+                                    <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
+                                        Your data is now ready to be processed by the Gen-U system. By clicking the
+                                        button below your data will be submitted and your art will be generated over the
+                                        next 72 hours.
+                                    </Typography>
+                                    <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
+                                        Please click the button below and approve this action in your wallet.
+                                    </Typography>
 
-                    <Slide
-                        in={showNewAch}
-                        direction="left"
-                        onEnter={() => {
-                            setTimeout(() => {
-                                setShowNewAch(false);
-                            }, 15000);
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: '20%',
-                                height: '20%',
-                                position: 'absolute',
-                                right: 0,
-                                top: '22%',
-                                backgroundImage: `url('/images/achievement-bg.png')`,
-                                backgroundPosition: 'right',
-                                backgroundSize: 'contain',
-                                backgroundRepeat: 'no-repeat',
-                                zIndex: (theme) => theme.zIndex.drawer + 1,
-                                display: 'flex',
-                                justifyContent: 'left',
-                                alignItems: 'center',
-                            }}
-                        >
-                            <img
-                                src={`/images/icons/${achievement.File}`}
-                                style={{ width: '25%', paddingLeft: '15%', paddingBottom: '5%' }}
-                            />
-                            <Typography
-                                variant="h3"
+                                    <img
+                                        src="/images/submit-button.png"
+                                        style={{ width: '30%', marginTop: '4%' }}
+                                        onMouseEnter={() => hoverAudio.play()}
+                                        onClick={() => {
+                                            clickAudio.play();
+                                            finalize();
+                                        }}
+                                    />
+                                </Box>
+                            </Box>
+
+                            <Box
                                 sx={{
-                                    paddingLeft: '3%',
-                                    paddingBottom: '7%',
-                                    color: '#A49A81',
-                                    maxWidth: '40%',
-                                    textAlign: 'center',
-                                    fontSize: '3.6vmin',
-                                    fontFamily: 'DK-DDG',
-                                    textShadow: '4px 4px rgba(0, 0, 0, 0.25)',
+                                    width: '40%',
+                                    height: '40%',
+                                    backgroundImage: `url('/images/final-overview.png')`,
+                                    backgroundSize: 'contain',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
+                                    position: 'absolute',
+                                    bottom: '10%',
+                                    right: '5.5%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
                                 }}
                             >
-                                {achievement.Name}
-                            </Typography>
-                        </Box>
-                    </Slide>
+                                <Box
+                                    sx={{
+                                        // border: '3px solid black',
+                                        width: '60%',
+                                        height: '90%',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontFamily: 'DK-DDG',
+                                            color: '#AEAD8F',
+                                            fontSize: '3vmin',
+                                            textShadow: '4px 4px #302C21',
+                                        }}
+                                    >
+                                        Overview
+                                    </Typography>
+
+                                    <Grid container sx={{ width: '100%' }} spacing={1}>
+                                        <Grid item xs={8} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>Final Mana:</Typography>
+                                        </Grid>
+                                        <Grid item xs={4} sx={{ textAlign: 'left' }}>
+                                            <Stack direction="row">
+                                                <Typography sx={finalOverviewSx}>{state.mana}</Typography>
+                                                <img src="/images/mana-bottle.png" style={{ height: '4vmin' }} />
+                                            </Stack>
+                                        </Grid>
+                                        <Grid item xs={8} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>Your Mana Ranking:</Typography>
+                                        </Grid>
+                                        <Grid item xs={4} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>#{manaRanking.manaRank}</Typography>
+                                        </Grid>
+
+                                        <Grid item xs={8} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>Luck Ratio:</Typography>
+                                        </Grid>
+                                        <Grid item xs={4} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>
+                                                {(
+                                                    (100 * state.randomSuccess) /
+                                                    (state.randomSuccess + state.randomFail)
+                                                ).toFixed(2)}
+                                                %
+                                            </Typography>
+                                        </Grid>
+
+                                        <Grid item xs={5} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>Achivements:</Typography>
+                                        </Grid>
+                                        <Grid item xs={7} sx={{ textAlign: 'left' }}>
+                                            <Typography sx={finalOverviewSx}>
+                                                <ul
+                                                    className="custom-scrollbar"
+                                                    style={{
+                                                        textAlign: 'left',
+                                                        marginTop: 0,
+                                                        overflowY: 'auto',
+                                                        overflowX: 'clip',
+                                                        height: '16vmin',
+                                                    }}
+                                                >
+                                                    {state.achievements.map((ac) => {
+                                                        return <li>{ac}</li>;
+                                                    })}
+                                                </ul>
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                            </Box>
+
+                            <img
+                                src="/images/continue-button.png"
+                                style={{ position: 'absolute', bottom: '-2%', right: '17%', width: '16%' }}
+                                onMouseEnter={() => { hoverAudio.play() }}
+                                onClick={() => {
+                                    clickAudio.play();
+                                    chooseOption(1);
+                                }}
+                            />
+                        </>
+                    )}
                 </Box>
             </Fade>
 

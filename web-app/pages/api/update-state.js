@@ -177,6 +177,7 @@ const handler = async (req, res) => {
                 randomSuccess: 0,
                 randomFail: 0,
                 currentDecision: 1,
+                finalized: false
             };
             await players.insertOne(state);
         } else {

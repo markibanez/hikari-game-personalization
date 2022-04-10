@@ -20,6 +20,7 @@ export default function Token() {
     const [state, setState] = useState({});
     const [decision, setDecision] = useState({});
     const [introDone, setIntroDone] = useState(false);
+    const [manaRanking, setManaRanking] = useState(null);
 
     const validAddress = ethers.utils.isAddress(address);
     const csAddress = validAddress ? ethers.utils.getAddress(address) : null;
@@ -42,12 +43,14 @@ export default function Token() {
 
                     const response = await fetch(`/api/get-state?address=${address}&token=${tokenId}`);
                     if (response.status === 200) {
-                        const result = await response.json(); console.log(result);
+                        const result = await response.json();
                         setState(result.state);
                         setDecision(result.decision);
+                        if (result.manaRanking?.length > 0) setManaRanking(result.manaRanking[0]);
                     }
                 } catch (err) {
                     enqueueSnackbar('Could not load state', { variant: 'error' });
+                    router.push('/');
                     console.log(err);
                 } finally {
                     setLoading(false);
@@ -124,6 +127,8 @@ export default function Token() {
                             decision={decision}
                             setState={setState}
                             setDecision={setDecision}
+                            manaRanking={manaRanking}
+                            setManaRanking={setManaRanking}
                             address={address}
                             token={token}
                         />

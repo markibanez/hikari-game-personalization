@@ -1,92 +1,107 @@
 [
-    {
-        "Name": "Lover’s Bane",
-        "Code": "lovers_bane",
-        "Event": "Killed Hitoshi",
-        "Icon": "Heart stabbed"
-    },
-    {
-        "Name": "99 Problems",
-        "Code": "99_problems",
-        "Event": "Killed Kira",
-        "Icon": "Heart stabbed"
-    },
-    {
-        "Name": "Sensei’s Tanto",
-        "Code": "senseis_tanto",
-        "Event": "Won sensei’s sword",
-        "Icon": "Tanto with sheath"
-    },
-    {
-        "Name": "Scroll of Wind",
-        "Code": "scroll_of_wind",
-        "Event": "Found the scroll",
-        "Icon": "Scroll"
-    },
-    {
-        "Name": "TMNT",
-        "Code": "tmnt",
-        "Event": "Climbed through sewer outlet",
-        "Icon": "Rat"
-    },
-    {
-        "Name": "Still I Rise",
-        "Code": "still_i_rise",
-        "Event": "Main character gets killed",
-        "Icon": "Angel"
-    },
-    {
-        "Name": "Feline Finder",
-        "Code": "feline_finder",
-        "Event": "Found Kitten",
-        "Icon": "Kitten"
-    },
-    {
-        "Name": "Beast Elemental",
-        "Code": "beast_elemental",
-        "Event": "Chose Beast Elemental",
-        "Icon": "Claw slash"
-    },
-    {
-        "Name": "Mist Elemental",
-        "Code": "mist_elemental",
-        "Event": "Chose Mist Elemental",
-        "Icon": "eyes sticking out through fog"
-    },
-    {
-        "Name": "Star Elemental",
-        "Code": "star_elemental",
-        "Event": "Chose Star Elemental",
-        "Icon": "exploding star"
-    },
-    {
-        "Name": "Flame Elemental",
-        "Code": "flame_elemental",
-        "Event": "Chose Flame Elemental",
-        "Icon": "Fireball"
-    },
-    {
-        "Name": "Oliver Twist",
-        "Code": "oliver_twist",
-        "Event": "Stole food successfully",
-        "Icon": "Steaming pot"
-    },
-    {
-        "Name": "Simp",
-        "Code": "simp",
-        "Event": "Chose ‘be with her’ ",
-        "Icon": ""
-    },
-    {
-        "Name": "XO Tour Llif3",
-        "Code": "xo_tour_llif3",
-        "Event": "All friends are dead",
-        "Icon": "Gravestone"
-    },
-    {
-        "Name": "Antisocial",
-        "Code": "antisocial",
-        "Event": "Chose not to go to the bonfire",
-        "Icon": ""
-    }
+ {
+   "Name": "Lover’s Bane",
+   "Code": "lovers_bane",
+   "Event": "Killed Hitoshi",
+   "Icon": "Heart stabbed",
+   "File": "heart_stabbed.png"
+ },
+ {
+   "Name": "99 Problems",
+   "Code": "99_problems",
+   "Event": "Killed Kira",
+   "Icon": "Heart stabbed",
+   "File": "heart_stabbed.png"
+ },
+ {
+   "Name": "Sensei’s Tanto",
+   "Code": "senseis_tanto",
+   "Event": "Won sensei’s sword",
+   "Icon": "Tanto with sheath",
+   "File": "tanto.png"
+ },
+ {
+   "Name": "Scroll of Wind",
+   "Code": "scroll_of_wind",
+   "Event": "Found the scroll",
+   "Icon": "Scroll",
+   "File": "scroll.png"
+ },
+ {
+   "Name": "TMNT",
+   "Code": "tmnt",
+   "Event": "Climbed through sewer outlet",
+   "Icon": "Rat",
+   "File": "rat.png"
+ },
+ {
+   "Name": "Still I Rise",
+   "Code": "still_i_rise",
+   "Event": "Main character gets killed",
+   "Icon": "Angel",
+   "File": "angel.png"
+ },
+ {
+   "Name": "Feline Finder",
+   "Code": "feline_finder",
+   "Event": "Found Kitten",
+   "Icon": "Kitten",
+   "File": "cat.png"
+ },
+ {
+   "Name": "Beast Elemental",
+   "Code": "beast_elemental",
+   "Event": "Chose Beast Elemental",
+   "Icon": "Claw slash",
+   "File": "claw.png"
+ },
+ {
+   "Name": "Mist Elemental",
+   "Code": "mist_elemental",
+   "Event": "Chose Mist Elemental",
+   "Icon": "eyes sticking out through fog",
+   "File": "mist.png"
+ },
+ {
+   "Name": "Star Elemental",
+   "Code": "star_elemental",
+   "Event": "Chose Star Elemental",
+   "Icon": "exploding star",
+   "File": "star.png"
+ },
+ {
+   "Name": "Flame Elemental",
+   "Code": "flame_elemental",
+   "Event": "Chose Flame Elemental",
+   "Icon": "Fireball",
+   "File": "fireball.png"
+ },
+ {
+   "Name": "Oliver Twist",
+   "Code": "oliver_twist",
+   "Event": "Stole food successfully",
+   "Icon": "Steaming pot",
+   "File": "pot.png"
+ },
+ {
+   "Name": "Simp",
+   "Code": "simp",
+   "Event": "Chose ‘be with her’ ",
+   "Icon": "love heart",
+   "File": "heart.png"
+ },
+ {
+   "Name": "XO Tour Llif3",
+   "Code": "xo_tour_llif3",
+   "Event": "All friends are dead",
+   "Icon": "Gravestone",
+   "File": "gravestone.png"
+ },
+ {
+   "Name": "Antisocial",
+   "Code": "antisocial",
+   "Event": "Chose not to go to the bonfire",
+   "Icon": "sad face",
+   "File": "antisocial.png"
+ }
 ]

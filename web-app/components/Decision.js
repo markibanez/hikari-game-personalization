@@ -334,7 +334,7 @@ export default function Decision(props) {
                             }}
                         >
                             <img
-                                src="/images/sewer-rat.png"
+                                src={`/images/icons/${achievement.File}`}
                                 style={{ width: '25%', paddingLeft: '15%', paddingBottom: '5%' }}
                             />
                             <Typography

@@ -5,6 +5,7 @@ import { useSnackbar } from 'notistack';
 import uuid from 'react-uuid';
 import achievements from './../data/achievements.json';
 import slideAudioData from './../data/audio.json';
+import musicData from './../data/music.json';
 
 export default function Decision(props) {
     const { state, decision, setState, setDecision, manaRanking, setManaRanking, address, token } = props;
@@ -15,6 +16,9 @@ export default function Decision(props) {
     const [showNewAch, setShowNewAch] = useState(false);
     const [achievement, setAchievement] = useState({});
     const [currentAudio, setCurrentAudio] = useState(null);
+    const [currentMusic, setCurrentMusic] = useState(null);
+    const [currentMusicAudio, setCurrentMusicAudio] = useState(null);
+    const [currentMusicFile, setCurrentMusicFile] = useState(null);
 
     const wallet = useContext(WalletContext);
     const { enqueueSnackbar } = useSnackbar();
@@ -49,6 +53,39 @@ export default function Decision(props) {
             }
         }
     }, [story_effects]);
+
+    // music
+    const audioData = slideAudioData.find(d => d.id === state.currentDecision);
+    const musicName = audioData?.bg_music;
+    useEffect(() => {
+        if (currentMusicAudio) currentMusicAudio.pause();
+
+        if (musicName) {
+            const music = musicData[musicName];
+            if (music?.length > 0)  {
+                setCurrentMusic(audioData.bg_music);
+                const musicAudio = new Audio(`/audio/music/${music[0]}`);
+                setCurrentMusicFile(music[0]);
+            }
+        }
+
+    }, [musicName])
+
+    useEffect(() => {
+        console.log(currentMusicFile, 'currentMusicFile useEffect');
+        const musicAudio = new Audio(`/audio/music/${currentMusicFile}`);
+        musicAudio.volume = 0.6;
+        musicAudio.onended = e => {
+            let index = musicData[musicName].findIndex(m => m === currentMusicFile);
+            if (index > -1) {
+                if (index + 1 === musicData[musicName].length) index = 0;
+                else index++;
+                setCurrentMusicFile(musicData[musicName][index]);
+            }
+        }
+        musicAudio.play();
+        setCurrentMusicAudio(musicAudio);
+    }, [currentMusicFile])
 
     const isFinalSlide = decision?.id === 700;
     let art;

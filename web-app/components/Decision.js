@@ -126,10 +126,14 @@ export default function Decision(props) {
     const playSlideAudio = () => {
         const data = slideAudioData.find((d) => d.id === state.currentDecision);
         if (data) {
-            const audioFile = data.audio_file;
-            const audio = new Audio(`/audio/bg/${audioFile}`);
-            audio.play();
-            setCurrentAudio(audio);
+            try {
+                const audioFile = data.audio_file;
+                const audio = new Audio(`/audio/bg/${audioFile}`);
+                audio.play();
+                setCurrentAudio(audio);
+            } catch (err) {
+                console.log(err);
+            }
         }
     };
 

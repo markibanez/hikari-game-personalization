@@ -472,7 +472,7 @@ export default function Decision(props) {
                                     }}
                                 >
                                     <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
-                                        You've successfully completed the Gen-U storyline.
+                                        {`You've successfully completed the Gen-U storyline.`}
                                     </Typography>
                                     <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
                                         Your data is now ready to be processed by the Gen-U system. By clicking the

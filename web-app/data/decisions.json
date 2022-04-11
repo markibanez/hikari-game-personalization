@@ -6445,7 +6445,7 @@
    "text_file": ".txt",
    "dialogue": "You're working on a group assignment in class. One of your group members has a very ambitious idea which would surely get you a great mark if done correctly. Do you...",
    "id": 299,
-   "option1_id": "300-60, 301-40",
+   "option1_id": "1-300-60, 0-301-40",
    "option1_text": "A) Take lead of the project, making your own edits to the overall plan first",
    "option1_effect": "Red+3 Mana+2, Red+3 Mana-1",
    "option2_id": "0-302-50, 1-303-50",

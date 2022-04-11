@@ -58,21 +58,19 @@ export default function Decision(props) {
     const audioData = slideAudioData.find(d => d.id === state.currentDecision);
     const musicName = audioData?.bg_music;
     useEffect(() => {
-        if (currentMusicAudio) currentMusicAudio.pause();
-
         if (musicName) {
             const music = musicData[musicName];
             if (music?.length > 0)  {
                 setCurrentMusic(audioData.bg_music);
                 const musicAudio = new Audio(`/audio/music/${music[0]}`);
-                setCurrentMusicFile(music[0]);
+                if (currentMusicAudio) fadeCurrentMusicAudio(music[0]);
+                else setCurrentMusicFile(music[0]);
             }
         }
 
     }, [musicName])
 
     useEffect(() => {
-        console.log(currentMusicFile, 'currentMusicFile useEffect');
         const musicAudio = new Audio(`/audio/music/${currentMusicFile}`);
         musicAudio.volume = 0.6;
         musicAudio.onended = e => {
@@ -164,6 +162,20 @@ export default function Decision(props) {
         }
     }
 
+    function fadeCurrentMusicAudio(next) {
+        console.log(next);
+        if (!currentMusicAudio) return;
+
+        if (currentMusicAudio.volume - 0.2 > 0) {
+            currentMusicAudio.volume -= 0.2;
+            setTimeout(() => fadeCurrentMusicAudio(next), 2);
+        } else {
+            currentMusicAudio.pause();
+            currentMusicAudio.remove();
+            if (next) setCurrentMusicFile(next);
+        }
+    }
+
     const enterHandler = () => {
         playSlideAudio();
     };
@@ -241,9 +253,9 @@ export default function Decision(props) {
         const response = await fetch(`/api/finalize-state?address=${address}&token=${token}&signature=${signature}`);
         if (response.status === 200) {
             const result = await response.json();
-            enqueueSnackbar((<h2 sx={{ margin: 0, padding: 0 }}>Your Gen-U state has been finalized</h2>), { variant: 'success' });
+            enqueueSnackbar((<Typography sx={{ margin: 0, padding: 0, fontSize: '2vmin' }}>Your Gen-U state has been finalized</Typography>), { variant: 'success' });
         } else {
-            enqueueSnackbar((<h2 sx={{ margin: 0, padding: 0 }}>Could not finalize your Gen-U state</h2>), { variant: 'error' });
+            enqueueSnackbar((<Typography sx={{ margin: 0, padding: 0, fontSize: '2vmin' }}>Could not finalize your Gen-U state</Typography>), { variant: 'error' });
         }
     }
 

@@ -576,7 +576,7 @@ export default function Decision(props) {
                                                     }}
                                                 >
                                                     {state.achievements.map((ac) => {
-                                                        return <li>{ac}</li>;
+                                                        return <li key={ac}>{ac}</li>;
                                                     })}
                                                 </ul>
                                             </Typography>

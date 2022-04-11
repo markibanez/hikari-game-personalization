@@ -73,9 +73,9 @@ export default function Token() {
     }, [router, validAddress, tokenId]);
 
     useEffect(() => {
-        // wallet.getNFT(tokenId).then((token) => {
-        //     console.log(token);
-        // });
+        wallet.getNFT(tokenId).then((token) => {
+            console.log(token);
+        }).catch(() => { router.push('/') });
     }, []);
 
     return (

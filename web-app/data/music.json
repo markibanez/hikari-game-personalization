@@ -1,10 +1,11 @@
 {
     "Upbeat": [
-        "upbeat_2.mp3",
-        "upbeat_3.mp3",
-        "upbeat_4.mp3"
+        "upbeat_8.mp3", "upbeat_2.mp3", "upbeat_3.mp3", "upbeat_4.mp3", "upbeat_5.mp3", "upbeat_6.mp3", "upbeat_7.mp3"
     ],
     "Tense": [
-        "tense_2.mp3"
+        "tense_1.mp3", "tense_2.mp3", "tense_3.mp3", "tense_4.mp3"
+    ],
+    "Romantic": [
+        "romantic_1.mp3", "romantic_2.mp3"
     ]
 }

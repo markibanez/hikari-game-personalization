@@ -19,7 +19,7 @@ export default function ConnectWallet(props) {
             <Fade in={!wallet.address} timeout={1000} style={{ transitionDelay: '1000ms' }} unmountOnExit>
                 <Box sx={{ width: '100vw', height: '100vh', textAlign: 'center' }}>
                     <img
-                        src="/images/begin-label.png"
+                        src="/images/begin-label3.png"
                         style={{
                             width: '35%',
                             height: '17.5%',
@@ -33,10 +33,15 @@ export default function ConnectWallet(props) {
                     />
                     <img
                         src="/images/connect-button.png"
-                        style={{ width: '30%', height: '15%', objectFit: 'contain',position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: `translate(-50%, -50%)` }}
+                        style={{
+                            width: '25%',
+                            height: '12.5%',
+                            objectFit: 'contain',
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: `translate(-50%, -50%)`,
+                        }}
                         onClick={async () => {
                             await wallet.connect();
                         }}

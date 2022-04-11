@@ -72,7 +72,7 @@ export default function Decision(props) {
 
     useEffect(() => {
         const musicAudio = new Audio(`/audio/music/${currentMusicFile}`);
-        musicAudio.volume = 0.6;
+        musicAudio.volume = 0.3;
         musicAudio.onended = e => {
             let index = musicData[musicName].findIndex(m => m === currentMusicFile);
             if (index > -1) {

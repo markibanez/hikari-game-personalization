@@ -27,8 +27,8 @@ export default function Decision(props) {
     clickAudio.volume = 0.75;
     const hoverAudio = new Audio('/audio/hover.wav');
     hoverAudio.volume = 0.1;
-    const randomSuccessAudio = new Audio('/audio/random-success.wav');
-    const randomFailAudio = new Audio('/audio/random-fail.wav');
+    const randomSuccessAudio = new Audio('/audio/random-success.mp3');
+    const randomFailAudio = new Audio('/audio/random-fail.mp3');
 
     const chooseOption = async (option) => {
         clickAudio.play();
@@ -139,6 +139,7 @@ export default function Decision(props) {
                 setDecision(result.decision);
                 setRandomDismissed(false);
                 setManaDismissed(false);
+
                 onImageLoaded(art);
             } else {
                 console.log(response);
@@ -156,19 +157,18 @@ export default function Decision(props) {
 
         if (currentAudio.volume - 0.2 > 0) {
             currentAudio.volume -= 0.2;
-            setTimeout(fadeCurrentAudio, 2);
+            setTimeout(fadeCurrentAudio, 4);
         } else {
             currentAudio.pause();
         }
     }
 
     function fadeCurrentMusicAudio(next) {
-        console.log(next);
         if (!currentMusicAudio) return;
 
         if (currentMusicAudio.volume - 0.2 > 0) {
             currentMusicAudio.volume -= 0.2;
-            setTimeout(() => fadeCurrentMusicAudio(next), 2);
+            setTimeout(() => fadeCurrentMusicAudio(next), 4);
         } else {
             currentMusicAudio.pause();
             currentMusicAudio.remove();
@@ -234,11 +234,11 @@ export default function Decision(props) {
     };
 
     const onImageLoaded = (url) => {
+        setProcessing(true);
         const img = new Image();
         img.src = url;
         img.onload = () => {
             setProcessing(false);
-            console.log(`${url} loaded`);
         };
     };
 
@@ -272,7 +272,7 @@ export default function Decision(props) {
                     zIndex: 1,
                 }}
             ></Box>
-            <Fade in={!processing} timeout={1000} onEnter={enterHandler} onExited={exitedHandler}>
+            <Fade in={!processing} timeout={{ enter: 2000, exit: 1000 }} onEnter={enterHandler} onExited={exitedHandler}>
                 <Box
                     sx={{
                         position: 'fixed',
@@ -406,10 +406,10 @@ export default function Decision(props) {
                             >
                                 <Box
                                     sx={{
-                                        width: '20%',
-                                        height: '20%',
+                                        width: '24%',
+                                        height: '24%',
                                         position: 'absolute',
-                                        right: 0,
+                                        right: '-2%',
                                         top: '22%',
                                         backgroundImage: `url('/images/achievement-bg.png')`,
                                         backgroundPosition: 'right',
@@ -431,7 +431,7 @@ export default function Decision(props) {
                                             paddingLeft: '3%',
                                             paddingBottom: '7%',
                                             color: '#A49A81',
-                                            maxWidth: '40%',
+                                            maxWidth: '30%',
                                             textAlign: 'center',
                                             fontSize: '3.6vmin',
                                             fontFamily: 'DK-DDG',

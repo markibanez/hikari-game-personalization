@@ -8,6 +8,11 @@
     src: url('/HinaMincho-Regular.ttf');
 }
 
+@font-face {
+    font-family: Charter;
+    src: url('/Charter-Regular.otf');
+}
+
 body, html {
     height: 100vh;
     width: 100vw;

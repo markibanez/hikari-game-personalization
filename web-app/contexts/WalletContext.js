@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import Web3Modal from 'web3modal';
 import { useSnackbar } from 'notistack';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { Typography } from '@mui/material';
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const WalletContext = createContext({});
@@ -94,7 +95,7 @@ export function WalletProvider({ children }) {
         const instance = await web3Modal.connect();
 
         if (instance.networkVersion != requiredNetwork) {
-            enqueueSnackbar((<h1>{`You are not in the correct network. Please switch your wallet to ${networks[requiredNetwork]?.name}`}</h1>), { variant: 'error' });
+            enqueueSnackbar((<Typography sx={{ fontSize: '2.5vmin' }}>{`You are not in the correct network. Please switch your wallet to ${networks[requiredNetwork]?.name}`}</Typography>), { variant: 'error' });
             return;
         }
 

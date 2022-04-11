@@ -41,17 +41,29 @@ export default function Start(props) {
     return (
         <>
             <Box
-                sx={{ position: 'absolute', top: '78%', left: '50%', transform: `translate(-50%, -55%)` }}
+                sx={{
+                    position: 'absolute',
+                    bottom: '22%',
+                    left: '50%',
+                    transform: `translate(-50%, -55%)`,
+                    // backgroundImage: '/images/back-to-home.png',
+                    // backgroundSize: 'contain',
+                    // backgroundRepeat: 'no-repeat',
+                    // backgroundPosition: 'center',
+                    // width: '10vmin',
+                    // height: '5%'
+                }}
                 onClick={() => router.back()}
             >
-                <Typography variant="h5" sx={{ padding: '15px 25px', fontWeight: 700, color: '#302C21' }}>
+                <img src="/images/back-to-home.png" />
+                {/* <Typography variant="h5" sx={{ padding: '15px 25px', fontWeight: 700, color: '#302C21' }}>
                     Back to Home
-                </Typography>
+                </Typography> */}
             </Box>
             <Box
                 sx={{
-                    width: '56%',
-                    height: '56%',
+                    width: '43%',
+                    height: '43%',
                     textAlign: 'center',
                     backgroundImage: `url("/images/branded-modal-2.png")`,
                     backgroundSize: 'contain',
@@ -61,18 +73,31 @@ export default function Start(props) {
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
-                    transform: `translate(-50%, -55%)`,
+                    transform: `translate(-50%, -65%)`,
                 }}
             >
                 <Typography
                     variant="h3"
-                    sx={{ fontFamily: 'DK-DDG', color: '#AEAD8F', marginTop: '21vmin', fontSize: '5vmin',textShadow: '2px 2px #413D31', }}
+                    sx={{
+                        fontFamily: 'DK-DDG',
+                        color: '#AEAD8F',
+                        marginTop: '16vmin',
+                        fontSize: '3vmin',
+                        textShadow: '2px 2px #413D31',
+                    }}
                 >
                     SIGN TRANSACTION
                 </Typography>
                 <Typography
                     variant="h4"
-                    sx={{ paddingX: '20%', fontSize: '20pt', color: '#302C21', marginTop: 2, fontSize: '3vmin' }}
+                    sx={{
+                        paddingX: '20%',
+                        fontSize: '20pt',
+                        color: '#302C21',
+                        marginTop: 2,
+                        fontSize: '2.25vmin',
+                        fontFamily: 'Charter',
+                    }}
                 >
                     You must approve a state change in your wallet to begin the Gen-U experience with this soul.
                 </Typography>

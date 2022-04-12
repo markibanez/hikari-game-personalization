@@ -102,12 +102,14 @@ export default function Decision(props) {
                     } else {
                         randomFailAudio.play();
                     }
+                    setRandomDismissed(false);
                 } else {
                     if (result.state.randomEffects?.mana > 0) {
                         randomSuccessAudio.play();
                     } else if (result.state.randomEffects?.mana <= 0) {
                         randomFailAudio.play();
                     }
+                    setManaDismissed(false);
                 }
 
                 if (result.state.newAchievement) {
@@ -269,12 +271,14 @@ export default function Decision(props) {
         img.src = artUrl;
         img.onload = () => {
             console.log(`${url} loadeddata`)
+            setRandomDismissed(false);
+            setManaDismissed(false);
+
             setArt(artUrl);
             setState(state);
             setDecision(decision);
             setProcessing(false);
-            setRandomDismissed(false);
-            setManaDismissed(false);
+
         };
         // console.log(url);
         // let blob = await fetch(url).then((r) => r.blob());

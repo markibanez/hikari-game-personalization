@@ -159,11 +159,11 @@ export function WalletProvider({ children }) {
             const tokenMetadata = []
             for (let i = 0; i < balance; i++) {
                 const tokenId = await contract.tokenOfOwnerByIndex(address, i);
-                const tokenURI = await contract.tokenURI(tokenId);
+                // const tokenURI = await contract.tokenURI(tokenId);
 
-                const response = await fetch(tokenURI);
-                const metadata = await response.json();
-                // const metadata = {};
+                // const response = await fetch(tokenURI);
+                // const metadata = await response.json();
+                const metadata = {};
                 metadata.tokenId = tokenId;
                 tokenMetadata.push(metadata);
             }

@@ -124,9 +124,6 @@ export default function Decision(props) {
                     setManaRanking(result.manaRanking[0]);
                 }
 
-                setRandomDismissed(false);
-                setManaDismissed(false);
-
                 const isFinalSlide = decision?.id === 700;
                 let artUrl;
                 if (isFinalSlide) {
@@ -276,6 +273,8 @@ export default function Decision(props) {
             setState(state);
             setDecision(decision);
             setProcessing(false);
+            setRandomDismissed(false);
+            setManaDismissed(false);
         };
         // console.log(url);
         // let blob = await fetch(url).then((r) => r.blob());

@@ -34,9 +34,11 @@ const handler = async (req, res) => {
             return;
         }
 
+        const progressPercent = (state.logs.length / 90) * 100;
         delete state._id;
         delete state.logs;
-        res.json({ minted: true, genuStarted: true, currentState: state });
+
+        res.json({ minted: true, genuStarted: true, currentState: state, progressPercent });
     } catch (err) {
         if (err.reason === 'Token does not exist') res.json({ minted: false });
         else res.status(500).json(err);

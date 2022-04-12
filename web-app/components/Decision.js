@@ -271,12 +271,13 @@ export default function Decision(props) {
         img.src = artUrl;
         img.onload = () => {
             console.log(`${url} loadeddata`)
+            setArt(artUrl);
+
+            setState(state);
+            setDecision(decision);
             setRandomDismissed(false);
             setManaDismissed(false);
 
-            setArt(artUrl);
-            setState(state);
-            setDecision(decision);
             setProcessing(false);
 
         };
@@ -626,7 +627,7 @@ export default function Decision(props) {
                                         </Grid>
 
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
-                                            <Typography sx={finalOverviewSx}>Luck Ratio:</Typography>
+                                            <Typography sx={finalOverviewSx}>Success Ratio:</Typography>
                                         </Grid>
                                         <Grid item xs={4} sx={{ textAlign: 'right' }}>
                                             <Typography sx={finalOverviewSx}>

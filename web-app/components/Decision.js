@@ -94,7 +94,6 @@ export default function Decision(props) {
                 setShowNewAch(false);
 
                 const result = await response.json();
-                console.log(result);
 
                 if (result.state.isRandom) {
                     if (result.state.randomSuccess) {
@@ -185,14 +184,12 @@ export default function Decision(props) {
     const playSlideAudio = () => {
         const data = slideAudioData.find((d) => d.id === state.currentDecision);
         if (data) {
-            console.log(data);
             try {
                 if (currentAudio) currentAudio.pause();
                 const audioFile = data.audio_file;
                 const audio = new Audio(`/audio/bg/${audioFile}`);
                 audio.onended = () => {
                     const loopFile = data.loop_file;
-                    console.log(`${audioFile} ended, playing loop ${loopFile}`);
                     const loop = new Audio(`/audio/bg/${loopFile}`);
                     loop.loop = true;
                     fadeCurrentAudio(loop);
@@ -270,7 +267,6 @@ export default function Decision(props) {
         const img = new Image();
         img.src = artUrl;
         img.onload = () => {
-            console.log(`${url} loadeddata`)
             setArt(artUrl);
 
             setState(state);

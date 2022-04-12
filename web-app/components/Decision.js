@@ -19,6 +19,8 @@ export default function Decision(props) {
     const [currentMusic, setCurrentMusic] = useState(null);
     const [currentMusicAudio, setCurrentMusicAudio] = useState(null);
     const [currentMusicFile, setCurrentMusicFile] = useState(null);
+    const [art, setArt] = useState(null);
+    const [dataSubmitted, setDataSubmitted] = useState(false);
 
     const wallet = useContext(WalletContext);
     const { enqueueSnackbar } = useSnackbar();
@@ -55,45 +57,34 @@ export default function Decision(props) {
     }, [story_effects]);
 
     // music
-    const audioData = slideAudioData.find(d => d.id === state.currentDecision);
+    const audioData = slideAudioData.find((d) => d.id === state.currentDecision);
     const musicName = audioData?.bg_music;
     useEffect(() => {
         if (musicName) {
             const music = musicData[musicName];
-            if (music?.length > 0)  {
+            if (music?.length > 0) {
                 setCurrentMusic(audioData.bg_music);
                 const musicAudio = new Audio(`/audio/music/${music[0]}`);
                 if (currentMusicAudio) fadeCurrentMusicAudio(music[0]);
                 else setCurrentMusicFile(music[0]);
             }
         }
-
-    }, [musicName])
+    }, [musicName]);
 
     useEffect(() => {
         const musicAudio = new Audio(`/audio/music/${currentMusicFile}`);
         musicAudio.volume = 0.075;
-        musicAudio.onended = e => {
-            let index = musicData[musicName].findIndex(m => m === currentMusicFile);
+        musicAudio.onended = (e) => {
+            let index = musicData[musicName].findIndex((m) => m === currentMusicFile);
             if (index > -1) {
                 if (index + 1 === musicData[musicName].length) index = 0;
                 else index++;
                 setCurrentMusicFile(musicData[musicName][index]);
             }
-        }
+        };
         musicAudio.play();
         setCurrentMusicAudio(musicAudio);
-    }, [currentMusicFile])
-
-    const isFinalSlide = decision?.id === 700;
-    let art;
-    if (isFinalSlide) {
-        if (state.gender === 'male') art = `https://storage.googleapis.com/hikari-genu/final/final-slide-male.png`;
-        else if (state.gender === 'female')
-            art = `https://storage.googleapis.com/hikari-genu/final/final-slide-female.png`;
-    } else {
-        art = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`;
-    }
+    }, [currentMusicFile]);
 
     const exitedHandler = async () => {
         try {
@@ -107,10 +98,8 @@ export default function Decision(props) {
 
                 if (result.state.isRandom) {
                     if (result.state.randomSuccess) {
-                        console.log('play random success');
                         randomSuccessAudio.play();
                     } else {
-                        console.log('play random success');
                         randomFailAudio.play();
                     }
                 } else {
@@ -135,12 +124,19 @@ export default function Decision(props) {
                     setManaRanking(result.manaRanking[0]);
                 }
 
-                setState(result.state);
-                setDecision(result.decision);
                 setRandomDismissed(false);
                 setManaDismissed(false);
 
-                onImageLoaded(art);
+                const isFinalSlide = decision?.id === 700;
+                let artUrl;
+                if (isFinalSlide) {
+                    if (state.gender === 'male') artUrl = endArtMale;
+                    else if (state.gender === 'female') artUrl = endArtFemale;
+                } else {
+                    artUrl = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`;
+                }
+
+                onImageLoaded(artUrl, result.state, result.decision);
             } else {
                 console.log(response);
             }
@@ -152,12 +148,14 @@ export default function Decision(props) {
         // }
     };
 
+    const endArtMale = `https://storage.googleapis.com/hikari-genu/final/final-slide-male.png`;
+    const endArtFemale = `https://storage.googleapis.com/hikari-genu/final/final-slide-female.png`;
+
     function fadeCurrentAudio(next) {
         if (!currentAudio) return;
 
         if (currentAudio.volume - 0.003 > 0) {
             currentAudio.volume -= 0.003;
-            console.log('current audio volume ', currentAudio.volume);
             setTimeout(() => fadeCurrentAudio(next), 4);
         } else {
             currentAudio.pause();
@@ -190,16 +188,16 @@ export default function Decision(props) {
         if (data) {
             console.log(data);
             try {
-                if (currentAudio) currentAudio.pause()
+                if (currentAudio) currentAudio.pause();
                 const audioFile = data.audio_file;
                 const audio = new Audio(`/audio/bg/${audioFile}`);
                 audio.onended = () => {
                     const loopFile = data.loop_file;
-                    console.log(`${audioFile} ended, playing loop ${loopFile}`)
+                    console.log(`${audioFile} ended, playing loop ${loopFile}`);
                     const loop = new Audio(`/audio/bg/${loopFile}`);
                     loop.loop = true;
                     fadeCurrentAudio(loop);
-                }
+                };
                 audio.play();
                 setCurrentAudio(audio);
             } catch (err) {
@@ -247,19 +245,43 @@ export default function Decision(props) {
         // paddingRight: '30px'
     };
 
-    const onImageLoaded = (url) => {
-        setProcessing(true);
+    useEffect(() => {
+        const isFinalSlide = decision?.id === 700;
+        let artUrl;
+        if (isFinalSlide) {
+            if (state.gender === 'male') artUrl = endArtMale;
+            else if (state.gender === 'female') artUrl = endArtFemale;
+        } else {
+            artUrl = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`;
+        }
+        setArt(artUrl);
+    }, []);
+
+    const onImageLoaded = async (url, state, decision) => {
         const img = new Image();
         img.src = url;
         img.onload = () => {
+            console.log(`${url} loadeddata`)
+            setArt(url);
+            setState(state);
+            setDecision(decision);
             setProcessing(false);
         };
+        // console.log(url);
+        // let blob = await fetch(url).then((r) => r.blob());
+        // let dataUrl = await new Promise((resolve) => {
+        //     let reader = new FileReader();
+        //     reader.onload = () => resolve(reader.result);
+        //     reader.readAsDataURL(blob);
+        // });
+
+        // setArt(dataUrl);
     };
 
     const finalOverviewSx = {
         fontSize: '2vmin',
         fontFamily: 'Charter',
-        color: '#302C21'
+        color: '#302C21',
     };
 
     const finalize = async () => {
@@ -269,11 +291,22 @@ export default function Decision(props) {
         const response = await fetch(`/api/finalize-state?address=${address}&token=${token}&signature=${signature}`);
         if (response.status === 200) {
             const result = await response.json();
-            enqueueSnackbar((<Typography sx={{ margin: 0, padding: 0, fontSize: '2vmin' }}>Your Gen-U state has been finalized</Typography>), { variant: 'success' });
+            setDataSubmitted(true);
+            enqueueSnackbar(
+                <Typography sx={{ margin: 0, padding: 0, fontSize: '2vmin' }}>
+                    Your Gen-U state has been finalized
+                </Typography>,
+                { variant: 'success' }
+            );
         } else {
-            enqueueSnackbar((<Typography sx={{ margin: 0, padding: 0, fontSize: '2vmin' }}>Could not finalize your Gen-U state</Typography>), { variant: 'error' });
+            enqueueSnackbar(
+                <Typography sx={{ margin: 0, padding: 0, fontSize: '2vmin' }}>
+                    Could not finalize your Gen-U state
+                </Typography>,
+                { variant: 'error' }
+            );
         }
-    }
+    };
 
     return (
         <>
@@ -288,7 +321,12 @@ export default function Decision(props) {
                     zIndex: 1,
                 }}
             ></Box>
-            <Fade in={!processing} timeout={{ enter: 2000, exit: 1000 }} onEnter={enterHandler} onExited={exitedHandler}>
+            <Fade
+                in={!processing}
+                timeout={{ enter: 1000, exit: 1000 }}
+                onEnter={enterHandler}
+                onExited={exitedHandler}
+            >
                 <Box
                     sx={{
                         position: 'fixed',
@@ -297,6 +335,10 @@ export default function Decision(props) {
                         width: '100%',
                         height: '100%',
                         aspectRatio: '16 / 9',
+                        // backgroundImage: decision?.id === 700 ?
+                        //     (state.gender === 'male' ? `url('${endArtMale}')` : `url('${endArtFemale}')`) :
+                        //     `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
+
                         backgroundImage: `url('${art}')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
@@ -447,9 +489,9 @@ export default function Decision(props) {
                                             paddingLeft: '3%',
                                             paddingBottom: '7%',
                                             color: '#A49A81',
-                                            maxWidth: '30%',
+                                            maxWidth: '37%',
                                             textAlign: 'center',
-                                            fontSize: '3.6vmin',
+                                            fontSize: '3vmin',
                                             fontFamily: 'DK-DDG',
                                             textShadow: '4px 4px rgba(0, 0, 0, 0.25)',
                                         }}
@@ -490,12 +532,26 @@ export default function Decision(props) {
                                     <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter' }}>
                                         {`You've successfully completed the Gen-U storyline.`}
                                     </Typography>
-                                    <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter', marginTop: '3%' }}>
+                                    <Typography
+                                        sx={{
+                                            color: '#302C21',
+                                            fontSize: '2vmin',
+                                            fontFamily: 'Charter',
+                                            marginTop: '3%',
+                                        }}
+                                    >
                                         Your data is now ready to be processed by the Gen-U system. By clicking the
                                         button below your data will be submitted and your art will be generated over the
                                         next 72 hours.
                                     </Typography>
-                                    <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter', marginTop: '3%' }}>
+                                    <Typography
+                                        sx={{
+                                            color: '#302C21',
+                                            fontSize: '2vmin',
+                                            fontFamily: 'Charter',
+                                            marginTop: '3%',
+                                        }}
+                                    >
                                         Please click the button below and approve this action in your wallet.
                                     </Typography>
 
@@ -551,8 +607,7 @@ export default function Decision(props) {
                                             <Typography sx={finalOverviewSx}>Final Mana:</Typography>
                                         </Grid>
                                         <Grid item xs={4} sx={{ textAlign: 'right' }}>
-                                                <Typography sx={finalOverviewSx}>{state.mana}</Typography>
-
+                                            <Typography sx={finalOverviewSx}>{state.mana}</Typography>
                                         </Grid>
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                             <Typography sx={finalOverviewSx}>Your Mana Ranking:</Typography>
@@ -590,7 +645,7 @@ export default function Decision(props) {
                                                     }}
                                                 >
                                                     {state.achievements?.map((ac) => {
-                                                        return <li key={ac}>{ac}</li>;
+                                                        return <li key={ac}>{achievements.find(a => a.Code === ac)?.Name}</li>;
                                                     })}
                                                 </ul>
                                             </Typography>
@@ -599,15 +654,19 @@ export default function Decision(props) {
                                 </Box>
                             </Box>
 
+                            {dataSubmitted &&
                             <img
                                 src="/images/continue-button.png"
                                 style={{ position: 'absolute', bottom: '-2%', right: '17%', width: '16%' }}
-                                onMouseEnter={() => { hoverAudio.play() }}
+                                onMouseEnter={() => {
+                                    hoverAudio.play();
+                                }}
                                 onClick={() => {
                                     clickAudio.play();
                                     chooseOption(1);
                                 }}
                             />
+                            }
                         </>
                     )}
                 </Box>

@@ -152,22 +152,27 @@ export default function Decision(props) {
         // }
     };
 
-    function fadeCurrentAudio() {
+    function fadeCurrentAudio(next) {
         if (!currentAudio) return;
 
-        if (currentAudio.volume - 0.2 > 0) {
-            currentAudio.volume -= 0.2;
-            setTimeout(fadeCurrentAudio, 4);
+        if (currentAudio.volume - 0.003 > 0) {
+            currentAudio.volume -= 0.003;
+            console.log('current audio volume ', currentAudio.volume);
+            setTimeout(() => fadeCurrentAudio(next), 4);
         } else {
             currentAudio.pause();
+            if (next) {
+                next.play();
+                setCurrentAudio(next);
+            }
         }
     }
 
     function fadeCurrentMusicAudio(next) {
         if (!currentMusicAudio) return;
 
-        if (currentMusicAudio.volume - 0.2 > 0) {
-            currentMusicAudio.volume -= 0.2;
+        if (currentMusicAudio.volume - 0.003 > 0) {
+            currentMusicAudio.volume -= 0.003;
             setTimeout(() => fadeCurrentMusicAudio(next), 4);
         } else {
             currentMusicAudio.pause();
@@ -183,9 +188,18 @@ export default function Decision(props) {
     const playSlideAudio = () => {
         const data = slideAudioData.find((d) => d.id === state.currentDecision);
         if (data) {
+            console.log(data);
             try {
+                if (currentAudio) currentAudio.pause()
                 const audioFile = data.audio_file;
                 const audio = new Audio(`/audio/bg/${audioFile}`);
+                audio.onended = () => {
+                    const loopFile = data.loop_file;
+                    console.log(`${audioFile} ended, playing loop ${loopFile}`)
+                    const loop = new Audio(`/audio/bg/${loopFile}`);
+                    loop.loop = true;
+                    fadeCurrentAudio(loop);
+                }
                 audio.play();
                 setCurrentAudio(audio);
             } catch (err) {

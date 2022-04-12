@@ -117,8 +117,8 @@ const handler = async (req, res) => {
                 // random luck calculation variables
                 if (isRandom) {
                     updatePayload.$inc.randomChoice = 1;
-                    if (randomSuccess) updatePayload.$inc.randomSuccess = 1;
-                    else updatePayload.$inc.randomFail = 1;
+                    if (randomSuccess) updatePayload.$inc.randomSuccessCount = 1;
+                    else updatePayload.$inc.randomFailCount = 1;
                 }
 
                 // story effects
@@ -174,8 +174,8 @@ const handler = async (req, res) => {
                 blue: 0,
                 green: 0,
                 randomChoice: 0,
-                randomSuccess: 0,
-                randomFail: 0,
+                randomSuccessCount: 0,
+                randomFailCount: 0,
                 currentDecision: 1,
                 finalized: false
             };

@@ -587,7 +587,7 @@ export default function Decision(props) {
                                     backgroundPosition: 'center',
                                     position: 'absolute',
                                     bottom: '13%',
-                                    right: '6%',
+                                    right: '7%',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
@@ -632,8 +632,8 @@ export default function Decision(props) {
                                         <Grid item xs={4} sx={{ textAlign: 'right' }}>
                                             <Typography sx={finalOverviewSx}>
                                                 {(
-                                                    (100 * state.randomSuccess) /
-                                                    (state.randomSuccess + state.randomFail)
+                                                    (100 * state.randomSuccessCount) /
+                                                    (state.randomSuccessCount + state.randomFailCount)
                                                 ).toFixed(2)}
                                                 %
                                             </Typography>

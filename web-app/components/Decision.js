@@ -293,7 +293,7 @@ export default function Decision(props) {
     };
 
     const finalOverviewSx = {
-        fontSize: '1.75vmin',
+        fontSize: '1.6vmin',
         fontFamily: 'Charter',
         color: '#302C21',
     };
@@ -651,7 +651,8 @@ export default function Decision(props) {
                                                         marginTop: 0,
                                                         overflowY: 'auto',
                                                         overflowX: 'clip',
-                                                        height: '16vmin',
+                                                        height: '13vmin',
+                                                        width: '100%'
                                                     }}
                                                 >
                                                     {state.achievements?.map((ac) => {

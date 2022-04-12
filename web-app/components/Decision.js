@@ -244,6 +244,8 @@ export default function Decision(props) {
 
     const finalOverviewSx = {
         fontSize: '2.5vmin',
+        fontFamily: 'Charter',
+        color: '#302C21'
     };
 
     const finalize = async () => {
@@ -465,27 +467,27 @@ export default function Decision(props) {
                             >
                                 <Box
                                     sx={{
-                                        width: '90%',
+                                        width: '80%',
                                         height: '60%',
                                         marginBottom: '10%',
                                         textAlign: 'center',
                                     }}
                                 >
-                                    <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
+                                    <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter' }}>
                                         {`You've successfully completed the Gen-U storyline.`}
                                     </Typography>
-                                    <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
+                                    <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter', marginTop: '3%' }}>
                                         Your data is now ready to be processed by the Gen-U system. By clicking the
                                         button below your data will be submitted and your art will be generated over the
                                         next 72 hours.
                                     </Typography>
-                                    <Typography sx={{ color: '#302C21', fontSize: '2.5vmin' }}>
+                                    <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter', marginTop: '3%' }}>
                                         Please click the button below and approve this action in your wallet.
                                     </Typography>
 
                                     <img
                                         src="/images/submit-button.png"
-                                        style={{ width: '30%', marginTop: '4%' }}
+                                        style={{ width: '30%', marginTop: '2%' }}
                                         onMouseEnter={() => hoverAudio.play()}
                                         onClick={() => {
                                             clickAudio.play();
@@ -514,7 +516,7 @@ export default function Decision(props) {
                                 <Box
                                     sx={{
                                         // border: '3px solid black',
-                                        width: '60%',
+                                        width: '55%',
                                         height: '90%',
                                         textAlign: 'center',
                                     }}
@@ -530,7 +532,7 @@ export default function Decision(props) {
                                         Overview
                                     </Typography>
 
-                                    <Grid container sx={{ width: '100%' }} spacing={1}>
+                                    <Grid container sx={{ width: '100%', marginTop: '3%' }} spacing={1}>
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                             <Typography sx={finalOverviewSx}>Final Mana:</Typography>
                                         </Grid>

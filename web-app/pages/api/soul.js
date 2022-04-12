@@ -17,7 +17,7 @@ const handler = async (req, res) => {
     }
 
     const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
-    const contractNetwork = 'rinkeby';
+    const contractNetwork = 'homestead';
 
     const abi = ['function tokenURI(uint256 tokenID) view returns (string uri)'];
     const provider = ethers.providers.getDefaultProvider(contractNetwork);

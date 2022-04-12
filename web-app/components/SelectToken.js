@@ -93,7 +93,7 @@ export default function SelectToken(props) {
                                                     Soul #{token.tokenId.toString()}
                                                 </Typography>
                                                 <Link href={`/personalize/${wallet.address}/${token.tokenId}`}>
-                                                    <img src="/images/enter-genu-button.png" style={{ width: '120px', alignSelf: 'center' }} />
+                                                    <img src="/images/enter-genu-button.png" style={{ width: '18vmin', alignSelf: 'center', marginTop: '3%' }} />
                                                 </Link>
                                             </Stack>
                                         </Grid>

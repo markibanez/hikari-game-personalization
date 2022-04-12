@@ -544,7 +544,7 @@ export default function Decision(props) {
                                             <Typography sx={finalOverviewSx}>Your Mana Ranking:</Typography>
                                         </Grid>
                                         <Grid item xs={4} sx={{ textAlign: 'left' }}>
-                                            <Typography sx={finalOverviewSx}>#{manaRanking.manaRank}</Typography>
+                                            <Typography sx={finalOverviewSx}>#{manaRanking?.manaRank}</Typography>
                                         </Grid>
 
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
@@ -575,7 +575,7 @@ export default function Decision(props) {
                                                         height: '16vmin',
                                                     }}
                                                 >
-                                                    {state.achievements.map((ac) => {
+                                                    {state.achievements?.map((ac) => {
                                                         return <li key={ac}>{ac}</li>;
                                                     })}
                                                 </ul>

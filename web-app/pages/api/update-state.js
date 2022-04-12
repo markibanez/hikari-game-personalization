@@ -8,7 +8,7 @@ const handler = async (req, res) => {
 
     const db = await getDb();
     const players = await db.collection('players');
-    const player = await players.findOne({ address, tokenID });
+    const player = await players.findOne({ address, tokenID }, { logs: 0 });
 
     let state = {};
     if (player) {
@@ -189,7 +189,7 @@ const handler = async (req, res) => {
     const decision = decisions.find((d) => d.id === state.currentDecision);
 
     let manaRanking = null;
-    if (decision.id === 700) {
+    if (decision.id >= 700 && decision.id <= 710) {
         manaRanking = await players.aggregate([
             {
                 $setWindowFields: {
@@ -200,7 +200,7 @@ const handler = async (req, res) => {
                 },
             },
             {
-                $match: { tokenID: 2 },
+                $match: { tokenID },
             },
             {
                 $project: { tokenID: 1, mana: 1, manaRank: 1 },
@@ -208,6 +208,7 @@ const handler = async (req, res) => {
         ]).toArray();
     }
 
+    delete state.logs;
     res.status(200).json({ state, decision, manaRanking });
 };
 

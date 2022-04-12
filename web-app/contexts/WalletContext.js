@@ -186,10 +186,11 @@ export function WalletProvider({ children }) {
         const contractAddress = process.env.NEXT_PUBLIC_ERC721_ADDRESS;
         const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
 
-        const tokenURI = await contract.tokenURI(tokenId);
+        // const tokenURI = await contract.tokenURI(tokenId);
 
-        const response = await fetch(tokenURI);
-        const metadata = await response.json();
+        // const response = await fetch(tokenURI);
+        // const metadata = await response.json();
+        const metadata = {};
         metadata.tokenId = tokenId;
 
         return metadata;

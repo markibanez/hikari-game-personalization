@@ -76,7 +76,7 @@ export function WalletProvider({ children }) {
     const [gettingTokens, setGettingTokens] = useState(false);
     const [groupedTokens, setGroupedTokens] = useState([]);
 
-    const requiredNetwork = 4;
+    const requiredNetwork = 1;
     const connect = async () => {
         const providerOptions = {
             walletconnect: {
@@ -146,7 +146,7 @@ export function WalletProvider({ children }) {
 
         try {
             const abi = [
-                "function balanceOf(address owner) view returns (uint balance)",
+                "function balanceOf(address owner) view returns (uint256 balance)",
                 "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint tokenId)",
                 "function tokenURI(uint tokenId) view returns (string tokenUri)",
             ]

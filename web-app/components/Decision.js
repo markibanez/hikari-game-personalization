@@ -258,11 +258,21 @@ export default function Decision(props) {
     }, []);
 
     const onImageLoaded = async (url, state, decision) => {
+        setProcessing(true);
+        const isFinalSlide = decision?.id === 700;
+        let artUrl;
+        if (isFinalSlide) {
+            if (state.gender === 'male') artUrl = endArtMale;
+            else if (state.gender === 'female') artUrl = endArtFemale;
+        } else {
+            artUrl = `https://storage.googleapis.com/hikari-genu/art/${decision?.id}.png`;
+        }
+
         const img = new Image();
-        img.src = url;
+        img.src = artUrl;
         img.onload = () => {
             console.log(`${url} loadeddata`)
-            setArt(url);
+            setArt(artUrl);
             setState(state);
             setDecision(decision);
             setProcessing(false);
@@ -279,7 +289,7 @@ export default function Decision(props) {
     };
 
     const finalOverviewSx = {
-        fontSize: '2vmin',
+        fontSize: '1.75vmin',
         fontFamily: 'Charter',
         color: '#302C21',
     };
@@ -504,13 +514,13 @@ export default function Decision(props) {
                             <Box
                                 sx={{
                                     width: '40%',
-                                    height: '50%',
+                                    height: '40%',
                                     backgroundImage: `url('/images/congrats-bg.png')`,
                                     backgroundSize: 'contain',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
                                     position: 'absolute',
-                                    top: '0%',
+                                    top: '2%',
                                     right: '5%',
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -525,13 +535,13 @@ export default function Decision(props) {
                                         textAlign: 'center',
                                     }}
                                 >
-                                    <Typography sx={{ color: '#302C21', fontSize: '2vmin', fontFamily: 'Charter' }}>
+                                    <Typography sx={{ color: '#302C21', fontSize: '1.75vmin', fontFamily: 'Charter' }}>
                                         {`You've successfully completed the Gen-U storyline.`}
                                     </Typography>
                                     <Typography
                                         sx={{
                                             color: '#302C21',
-                                            fontSize: '2vmin',
+                                            fontSize: '1.75vmin',
                                             fontFamily: 'Charter',
                                             marginTop: '3%',
                                         }}
@@ -543,7 +553,7 @@ export default function Decision(props) {
                                     <Typography
                                         sx={{
                                             color: '#302C21',
-                                            fontSize: '2vmin',
+                                            fontSize: '1.75vmin',
                                             fontFamily: 'Charter',
                                             marginTop: '3%',
                                         }}
@@ -565,15 +575,15 @@ export default function Decision(props) {
 
                             <Box
                                 sx={{
-                                    width: '40%',
-                                    height: '40%',
+                                    width: '35%',
+                                    height: '35%',
                                     backgroundImage: `url('/images/final-overview.png')`,
                                     backgroundSize: 'contain',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: 'center',
                                     position: 'absolute',
-                                    bottom: '10%',
-                                    right: '5.5%',
+                                    bottom: '13%',
+                                    right: '6%',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
@@ -591,7 +601,7 @@ export default function Decision(props) {
                                         sx={{
                                             fontFamily: 'DK-DDG',
                                             color: '#AEAD8F',
-                                            fontSize: '3vmin',
+                                            fontSize: '2.5vmin',
                                             textShadow: '4px 4px #302C21',
                                         }}
                                     >

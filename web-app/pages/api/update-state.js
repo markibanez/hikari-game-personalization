@@ -104,7 +104,7 @@ const handler = async (req, res) => {
             }
 
             logEntry.appliedEffects = effects;
-            logEntry.afterId = nextDecision.id;
+            logEntry.afterId = nextDecision?.id || 'last-one';
 
             if (nextDecision) {
                 const updatePayload = {

@@ -675,14 +675,14 @@
         "art_file": "39.png",
         "id": 97,
         "bg_music": "Tense",
-        "audio_file": "39.mp3",
+        "audio_file": "63.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "40.png",
         "id": 98,
         "bg_music": "Tense",
-        "audio_file": "40.mp3",
+        "audio_file": "84.mp3",
         "loop_file": "day_in.mp3"
     },
     {
@@ -948,35 +948,35 @@
         "art_file": "71.png",
         "id": 136,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "71.png",
         "id": 137,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "71.png",
         "id": 138,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "71.png",
         "id": 139,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "71.png",
         "id": 140,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1207,14 +1207,14 @@
         "art_file": "63.png",
         "id": 173,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "63.png",
         "id": 174,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1319,7 +1319,7 @@
         "art_file": "63.png var 1",
         "id": 189,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1452,14 +1452,14 @@
         "art_file": "63.png",
         "id": 208,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "63.png var 1",
         "id": 209,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1550,7 +1550,7 @@
         "art_file": "63.png",
         "id": 222,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1592,7 +1592,7 @@
         "art_file": "63.png var 1",
         "id": 228,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1634,7 +1634,7 @@
         "art_file": "63.png var 2",
         "id": 234,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_out.mp3"
     },
     {
@@ -1711,7 +1711,7 @@
         "art_file": "63.png var 1",
         "id": 245,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1725,7 +1725,7 @@
         "art_file": "63.png var 1",
         "id": 247,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -1746,7 +1746,7 @@
         "art_file": "63.png var 2",
         "id": 250,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -2621,14 +2621,14 @@
         "art_file": "",
         "id": 366,
         "bg_music": "Tense",
-        "audio_file": "39.mp3",
+        "audio_file": "63.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 367,
         "bg_music": "Tense",
-        "audio_file": "40.mp3",
+        "audio_file": "84.mp3",
         "loop_file": "day_in.mp3"
     },
     {
@@ -2894,35 +2894,35 @@
         "art_file": "",
         "id": 405,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 406,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 407,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 408,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 409,
         "bg_music": "Tense",
-        "audio_file": "71.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -2964,7 +2964,7 @@
         "art_file": "",
         "id": 415,
         "bg_music": "Tense",
-        "audio_file": "night_out.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3153,14 +3153,14 @@
         "art_file": "",
         "id": 442,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 443,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3265,7 +3265,7 @@
         "art_file": "",
         "id": 458,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3398,14 +3398,14 @@
         "art_file": "",
         "id": 477,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
         "art_file": "",
         "id": 478,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3496,7 +3496,7 @@
         "art_file": "",
         "id": 491,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3538,7 +3538,7 @@
         "art_file": "",
         "id": 497,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3580,7 +3580,7 @@
         "art_file": "",
         "id": 503,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_out.mp3"
     },
     {
@@ -3657,7 +3657,7 @@
         "art_file": "",
         "id": 514,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "56.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3671,7 +3671,7 @@
         "art_file": "",
         "id": 516,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {
@@ -3692,7 +3692,7 @@
         "art_file": "",
         "id": 519,
         "bg_music": "Tense",
-        "audio_file": "63.mp3",
+        "audio_file": "night_in.mp3",
         "loop_file": "night_in.mp3"
     },
     {

@@ -335,10 +335,6 @@ export default function Decision(props) {
                         width: '100%',
                         height: '100%',
                         aspectRatio: '16 / 9',
-                        // backgroundImage: decision?.id === 700 ?
-                        //     (state.gender === 'male' ? `url('${endArtMale}')` : `url('${endArtFemale}')`) :
-                        //     `url('https://storage.googleapis.com/hikari-genu/art/${decision.id}.png')`,
-
                         backgroundImage: `url('${art}')`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',

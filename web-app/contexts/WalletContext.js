@@ -169,6 +169,9 @@ export function WalletProvider({ children }) {
             }
 
             setTokens(tokenMetadata);
+            if (tokenMetadata.length === 0) {
+                enqueueSnackbar((<h2>{`Sorry but your wallet ${address} does not own any Hikari NFTs`}</h2>), { variant: 'error', persist: true } );
+            }
         } catch (err) {
             console.log(err);
         } finally {

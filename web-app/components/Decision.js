@@ -243,7 +243,7 @@ export default function Decision(props) {
     };
 
     const finalOverviewSx = {
-        fontSize: '2.5vmin',
+        fontSize: '2vmin',
         fontFamily: 'Charter',
         color: '#302C21'
     };
@@ -516,7 +516,7 @@ export default function Decision(props) {
                                 <Box
                                     sx={{
                                         // border: '3px solid black',
-                                        width: '55%',
+                                        width: '45%',
                                         height: '90%',
                                         textAlign: 'center',
                                     }}

@@ -536,23 +536,21 @@ export default function Decision(props) {
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                             <Typography sx={finalOverviewSx}>Final Mana:</Typography>
                                         </Grid>
-                                        <Grid item xs={4} sx={{ textAlign: 'left' }}>
-                                            <Stack direction="row">
+                                        <Grid item xs={4} sx={{ textAlign: 'right' }}>
                                                 <Typography sx={finalOverviewSx}>{state.mana}</Typography>
-                                                <img src="/images/mana-bottle.png" style={{ height: '4vmin' }} />
-                                            </Stack>
+
                                         </Grid>
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                             <Typography sx={finalOverviewSx}>Your Mana Ranking:</Typography>
                                         </Grid>
-                                        <Grid item xs={4} sx={{ textAlign: 'left' }}>
+                                        <Grid item xs={4} sx={{ textAlign: 'right' }}>
                                             <Typography sx={finalOverviewSx}>#{manaRanking?.manaRank}</Typography>
                                         </Grid>
 
                                         <Grid item xs={8} sx={{ textAlign: 'left' }}>
                                             <Typography sx={finalOverviewSx}>Luck Ratio:</Typography>
                                         </Grid>
-                                        <Grid item xs={4} sx={{ textAlign: 'left' }}>
+                                        <Grid item xs={4} sx={{ textAlign: 'right' }}>
                                             <Typography sx={finalOverviewSx}>
                                                 {(
                                                     (100 * state.randomSuccess) /

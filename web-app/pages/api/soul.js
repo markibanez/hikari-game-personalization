@@ -1,7 +1,15 @@
 import { getDb } from './_get-db-client';
 import { ethers } from 'ethers';
+import NextCors from 'nextjs-cors';
 
 const handler = async (req, res) => {
+    await NextCors(req, res, {
+        // Options
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        origin: '*',
+        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    });
+
     const { token } = req.query;
 
     if (!token) {
@@ -41,6 +49,6 @@ const handler = async (req, res) => {
         if (err.reason === 'Token does not exist') res.json({ minted: false });
         else res.status(500).json(err);
     }
-}
+};
 
 export default handler;

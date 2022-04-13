@@ -636,7 +636,7 @@ export default function Decision(props) {
                                         </Grid>
 
                                         <Grid item xs={5} sx={{ textAlign: 'left' }}>
-                                            <Typography sx={finalOverviewSx}>Achivements:</Typography>
+                                            <Typography sx={finalOverviewSx}>Achievements:</Typography>
                                         </Grid>
                                         <Grid item xs={7} sx={{ textAlign: 'left' }}>
                                             <Typography sx={finalOverviewSx}>

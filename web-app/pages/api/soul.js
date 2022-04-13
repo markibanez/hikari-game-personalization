@@ -20,11 +20,12 @@ const handler = async (req, res) => {
     const contractNetwork = 'homestead';
 
     const abi = ['function tokenURI(uint256 tokenID) view returns (string uri)'];
-    const provider = ethers.providers.getDefaultProvider(contractNetwork);
+    const provider = new ethers.providers.AlchemyProvider(contractNetwork, 'p6Fnnt26ftOFhzUjdWiz3jkRbwCrrRoB');
     const contract = new ethers.Contract(contractAddress, abi, provider);
 
     try {
         const tokenURI = await contract.tokenURI(tokenID);
+        console.log(`Token URI: ${tokenURI}`);
         const db = await getDb();
         const states = await db.collection('players');
         const state = await states.findOne({ tokenID });
@@ -34,12 +35,13 @@ const handler = async (req, res) => {
             return;
         }
 
-        const progressPercent = (state.logs.length / 90) * 100;
+        const progressPercent = (state.logs?.length / 90) * 100 || 0;
         delete state._id;
         delete state.logs;
 
         res.json({ minted: true, genuStarted: true, currentState: state, progressPercent });
     } catch (err) {
+        console.log(err);
         if (err.reason === 'Token does not exist') res.json({ minted: false });
         else res.status(500).json(err);
     }

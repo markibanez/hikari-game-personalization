@@ -8317,7 +8317,7 @@
     "option4_id": "393",
     "option4_text": "D) Flame",
     "option4_effect": "Yellow+3 Mana+5",
-    "story_effects": ""
+    "story_effects": "mist_elemental, beast_elemental, star_elemental, flame_elemental"
   },
   {
     "art_file": "50.png",
@@ -8325,19 +8325,18 @@
     "text_file": "124.txt",
     "dialogue": "Kira shows up to Sensei's hideout, apparently she escaped.",
     "id": 393,
-    "option1_id": "394",
-    "option1_text": "A) Mist",
-    "option1_effect": "Blue+5 Mana+5",
-    "option2_id": "394",
-    "option2_text": "B) Beast",
-    "option2_effect": "Green+5 Mana+5",
-    "option3_id": "394",
-    "option3_text": "C) Star",
-    "option3_effect": "Red+3 Mana+5",
-    "option4_id": "394",
-    "option4_text": "D) Flame",
-    "option4_effect": "Yellow+3 Mana+5",
-    "story_effects": "mist_elemental, beast_elemental, star_elemental, flame_elemental"
+    "option1_text": "A) Continue",
+    "option1_effect": "",
+    "option2_id": "",
+    "option2_text": "",
+    "option2_effect": "",
+    "option3_id": "",
+    "option3_text": "",
+    "option3_effect": "",
+    "option4_id": "",
+    "option4_text": "",
+    "option4_effect": "",
+    "story_effects": ""
   },
   {
     "art_file": "",

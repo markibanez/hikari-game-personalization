@@ -8325,7 +8325,7 @@
     "text_file": "124.txt",
     "dialogue": "Kira shows up to Sensei's hideout, apparently she escaped.",
     "id": 393,
-    "option1_id": 394,
+    "option1_id": "394",
     "option1_text": "A) Continue",
     "option1_effect": "",
     "option2_id": "",

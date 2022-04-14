@@ -13,7 +13,10 @@ const handler = async (req, res) => {
     const validSignature = validateSignature(address, 'finalize-state', signature);
     console.log(validSignature);
     if (validSignature) {
-        await players.updateOne({ address, tokenID }, { $set: { finalized: true }});
+        await players.updateOne(
+            { address, tokenID },
+            { $set: { finalized: true }, $currentDate: { finalizedOn: true } }
+        );
     } else {
         res.status(401).send('invalid-signature');
         return;

@@ -16,7 +16,7 @@ export default function Intro(props) {
         setSlide(nextSlide);
         onImageLoaded(`https://storage.googleapis.com/hikari-genu/intro/${nextSlide}.png`);
 
-        if (nextSlide > 5) {
+        if (nextSlide > 6) {
             setIntroDone(true);
         }
     };

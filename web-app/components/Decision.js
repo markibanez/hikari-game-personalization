@@ -101,14 +101,14 @@ export default function Decision(props) {
                     } else {
                         randomFailAudio.play();
                     }
-                    setRandomDismissed(false);
+                    // setRandomDismissed(false);
                 } else {
                     if (result.state.randomEffects?.mana > 0) {
                         randomSuccessAudio.play();
                     } else if (result.state.randomEffects?.mana <= 0) {
                         randomFailAudio.play();
                     }
-                    setManaDismissed(false);
+                    // setManaDismissed(false);
                 }
 
                 if (result.state.newAchievement) {
@@ -277,15 +277,6 @@ export default function Decision(props) {
             setProcessing(false);
 
         };
-        // console.log(url);
-        // let blob = await fetch(url).then((r) => r.blob());
-        // let dataUrl = await new Promise((resolve) => {
-        //     let reader = new FileReader();
-        //     reader.onload = () => resolve(reader.result);
-        //     reader.readAsDataURL(blob);
-        // });
-
-        // setArt(dataUrl);
     };
 
     const finalOverviewSx = {

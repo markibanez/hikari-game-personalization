@@ -275,7 +275,6 @@ export default function Decision(props) {
             setManaDismissed(false);
 
             setProcessing(false);
-
         };
     };
 
@@ -526,7 +525,7 @@ export default function Decision(props) {
                                         textAlign: 'center',
                                     }}
                                 >
-                                    <Typography sx={{ color: '#302C21', fontSize: '1.75vmin', fontFamily: 'Charter' }}>
+                                    {/* <Typography sx={{ color: '#302C21', fontSize: '1.75vmin', fontFamily: 'Charter' }}>
                                         {`You've successfully completed the Gen-U storyline.`}
                                     </Typography>
                                     <Typography
@@ -550,11 +549,17 @@ export default function Decision(props) {
                                         }}
                                     >
                                         Please click the button below and approve this action in your wallet.
-                                    </Typography>
+                                    </Typography> */}
 
                                     <img
                                         src="/images/submit-button.png"
-                                        style={{ width: '30%', marginTop: '2%' }}
+                                        style={{
+                                            width: '25%',
+                                            position: 'absolute',
+                                            bottom: '2%',
+                                            left: '50%',
+                                            transform: `translate(-50%, 0)`,
+                                        }}
                                         onMouseEnter={() => hoverAudio.play()}
                                         onClick={() => {
                                             clickAudio.play();
@@ -639,11 +644,15 @@ export default function Decision(props) {
                                                         overflowY: 'auto',
                                                         overflowX: 'clip',
                                                         height: '13vmin',
-                                                        width: '100%'
+                                                        width: '100%',
                                                     }}
                                                 >
                                                     {state.achievements?.map((ac) => {
-                                                        return <li key={ac}>{achievements.find(a => a.Code === ac)?.Name}</li>;
+                                                        return (
+                                                            <li key={ac}>
+                                                                {achievements.find((a) => a.Code === ac)?.Name}
+                                                            </li>
+                                                        );
                                                     })}
                                                 </ul>
                                             </Typography>
@@ -652,19 +661,19 @@ export default function Decision(props) {
                                 </Box>
                             </Box>
 
-                            {dataSubmitted &&
-                            <img
-                                src="/images/continue-button.png"
-                                style={{ position: 'absolute', bottom: '-2%', right: '17%', width: '16%' }}
-                                onMouseEnter={() => {
-                                    hoverAudio.play();
-                                }}
-                                onClick={() => {
-                                    clickAudio.play();
-                                    chooseOption(1);
-                                }}
-                            />
-                            }
+                            {dataSubmitted && (
+                                <img
+                                    src="/images/continue-button.png"
+                                    style={{ position: 'absolute', bottom: '-2%', right: '17%', width: '16%' }}
+                                    onMouseEnter={() => {
+                                        hoverAudio.play();
+                                    }}
+                                    onClick={() => {
+                                        clickAudio.play();
+                                        chooseOption(1);
+                                    }}
+                                />
+                            )}
                         </>
                     )}
                 </Box>
